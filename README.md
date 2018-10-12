@@ -1,2 +1,4 @@
-# Main
-MediaCMS Main
+# MediaCMS Main
+
+### Головний сайт MediaCMS
+Експериментальний проект (*в розробці*)
