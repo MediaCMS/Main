@@ -144,6 +144,8 @@ class View {
 
         foreach($schema as $alias => $params) {
 
+            if (isset($params['isHidden']) && ($params['isHidden'] !== false)) continue;
+
             $itemNode = $this->xml->menu->addChild('item');
 
             $itemNode->addAttribute('title', $params['title']);

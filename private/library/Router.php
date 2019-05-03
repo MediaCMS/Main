@@ -39,6 +39,9 @@ class Router {
     /** @var string Ознака автоматичного створення об'єкта вигляду */
     protected $isView = true;
 
+    /** @var string Ознака прихованого контролера */
+    protected $isHidden = false;
+
     /** @var array Перелік кодів та опису переадресації */
     protected $redirects = [
 
@@ -150,6 +153,10 @@ class Router {
                 if (isset($params['isView']))
 
                     $this->setIsView($params['isView']);
+
+                if (isset($params['isHidden']))
+
+                    $this->setIsHidden($params['isHidden']);
 
                 $params['active'] = true;
 
@@ -279,6 +286,26 @@ class Router {
     public function isView(): bool {
 
         return $this->isView;
+    }
+
+    /**
+     * Зберігає ознаку прихованого контролера
+     *
+     * @param boolean $isHidden Ознака прихованості
+     */
+    protected function setIsHidden(bool $isHidden): void {
+
+        $this->isHidden = $isHidden;
+    }
+
+    /**
+     * Повертає ознаку прихованого контролера
+     *
+     * @return boolean Ознака прихованості
+     */
+    public function isHidden(): bool {
+
+        return $this->isHidden;
     }
 
     /**

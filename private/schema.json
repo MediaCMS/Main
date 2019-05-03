@@ -47,6 +47,7 @@
     "image": "",
     "controller": "Test",
     "isDatabase": false,
-    "isView": false
+    "isView": false,
+    "isHidden": true
   }
 }
