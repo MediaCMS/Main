@@ -3,8 +3,8 @@
  * Налаштування
  *
  * @author      Артем Висоцький <a.vysotsky@gmail.com>
- * @package     MediaCMS\Panel
- * @link        https://github.com/MediaCMS
+ * @package     MediaCMS\Main
+ * @link        https://github.com/MediaCMS/Main
  * @copyright   GNU General Public License v3
  */
 
@@ -25,9 +25,6 @@ define('DB_USER', '');
 
 /** Пароль користувача БД MySQL */
 define('DB_PASSWORD', '');
-
-/** Адреса головного сайту */
-define('MAIN', '');
 
 /** Адреса фотосервера */
 define('PHOTO_HOST', '');

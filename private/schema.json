@@ -1,0 +1,52 @@
+{
+  "": {
+    "title": "Головний",
+    "description": "Медіа - демонстраційний сайт інтернет-видання розробленої на MediaCMS",
+    "image": "",
+    "controller": "Main"
+  },
+  "статті": {
+    "title": "Статті",
+    "description": "Список статей сайту",
+    "image": "",
+    "controller": "Article"
+  },
+  "категорії": {
+    "title": "Категорії",
+    "description": "Перелік категорій сайту",
+    "image": "",
+    "controller": "Category"
+  },
+  "мітки": {
+    "title": "Мітки",
+    "description": "Список міток сайту",
+    "image": "",
+    "controller": "Tag"
+  },
+  "архів": {
+    "title": "Архів",
+    "description": "Список статей структорований по датам",
+    "image": "",
+    "controller": "Archive"
+  },
+  "сторінки": {
+    "title": "Сторінки",
+    "description": "Перелік статичних сторінок сайту",
+    "image": "",
+    "controller": "Page"
+  },
+  "автори": {
+    "title": "Автори",
+    "description": "Перелік авторів статей сайту",
+    "image": "",
+    "controller": "User"
+  },
+  "тест": {
+    "title": "Тест",
+    "description": "Тестова сторінка для перевірки працездатності",
+    "image": "",
+    "controller": "Test",
+    "isDatabase": false,
+    "isView": false
+  }
+}

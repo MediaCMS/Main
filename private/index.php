@@ -8,8 +8,9 @@
  * @copyright   GNU General Public License v3
  */
 
-//use MediaCMS\Main\Router;
+use MediaCMS\Main\Router;
 //use MediaCMS\Main\Exception;
+use \Exception as ExceptionBase;
 
 session_start();
 
@@ -19,21 +20,17 @@ spl_autoload_register('autoload');
 
 try {
 
-    echo '<pre>' . print_r($_SERVER, true) . '</pre>';
-/*
     require_once(PATH_PRIVATE . '/settings.php');
 
     $router = new Router();
 
-    $controller = '\MediaCMS\Panel\Controller\\' . $router->getController();
+    $controller = '\MediaCMS\Main\Controller\\' . $router->getController();
 
     $controller = new $controller($router);
 
-    $action = $router->getAction();
+    call_user_func([$controller, 'run']);
 
-    call_user_func([$controller, $action]);
-*/
-} catch (\Exception $exception) {
+} catch (ExceptionBase $exception) {
 /*
     header('HTTP/1.x 500 Internal Server Error');
 
@@ -73,7 +70,7 @@ try {
  */
 function autoload(string $object) {
 
-    $object = str_replace('MediaCMS\Panel', '\library\\', $object);
+    $object = str_replace('MediaCMS\Main\\', '\library\\', $object);
 
     $object = str_replace('\\', '/', $object);
 
