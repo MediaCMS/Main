@@ -32,35 +32,11 @@ abstract class Controller {
     /** @var boolean Ознака створення меню */
     protected $menu = true;
 
-    /** @var array Підменю за налаштуванням */
-    protected $submenu = [
-
-        ['title' => 'Створити', 'alias' => 'редагування'],
-        ['title' => 'Фільтр', 'modal' => '#filter']
-    ];
-
     /** @var boolean Ознака завантаження WYSIWYG-редактора */
     protected $editor = false;
 
     /** @var array Дані поточного користувача */
     protected $user;
-
-    /** @var array Фільтр списку */
-    protected $filter = [];
-
-    /** @var array Фільтр списку за замовчуванням */
-    protected $filterDefault = [
-
-        '_status' => 1, '_orderField' => 'title', '_orderDirection' => 1,
-
-        '_offset' => 0, '_limit' => 10
-    ];
-
-    /** @var array Можливі назви полів для сортування списку
-     *
-     * [['title' => '', 'value' => '']]
-     */
-    protected $orderFields = [];
 
     /** @var integer Номер поточної сторінки списку */
     protected $page = 1;
@@ -121,10 +97,6 @@ abstract class Controller {
 
         $this->database->call($this->router->getController() . 'GetIndex', $this->filter);
 
-        $this->node->addAttribute('index', '/' . $this->router->getURI(0) . '/список');
-
-        $this->node->addAttribute('edit', '/' . $this->router->getURI(0) . '/редагування');
-
         $itemsNode = $this->node->addChild('items');
 
         $i = 1;
@@ -156,8 +128,6 @@ abstract class Controller {
     public function view(): void {
 
         $id = $this->router->getURI(2);
-
-        $this->submenu = [['title' => 'Закрити', 'alias' => 'список']];
 
         if (isset($id)) $this->get($id);
     }
@@ -249,8 +219,6 @@ abstract class Controller {
         if ($this->menu) {
 
             $this->view->setMenu($this->router->getSchema());
-
-            $this->view->setSubmenu($this->submenu, $this->router->getURI(0));
         }
 
         if (DEVELOPMENT) {

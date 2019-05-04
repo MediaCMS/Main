@@ -162,6 +162,10 @@ class Router {
 
             } else {
 
+                $this->setTitle('Сторінка не знайдена');
+
+                $this->setDescription('Запиувана Вами стрінка відсутня на нашому сайті');
+
                 $this->setController('Unknown');
 
             }

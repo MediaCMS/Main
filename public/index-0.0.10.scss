@@ -2,8 +2,8 @@
  * Головний файл стилів
  *
  * @author      Артем Висоцький <a.vysotsky@gmail.com>
- * @package     MediaCMS\Panel
- * @link        https://github.com/MediaCMS
+ * @package     MediaCMS\Main
+ * @link        https://github.com/MediaCMS/Main
  * @copyright   GNU General Public License v3
  */
 html {
@@ -31,7 +31,7 @@ html {
       }
     }
 
-    main {min-height: 80vh;
+    main {min-height: 70vh;
       div.body {
         &.action-index {
           table {

@@ -1,5 +1,5 @@
 @charset "UTF-8";
-/** Головний файл стилів  @author      Артем Висоцький <a.vysotsky@gmail.com> @package     MediaCMS\Panel @link        https://github.com/MediaCMS @copyright   GNU General Public License v3 */
+/** Головний файл стилів  @author      Артем Висоцький <a.vysotsky@gmail.com> @package     MediaCMS\Main @link        https://github.com/MediaCMS/Main @copyright   GNU General Public License v3 */
 html body img { border-radius: 3%; }
 html body header nav a.navbar-brand img { width: 28px; border-radius: 3px; opacity: 0.5; margin-top: -3px; }
 html body header nav a.navbar-brand :hover { opacity: 0.9; }
@@ -7,7 +7,7 @@ html body header nav div.navbar-collapse ul.navbar-nav li:last-child { padding-l
 html body header nav div.user { height: 28px; line-height: 28px; padding-right: 42px; position: relative; }
 html body header nav div.user img { width: 28px; height: 28px; border-radius: 7% / 10%; transition: width 0.7s, height 0.7s; position: absolute; top: 0; right: 0; z-index: 9999; object-fit: cover; }
 html body header nav div.user img:hover { width: 160px; height: 160px; }
-html body main { min-height: 80vh; }
+html body main { min-height: 70vh; }
 html body main div.body.action-index table tr { cursor: pointer; }
 html body main div.body.action-index table tr.disabled td { color: gray; }
 html body main div.body.action-edit form { max-width: 480px; }
@@ -31,4 +31,4 @@ html body #debug div.mapper table tbody td.string { font-size: 1.2rem; font-fami
 html body #debug div.mapper table tbody td.string pre { color: green; white-space: pre-wrap; margin: 0; }
 html body #debug div.mapper table tbody td.string pre span { color: blue; font-weight: normal; }
 
-/*# sourceMappingURL=index.css.map */
+/*# sourceMappingURL=index-0.0.10.css.mapp */
