@@ -50,20 +50,42 @@
             <body>
                 <xsl:if test="menu">
                     <header>
-                        <a class="navbar-brand" href="/" title="Головна сторінка">
-                            <img src="/logo.png" alt="{@logo}" />
-                        </a>
-                            <div title="{user/@roleTitle}" class="user text-light"><xsl:value-of select="user/@title" />
-                                <xsl:choose>
-                                    <xsl:when test="string-length(user/@image) &gt; 0">
-                                        <xsl:call-template name="image">
-                                            <xsl:with-param name="title" select="user/@title" />
-                                            <xsl:with-param name="uri" select="user/@image" />
-                                        </xsl:call-template>
-                                    </xsl:when>
-                                    <xsl:otherwise><img src="/user.png" alt="{user/@title}" /></xsl:otherwise>
-                                </xsl:choose>
+                        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                            <a class="" href="/" title="Головна сторінка">
+                                <img src="/logo.png" width="100" alt="{@logo}" />
+                            </a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon" />
+                            </button>
+
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav mr-auto ml-4">
+                                    <xsl:for-each select="categories/category">
+                                        <li class="nav-item">
+                                            <xsl:if test="@active">
+                                                <xsl:attribute name="class">nav-item active</xsl:attribute>
+                                            </xsl:if>
+                                            <a class="nav-link" href="{@uri}"><xsl:value-of select="@title" /></a>
+                                        </li>
+                                    </xsl:for-each>
+                                    <li class="nav-item" />
+                                </ul>
+                                <form class="form-inline my-2 my-lg-0" action="/пошук">
+                                    <input class="form-control mr-sm-2" type="search" placeholder="Пошук" aria-label="search" />
+                                </form>
+                                <div title="{user/@roleTitle}" class="user text-light"><xsl:value-of select="user/@title" />
+                                    <xsl:choose>
+                                        <xsl:when test="string-length(user/@image) &gt; 0">
+                                            <xsl:call-template name="image">
+                                                <xsl:with-param name="title" select="user/@title" />
+                                                <xsl:with-param name="uri" select="user/@image" />
+                                            </xsl:call-template>
+                                        </xsl:when>
+                                        <xsl:otherwise><img src="/user.png" alt="{user/@title}" /></xsl:otherwise>
+                                    </xsl:choose>
+                                </div>
                             </div>
+                        </nav>
                     </header>
                 </xsl:if>
                 <xsl:if test="alert">

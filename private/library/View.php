@@ -163,28 +163,26 @@ class View {
     }
 
     /**
-     * Додає у вигляд поточне підменю
+     * Додає у вигляд категорії
      *
-     * @param array $submenu Масив з пунктами підменю
-     * @param string $alias Поточний перший псевдонім адреси
+     * @param array $categories Масив з категоріями
+     * @param string $alias Псевдонім контролера категорій
      */
-    public function setSubmenu(array $submenu, string $alias): void {
+    public function setCategories(array $categories, string $alias): void {
 
-        $submenuNode = $this->xml->addChild('submenu');
+        $categoriesNode = $this->xml->addChild('categories');
 
-        foreach($submenu as $item) {
+        foreach($categories as $category) {
 
-            $itemNode = $submenuNode->addChild('item');
+            $categoryNode = $categoriesNode->addChild('category');
 
-            $itemNode->addAttribute('title', $item['title']);
+            $categoryNode->addAttribute('title', $category['title']);
 
-            if (isset($item['alias']))
+            $categoryNode->addAttribute('uri', '/'. $alias . '/' . $category['alias']);
 
-                $itemNode->addAttribute('uri', '/' . $alias . '/' . $item['alias']);
+            if (isset($category['active']))
 
-            if (isset($item['modal']))
-
-                $itemNode->addAttribute('modal', $item['modal']);
+                $categoryNode->addAttribute('active', 1);
         }
     }
 

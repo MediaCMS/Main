@@ -26,20 +26,11 @@ abstract class Controller {
     /** @var SimpleXMLElement Поточний елемент сторінки у вигляді */
     protected $node;
 
-    /** @var boolean Ознака створення меню */
-    protected $menu = true;
-
-    /** @var boolean Ознака завантаження WYSIWYG-редактора */
-    protected $editor = false;
-
     /** @var array Дані поточного користувача */
     protected $user;
 
-    /** @var integer Номер поточної сторінки списку */
-    protected $page = 1;
-
-    /** @var string Тип сторінки виводу */
-    protected $outputType = 'text/html';
+    /** @var integer Кількість записів на сторінку в списку */
+    protected $limit = 10;
 
     /** @var \Exception Виняток */
     protected $exception;
@@ -52,7 +43,7 @@ abstract class Controller {
      */
     public function __construct(Router $router) {
 
-        header(sprintf('Content-User: %s; charset=utf-8', $this->outputType));
+        header('Content-User: text/html; charset=utf-8');
 
         $this->router = $router;
 
@@ -66,6 +57,8 @@ abstract class Controller {
 
         $this->view->setImage($this->router->getImage());
 
+        $this->view->setMenu($this->router->getSchema());
+
         $this->node = $this->view->setNode($this->router->getController());
 
         if (isset($_SESSION['user'])) {
@@ -74,26 +67,51 @@ abstract class Controller {
 
             $this->view->setUser($this->user);
         }
+
+        $this->setCategories();
     }
 
     /**
-     * Додаткова маршрутизація
+     * Додає у вигляд категорії
      */
-    public function route(): void {
+    public function setCategories(): void {
 
+        $alias = 'категорії';
 
-        //primary()
-        //slave()
+        $this->database->call('CategoryGetList');
+
+        while($category = $this->database->getResult()) {
+
+            if (($this->router->getURI(0) == $alias)
+
+                && ($this->router->getURI(1) == $category['alias']))
+
+                $category['active'] = true;
+
+            $categories[] = $category;
+        }
+
+        $this->view->setCategories($categories, $alias);
     }
+
+    /**
+     * Головний метод контролера
+     */
+    public function run(): void {}
+
+    /**
+     * Виводить список (додатково)
+     */
+    protected function secondary(): void {}
 
     /**
      * Виводить список
      */
-/* ToDo Переробити
-
     public function index(): void {
 
-        $this->indexAdvanced();
+        $page = (isset($_GET['page'])) ? $_GET['page'] : 1;
+
+        $offset = ($page - 1) * $this->limit;
 
         $this->database->call($this->router->getController() . 'GetIndex');
 
@@ -105,31 +123,16 @@ abstract class Controller {
 
             $itemNode = $itemsNode->addChild('item');
 
-            $item['position'] = $this->filter['_offset'] + $i;
+            $item['position'] = $offset + $i;
 
             $this->view->setItem($itemNode, $item);
 
             $i ++;
         }
 
-        $pages = ceil($this->database->getFoundRows() / $this->filter['_limit']);
+        $pages = ceil($this->database->getFoundRows() / $this->limit);
 
-        $this->view->setPagination($this->page, $pages, $this->router->getURI(0));
-    }
-*/
-    /**
-     * Виводить список (додатково)
-     */
-    public function indexAdvanced(): void {}
-
-    /**
-     * Виводить дані
-     */
-    public function view(): void {
-
-        $id = $this->router->getURI(2);
-
-        if (isset($id)) $this->get($id);
+        $this->view->setPagination($page, $pages, $this->router->getURI(0));
     }
 
     /**
@@ -191,11 +194,6 @@ abstract class Controller {
      * Деструктор контроллера
      */
     public function __destruct() {
-
-        if ($this->menu) {
-
-            $this->view->setMenu($this->router->getSchema());
-        }
 
         if (DEVELOPMENT) {
 

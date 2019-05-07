@@ -16,11 +16,11 @@ use MediaCMS\Main\Exception;
 class Main extends Controller {
 
     /**
-     * Виводить список коментарів
+     * Головний метод контролера
      */
-    public function index(): void {
+    public function run(): void {
 
-        parent::index();
+
     }
 
     /**
@@ -34,7 +34,5 @@ class Main extends Controller {
 
             throw new Exception('Відсутній ідентифікатор коментаря');
         }
-
-        parent::view();
     }
 }
