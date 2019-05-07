@@ -26,9 +26,6 @@ abstract class Controller {
     /** @var SimpleXMLElement Поточний елемент сторінки у вигляді */
     protected $node;
 
-    /** @var API Прикладний програмний інтерфейс */
-    protected $api;
-
     /** @var boolean Ознака створення меню */
     protected $menu = true;
 
@@ -59,43 +56,46 @@ abstract class Controller {
 
         $this->router = $router;
 
-        if ($this->router->isDatabase())
+        $this->database = new Database(DB_NAME, DB_USER, DB_PASSWORD);
 
-            $this->database = new Database(DB_NAME, DB_USER, DB_PASSWORD);
+        $this->view = new View();
 
-        if ($this->router->isView()) {
+        $this->view->setTitle($this->router->getTitle());
 
-            $this->view = new View();
+        $this->view->setDescription($this->router->getDescription());
 
-            $this->view->setTitle($this->router->getTitle());
+        $this->view->setImage($this->router->getImage());
 
-            $this->view->setDescription($this->router->getDescription());
-
-            $this->view->setImage($this->router->getImage());
-
-            $this->node = $this->view->setNode($this->router->getController());
-
-        } else {
-
-            $this->api = new API();
-        }
+        $this->node = $this->view->setNode($this->router->getController());
 
         if (isset($_SESSION['user'])) {
 
             $this->user = $_SESSION['user'];
 
-            if ($this->router->isView()) $this->view->setUser($this->user);
+            $this->view->setUser($this->user);
         }
+    }
+
+    /**
+     * Додаткова маршрутизація
+     */
+    public function route(): void {
+
+
+        //primary()
+        //slave()
     }
 
     /**
      * Виводить список
      */
+/* ToDo Переробити
+
     public function index(): void {
 
         $this->indexAdvanced();
 
-        $this->database->call($this->router->getController() . 'GetIndex', $this->filter);
+        $this->database->call($this->router->getController() . 'GetIndex');
 
         $itemsNode = $this->node->addChild('items');
 
@@ -116,7 +116,7 @@ abstract class Controller {
 
         $this->view->setPagination($this->page, $pages, $this->router->getURI(0));
     }
-
+*/
     /**
      * Виводить список (додатково)
      */
@@ -188,33 +188,9 @@ abstract class Controller {
     }
 
     /**
-     * Створює та додає у вигляд виняток
-     *
-     * @param Exception $exception Виняток
-     */
-    public function exception(Exception $exception): void {
-
-        if ($this->router->isView()) {
-
-            $this->view->setException($exception);
-
-        } else {
-
-            $this->api->setException($exception);
-        }
-    }
-
-    /**
      * Деструктор контроллера
      */
     public function __destruct() {
-
-        if (!isset($this->view)) {
-
-            $this->api->print();
-
-            return;
-        }
 
         if ($this->menu) {
 

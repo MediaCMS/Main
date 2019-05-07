@@ -144,7 +144,9 @@ class View {
 
         foreach($schema as $alias => $params) {
 
-            if (isset($params['isHidden']) && ($params['isHidden'] !== false)) continue;
+            if (isset($params['isMenu']) && ($params['isMenu'] === false)) continue;
+
+            if (isset($params['isLogin']) && (!isset($this->xml->user))) continue;
 
             $itemNode = $this->xml->menu->addChild('item');
 

@@ -1,53 +1,103 @@
 {
   "": {
     "title": "Головна",
-    "description": "Медіа - демонстраційний сайт інтернет-видання розробленої на MediaCMS",
+    "description": "Медіа - демонстраційний сайт інтернет-видання розробленої на MediaCMS (сторінка в розробці)",
     "image": "",
     "controller": "Main"
   },
   "статті": {
     "title": "Статті",
-    "description": "Список статей сайту",
+    "description": "Список статей сайту (сторінка в розробці)",
     "image": "",
     "controller": "Article"
   },
   "категорії": {
     "title": "Категорії",
-    "description": "Перелік категорій сайту",
+    "description": "Перелік категорій сайту (сторінка в розробці)",
     "image": "",
     "controller": "Category"
   },
   "мітки": {
     "title": "Мітки",
-    "description": "Список міток сайту",
+    "description": "Список міток сайту (сторінка в розробці)",
     "image": "",
     "controller": "Tag"
   },
+  "автори": {
+    "title": "Автори",
+    "description": "Перелік авторів статей сайту (сторінка в розробці)",
+    "image": "",
+    "controller": "User"
+  },
   "архів": {
     "title": "Архів",
-    "description": "Список статей структорований по датам",
+    "description": "Список статей структорований по датам (сторінка в розробці)",
     "image": "",
-    "controller": "Archive"
+    "controller": "Archive",
+    "isMenu": false
   },
   "сторінки": {
     "title": "Сторінки",
-    "description": "Перелік статичних сторінок сайту",
+    "description": "Перелік статичних сторінок сайту (сторінка в розробці)",
     "image": "",
     "controller": "Page"
   },
-  "автори": {
-    "title": "Автори",
-    "description": "Перелік авторів статей сайту",
+  "пошук": {
+    "title": "Пошук",
+    "description": "Сторінка пошуку по сайту (сторінка в розробці)",
     "image": "",
-    "controller": "User"
+    "controller": "Search",
+    "isMenu": false
+  },
+  "погода": {
+    "title": "Погода",
+    "description": "Прогноз погоди на деклька днів (сторінка в розробці)",
+    "image": "",
+    "controller": "Weather",
+    "isMenu": false
+  },
+  "мапа": {
+    "title": "Мапа",
+    "description": "Мапа сайту (сторінка в розробці)",
+    "image": "",
+    "controller": "Map",
+    "isMenu": false
+  },
+  "стрічки": {
+    "title": "Стрічки",
+    "description": "RSS-канал нових статей (сторінка в розробці)",
+    "image": "",
+    "controller": "Feed",
+    "isMenu": false
+  },
+  "вхід": {
+    "title": "Вхід",
+    "description": "Авторизація зареєстрованого користувача (сторінка в розробці)",
+    "image": "",
+    "controller": "Login",
+    "isMenu": false
+  },
+  "вихід": {
+    "title": "Вихід",
+    "description": "Розавторизація користувача (сторінка в розробці)",
+    "image": "",
+    "controller": "Logout",
+    "isMenu": false,
+    "isLogin": true
+  },
+  "реєстрація": {
+    "title": "Реєстрація",
+    "description": "Реєстрація нового користувача (сторінка в розробці)",
+    "image": "",
+    "controller": "Register",
+    "isMenu": false
   },
   "тест": {
     "title": "Тест",
     "description": "Тестова сторінка для перевірки працездатності",
     "image": "",
     "controller": "Test",
-    "isDatabase": false,
-    "isView": false,
-    "isHidden": true
+    "isMenu": false,
+    "isLogin": true
   }
 }

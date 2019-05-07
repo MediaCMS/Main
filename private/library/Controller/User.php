@@ -17,30 +17,30 @@ class User extends Controller {
     /**
      * Виводить список користувачів
      */
-    public function index(): void {
+    public function Primary(): void {
 
-        parent::index();
+        $this->index();
     }
 
     /**
      * Виводить користувача
      */
-    public function view(): void {
+    public function Secondary(): void {
 
-        parent::view();
+        $this->view();
     }
 
     /**
      * Авторизовує користувача
      */
-    public function login(): void {
+    public function Login(): void {
 
     }
 
     /**
      * Розавторизовує користувача
      */
-    public function logout(): void {
+    public function Logout(): void {
 
     }
 }

@@ -33,15 +33,6 @@ class Router {
     /** @var string Назва поточного контролера */
     protected $controller;
 
-    /** @var string Ознака автоматичного створення об'єкта бази даних */
-    protected $isDatabase = true;
-
-    /** @var string Ознака автоматичного створення об'єкта вигляду */
-    protected $isView = true;
-
-    /** @var string Ознака прихованого контролера */
-    protected $isHidden = false;
-
     /** @var array Перелік кодів та опису переадресації */
     protected $redirects = [
 
@@ -101,6 +92,45 @@ class Router {
     }
 
     /**
+     * Вибирає контролер та дію
+     */
+    private function route(): void {
+
+        $alias = $this->getURI(0);
+
+        if (is_null($alias)) {
+
+            $this->controller = 'Main';
+
+        } else {
+
+            $this->setSchema();
+
+            if (isset($this->schema[$alias])) {
+
+                $params = &$this->schema[$alias];
+
+                $this->title = $params['title'];
+
+                $this->description = $params['description'];
+
+                $this->controller = $params['controller'];
+
+                $params['active'] = true;
+
+            } else {
+
+                $this->title = 'Сторінка не знайдена';
+
+                $this->description = 'Запиувана Вами стрінка відсутня на нашому сайті';
+
+                $this->controller = 'Unknown';
+
+            }
+        }
+    }
+
+    /**
      * Отримує та зберігає схему сайта
      */
     private function setSchema(): void {
@@ -122,57 +152,6 @@ class Router {
     }
 
     /**
-     * Вибирає контролер та дію
-     */
-    private function route(): void {
-
-        $alias = $this->getURI(0);
-
-        if (is_null($alias)) {
-
-            $this->setController('Main');
-
-        } else {
-
-            $this->setSchema();
-
-            if (isset($this->schema[$alias])) {
-
-                $params = &$this->schema[$alias];
-
-                $this->setTitle($params['title']);
-
-                $this->setDescription($params['description']);
-
-                $this->setController($params['controller']);
-
-                if (isset($params['isDatabase']))
-
-                    $this->setIsDatabase($params['isDatabase']);
-
-                if (isset($params['isView']))
-
-                    $this->setIsView($params['isView']);
-
-                if (isset($params['isHidden']))
-
-                    $this->setIsHidden($params['isHidden']);
-
-                $params['active'] = true;
-
-            } else {
-
-                $this->setTitle('Сторінка не знайдена');
-
-                $this->setDescription('Запиувана Вами стрінка відсутня на нашому сайті');
-
-                $this->setController('Unknown');
-
-            }
-        }
-    }
-
-    /**
      * Зберігає найменування поточної сторінки
      *
      * @param string $title Текст назви
@@ -187,19 +166,9 @@ class Router {
      *
      * @return string Текст назви
      */
-    public function getTitle() {
+    public function getTitle(): string {
 
         return $this->title;
-    }
-
-    /**
-     * Зберігає опис поточної сторінки
-     *
-     * @param string $description Текст опису
-     */
-    protected function setDescription(string $description): void {
-
-        $this->description = $description;
     }
 
     /**
@@ -207,19 +176,9 @@ class Router {
      *
      * @return string Текст опису
      */
-    public function getDescription() {
+    public function getDescription(): string {
 
         return $this->description;
-    }
-
-    /**
-     * Зберігає зображення поточної сторінки
-     *
-     * @param string $image Адреса файла зображення
-     */
-    protected function setImage(string $image): void {
-
-        $this->image = $image;
     }
 
     /**
@@ -227,19 +186,9 @@ class Router {
      *
      * @return string Адреса файла зображення
      */
-    public function getImage() {
+    public function getImage(): string {
 
         return $this->image;
-    }
-
-    /**
-     * Зберігає контролер поточної сторінки
-     *
-     * @param string $controller Назва контролера
-     */
-    protected function setController(string $controller): void {
-
-        $this->controller = $controller;
     }
 
     /**
@@ -250,66 +199,6 @@ class Router {
     public function getController(): string {
 
         return $this->controller;
-    }
-
-    /**
-     * Зберігає ознаку автоматичного створення об'єкта бази даних
-     *
-     * @param boolean $isDatabase Ознака створення
-     */
-    protected function setIsDatabase(bool $isDatabase): void {
-
-        $this->isDatabase = $isDatabase;
-    }
-
-    /**
-     * Повертає ознаку автоматичного створення об'єкта бази даних
-     *
-     * @return boolean Ознака створення
-     */
-    public function isDatabase(): bool {
-
-        return $this->isDatabase;
-    }
-
-    /**
-     * Зберігає ознаку автоматичного створення об'єкта вигляду
-     *
-     * @param boolean $isView Ознака створення
-     */
-    protected function setIsView(bool $isView): void {
-
-        $this->isView = $isView;
-    }
-
-    /**
-     * Повертає ознаку автоматичного створення об'єкта вигляду
-     *
-     * @return boolean Ознака створення
-     */
-    public function isView(): bool {
-
-        return $this->isView;
-    }
-
-    /**
-     * Зберігає ознаку прихованого контролера
-     *
-     * @param boolean $isHidden Ознака прихованості
-     */
-    protected function setIsHidden(bool $isHidden): void {
-
-        $this->isHidden = $isHidden;
-    }
-
-    /**
-     * Повертає ознаку прихованого контролера
-     *
-     * @return boolean Ознака прихованості
-     */
-    public function isHidden(): bool {
-
-        return $this->isHidden;
     }
 
     /**

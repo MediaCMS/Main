@@ -12,6 +12,8 @@ use MediaCMS\Main\Router;
 //use MediaCMS\Main\Exception;
 use \Exception as ExceptionBase;
 
+session_start();
+
 set_error_handler('exceptionErrorHandler');
 
 spl_autoload_register('autoload');

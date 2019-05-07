@@ -13,7 +13,7 @@
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:exslt="http://exslt.org/common">
 
-    <xsl:output method="html" indent="no" encoding="UTF-8"  media-type="text/html" />
+    <xsl:output method="html" indent="no" encoding="UTF-8" media-type="text/html" />
 
     <xsl:variable name="imagePath" select="concat(/root/@photoHost, /root/@photoPath)" />
 
@@ -50,7 +50,7 @@
             <body>
                 <xsl:if test="menu">
                     <header>
-                        <a class="navbar-brand" href="{@main}" title="Головний сайт">
+                        <a class="navbar-brand" href="/" title="Головна сторінка">
                             <img src="/logo.png" alt="{@logo}" />
                         </a>
                             <div title="{user/@roleTitle}" class="user text-light"><xsl:value-of select="user/@title" />
