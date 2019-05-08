@@ -10,6 +10,11 @@ html {
   body {
     a {}
     img {border-radius: 3%;}
+    pre {
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
 
     header {
       nav {

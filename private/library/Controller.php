@@ -51,30 +51,46 @@ abstract class Controller {
 
         $this->view = new View();
 
-        $this->view->setTitle($this->router->getTitle());
+        try {
 
-        $this->view->setDescription($this->router->getDescription());
+            $this->view->setTitle($this->router->getTitle());
 
-        $this->view->setImage($this->router->getImage());
+            $this->view->setDescription($this->router->getDescription());
 
-        $this->view->setMenu($this->router->getSchema());
+            $this->view->setImage($this->router->getImage());
 
-        $this->node = $this->view->setNode($this->router->getController());
+            $this->view->setMenu($this->router->getSchema());
 
-        if (isset($_SESSION['user'])) {
+            $this->node = $this->view->setNode($this->router->getController());
 
-            $this->user = $_SESSION['user'];
+            if (isset($_SESSION['user'])) {
 
-            $this->view->setUser($this->user);
+                $this->user = $_SESSION['user'];
+
+                $this->view->setUser($this->user);
+            }
+
+            $this->setCategories();
+
+
+            $this->run();
+
+        } catch (Exception $exception) {
+
+            header('HTTP/1.x 500 Internal Server Error');
+
+            $this->view->setException($exception);
+
+            Log::append($exception);
         }
-
-        $this->setCategories();
     }
 
     /**
      * Додає у вигляд категорії
      */
     public function setCategories(): void {
+
+        $categories = [];
 
         $categoryController = $this->router->getSchema('Category');
 

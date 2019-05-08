@@ -17,7 +17,8 @@ class Login extends Controller {
     /**
      * Головний метод контролера
      */
-    public function primary(): void {
+    public function run(): void {
+
 
     }
 }

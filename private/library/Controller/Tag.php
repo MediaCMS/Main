@@ -15,18 +15,10 @@ use MediaCMS\Main\Controller;
 class Tag extends Controller {
 
     /**
-     * Виводить список міток
+     * Головний метод контролера
      */
-    public function index(): void {
+    public function run(): void {
 
-        parent::index();
-    }
 
-    /**
-     * Виводить статті мітки
-     */
-    public function view(): void {
-
-        parent::view();
     }
 }

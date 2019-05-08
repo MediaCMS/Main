@@ -15,18 +15,10 @@ use MediaCMS\Main\Controller;
 class Article extends Controller {
 
     /**
-     * Виводить список статей
+     * Головний метод контролера
      */
-    public function index(): void {
+    public function run(): void {
 
-        parent::index();
-    }
 
-    /**
-     * Виводить статтю
-     */
-    public function view(): void {
-
-        parent::view();
     }
 }

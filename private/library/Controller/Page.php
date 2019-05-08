@@ -15,18 +15,10 @@ use MediaCMS\Main\Controller;
 class Page extends Controller {
 
     /**
-     * Виводить список сторінок
+     * Головний метод контролера
      */
-    public function index(): void {
+    public function run(): void {
 
-        parent::index();
-    }
 
-    /**
-     * Виводить сторінку
-     */
-    public function view(): void {
-
-        parent::view();
     }
 }

@@ -15,32 +15,10 @@ use MediaCMS\Main\Controller;
 class User extends Controller {
 
     /**
-     * Виводить список користувачів
+     * Головний метод контролера
      */
-    public function Primary(): void {
+    public function run(): void {
 
-        $this->index();
-    }
-
-    /**
-     * Виводить користувача
-     */
-    public function Secondary(): void {
-
-        $this->view();
-    }
-
-    /**
-     * Авторизовує користувача
-     */
-    public function Login(): void {
-
-    }
-
-    /**
-     * Розавторизовує користувача
-     */
-    public function Logout(): void {
 
     }
 }

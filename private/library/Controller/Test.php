@@ -16,25 +16,10 @@ use MediaCMS\Main\Exception;
 class Test extends Controller {
 
     /**
-     * Виводить список коментарів
+     * Головний метод контролера
      */
-    public function index(): void {
+    public function run(): void {
 
-        parent::index();
-    }
 
-    /**
-     * Виводить коментар
-     */
-    public function view(): void {
-
-        if (is_null($this->router->getURI(2))) {
-
-            $this->router->redirect('/' . $this->router->getURI(0));
-
-            throw new Exception('Відсутній ідентифікатор коментаря');
-        }
-
-        parent::view();
     }
 }

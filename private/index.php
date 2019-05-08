@@ -28,7 +28,7 @@ try {
 
     $controller = new $controller($router);
 
-    call_user_func([$controller, 'run']);
+    //call_user_func([$controller, 'run']);
 
 } catch (Exception $exception) {
 

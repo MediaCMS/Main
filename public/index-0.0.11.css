@@ -1,6 +1,7 @@
 @charset "UTF-8";
 /** Головний файл стилів  @author      Артем Висоцький <a.vysotsky@gmail.com> @package     MediaCMS\Main @link        https://github.com/MediaCMS/Main @copyright   GNU General Public License v3 */
 html body img { border-radius: 3%; }
+html body pre { overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; }
 html body header nav a.navbar-brand img { width: 28px; border-radius: 3px; opacity: 0.5; margin-top: -3px; }
 html body header nav a.navbar-brand :hover { opacity: 0.9; }
 html body header nav div.navbar-collapse ul.navbar-nav li:last-child { padding-left: 15px; }
@@ -31,4 +32,4 @@ html body #debug div.mapper table tbody td.string { font-size: 1.2rem; font-fami
 html body #debug div.mapper table tbody td.string pre { color: green; white-space: pre-wrap; margin: 0; }
 html body #debug div.mapper table tbody td.string pre span { color: blue; font-weight: normal; }
 
-/*# sourceMappingURL=index-0.0.10.css.mapp */
+/*# sourceMappingURL=index-0.0.11.css.map */

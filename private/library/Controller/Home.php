@@ -13,14 +13,18 @@ namespace MediaCMS\Main\Controller;
 use MediaCMS\Main\Controller;
 use MediaCMS\Main\Exception;
 
-class Main extends Controller {
+class Home extends Controller {
 
     /**
      * Головний метод контролера
      */
     public function run(): void {
 
+        $params = ['_status' => 1, '_orderField' => 'time', '_orderDirection' => 1, '_limit' => $this->limit];
 
+        $this->database->call('ArticleGetIndex', $params);
+
+        $this->setItems('articles', 'article');
     }
 
     /**

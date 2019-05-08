@@ -15,18 +15,10 @@ use MediaCMS\Main\Controller;
 class Category extends Controller {
 
     /**
-     * Виводить список категорій
+     * Головний метод контролера
      */
-    public function index(): void {
+    public function run(): void {
 
-        parent::index();
-    }
 
-    /**
-     * Виводить статті категорії
-     */
-    public function view(): void {
-
-        parent::view();
     }
 }

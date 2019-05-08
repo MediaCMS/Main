@@ -15,18 +15,10 @@ use MediaCMS\Main\Controller;
 class Archive extends Controller {
 
     /**
-     * Виводить список статей по датам
+     * Головний метод контролера
      */
-    public function index(): void {
+    public function run(): void {
 
-        parent::index();
-    }
 
-    /**
-     * Виводить статті за певну дату
-     */
-    public function view(): void {
-
-        parent::view();
     }
 }

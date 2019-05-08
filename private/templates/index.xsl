@@ -17,6 +17,7 @@
 
     <xsl:variable name="imagePath" select="concat(/root/@photoHost, /root/@photoPath)" />
 
+    <xsl:include href="home.xsl" />
     <xsl:include href="article.xsl" />
     <xsl:include href="category.xsl" />
     <xsl:include href="tag.xsl" />
@@ -37,7 +38,7 @@
                 <title><xsl:value-of select="@title" /></title>
                 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
                 <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-                <link href="/index-0.0.10.css" rel="stylesheet" />
+                <link href="/index-0.0.11.css" rel="stylesheet" />
                 <link href="/bootstrap-4.3.1.min.css" rel="stylesheet" />
                 <script src="/jquery-3.4.1.min.js" type="application/javascript" />
                 <script src="/popper-1.15.0.min.js" type="application/javascript" />
@@ -96,8 +97,10 @@
                 </xsl:if>
                 <main class="container">
                     <div class="body controller-{name(main/*/.)} action-{name(main/*/*/.)} mt-4">
-                        <h1><xsl:value-of select="@title" /></h1>
-                        <p><xsl:value-of select="@description" /></p>
+                        <xsl:if test="not(main/home)">
+                            <h1><xsl:value-of select="@title" /></h1>
+                            <p><xsl:value-of select="@description" /></p>
+                        </xsl:if>
                         <xsl:apply-templates select="main/*" />
                     </div>
                 </main>
@@ -231,7 +234,7 @@
                     </table>
                 </div>
             </xsl:if>
-            <div class="xml text-left d-inline-block">
+            <div class="container xml text-left d-inline-block">
                 <pre><xsl:value-of select="xml" /></pre>
             </div>
         </div>
