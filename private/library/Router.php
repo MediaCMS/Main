@@ -106,32 +106,38 @@ class Router {
 
             $this->setSchema();
 
-            if (isset($this->schema[$alias])) {
+            foreach($this->schema as $controller => &$params) {
 
-                $params = &$this->schema[$alias];
+                if ($params['alias'] != $alias) continue;
+
+                $this->controller = $controller;
 
                 $this->title = $params['title'];
 
                 $this->description = $params['description'];
 
-                $this->controller = $params['controller'];
+                $this->image = $params['image'];
 
                 $params['active'] = true;
 
-            } else {
+                break;
+            }
+
+            if (!isset($this->controller)) {
 
                 $this->title = 'Сторінка не знайдена';
 
                 $this->description = 'Запиувана Вами стрінка відсутня на нашому сайті';
 
                 $this->controller = 'Unknown';
-
             }
         }
     }
 
     /**
      * Отримує та зберігає схему сайта
+     *
+     * ToDo: CacheIt! (with alias key)
      */
     private function setSchema(): void {
 
@@ -142,13 +148,14 @@ class Router {
     }
 
     /**
-     * Повертає схему сайту
+     * Повертає всю схему сайту чи тільки параметри певного контролера
      *
-     * @return array Схема сайта
+     * @param string|null $controller Назва затребуваного контролера
+     * @return array Схема або параметри контролера
      */
-    public function getSchema(): array {
+    public function getSchema(string $controller = null): array {
 
-        return $this->schema;
+        return (isset($controller)) ? $this->schema[$controller] : $this->schema;
     }
 
     /**

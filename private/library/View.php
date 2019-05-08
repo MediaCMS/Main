@@ -142,7 +142,7 @@ class View {
 
          $this->xml->addChild('menu');
 
-        foreach($schema as $alias => $params) {
+        foreach($schema as $params) {
 
             if (isset($params['isMenu']) && ($params['isMenu'] === false)) continue;
 
@@ -154,7 +154,7 @@ class View {
 
             $itemNode->addAttribute('description', $params['description']);
 
-            $itemNode->addAttribute('uri', '/' . $alias);
+            $itemNode->addAttribute('uri', '/' . $params['alias']);
 
             if (isset($params['active']))
 

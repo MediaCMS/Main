@@ -1,102 +1,102 @@
 {
-  "": {
+  "Main": {
     "title": "Головна",
     "description": "Медіа - демонстраційний сайт інтернет-видання розробленої на MediaCMS (сторінка в розробці)",
     "image": "",
-    "controller": "Main"
+    "alias": ""
   },
-  "статті": {
+  "Article": {
     "title": "Статті",
     "description": "Список статей сайту (сторінка в розробці)",
     "image": "",
-    "controller": "Article"
+    "alias": "статті"
   },
-  "категорії": {
+  "Category": {
     "title": "Категорії",
     "description": "Перелік категорій сайту (сторінка в розробці)",
     "image": "",
-    "controller": "Category"
+    "alias": "категорії"
   },
-  "мітки": {
+  "Tag": {
     "title": "Мітки",
     "description": "Список міток сайту (сторінка в розробці)",
     "image": "",
-    "controller": "Tag"
+    "alias": "мітки"
   },
-  "автори": {
+  "User": {
     "title": "Автори",
     "description": "Перелік авторів статей сайту (сторінка в розробці)",
     "image": "",
-    "controller": "User"
+    "alias": "автори"
   },
-  "архів": {
+  "Archive": {
     "title": "Архів",
     "description": "Список статей структорований по датам (сторінка в розробці)",
     "image": "",
-    "controller": "Archive",
+    "alias": "архів",
     "isMenu": false
   },
-  "сторінки": {
+  "Page": {
     "title": "Сторінки",
     "description": "Перелік статичних сторінок сайту (сторінка в розробці)",
     "image": "",
-    "controller": "Page"
+    "alias": "сторінки"
   },
-  "пошук": {
+  "Search": {
     "title": "Пошук",
     "description": "Сторінка пошуку по сайту (сторінка в розробці)",
     "image": "",
-    "controller": "Search",
+    "alias": "пошук",
     "isMenu": false
   },
-  "погода": {
+  "Weather": {
     "title": "Погода",
     "description": "Прогноз погоди на деклька днів (сторінка в розробці)",
     "image": "",
-    "controller": "Weather",
+    "alias": "погода",
     "isMenu": false
   },
-  "мапа": {
+  "Map": {
     "title": "Мапа",
     "description": "Мапа сайту (сторінка в розробці)",
     "image": "",
-    "controller": "Map",
+    "alias": "мапа",
     "isMenu": false
   },
-  "стрічки": {
+  "Feed": {
     "title": "Стрічки",
     "description": "RSS-канал нових статей (сторінка в розробці)",
     "image": "",
-    "controller": "Feed",
+    "alias": "стрічки",
     "isMenu": false
   },
-  "вхід": {
+  "Login": {
     "title": "Вхід",
     "description": "Авторизація зареєстрованого користувача (сторінка в розробці)",
     "image": "",
-    "controller": "Login",
+    "alias": "вхід",
     "isMenu": false
   },
-  "вихід": {
+  "Logout": {
     "title": "Вихід",
     "description": "Розавторизація користувача (сторінка в розробці)",
     "image": "",
-    "controller": "Logout",
+    "alias": "вихід",
     "isMenu": false,
     "isLogin": true
   },
-  "реєстрація": {
+  "Register": {
     "title": "Реєстрація",
     "description": "Реєстрація нового користувача (сторінка в розробці)",
     "image": "",
-    "controller": "Register",
+    "alias": "реєстрація",
     "isMenu": false
   },
-  "тест": {
+  "Test": {
     "title": "Тест",
     "description": "Тестова сторінка для перевірки працездатності",
     "image": "",
-    "controller": "Test",
+    "alias": "тест",
     "isMenu": false,
     "isLogin": true
   }

@@ -76,13 +76,13 @@ abstract class Controller {
      */
     public function setCategories(): void {
 
-        $alias = 'категорії';
+        $categoryController = $this->router->getSchema('Category');
 
         $this->database->call('CategoryGetList');
 
         while($category = $this->database->getResult()) {
 
-            if (($this->router->getURI(0) == $alias)
+            if (($this->router->getURI(0) == $categoryController['alias'])
 
                 && ($this->router->getURI(1) == $category['alias']))
 
@@ -91,7 +91,7 @@ abstract class Controller {
             $categories[] = $category;
         }
 
-        $this->view->setCategories($categories, $alias);
+        $this->view->setCategories($categories, $categoryController['alias']);
     }
 
     /**
