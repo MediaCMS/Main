@@ -29,30 +29,28 @@
     <xsl:template match="/*">
         <xsl:text disable-output-escaping="yes">&lt;!DOCTYPE html></xsl:text>
         <html xml:lang="uk" lang="uk" dir="ltr" id="root">
-            <xsl:if test="@editor">
-                <xsl:attribute name="data-photo-host"><xsl:value-of select="@photoHost" /></xsl:attribute>
-                <xsl:attribute name="data-photo-path"><xsl:value-of select="@photoPath" /></xsl:attribute>
-            </xsl:if>
+            <xsl:attribute name="data-photo-host"><xsl:value-of select="@photoHost" /></xsl:attribute>
+            <xsl:attribute name="data-photo-path"><xsl:value-of select="@photoPath" /></xsl:attribute>
             <xsl:if test="debug"><xsl:attribute name="data-debug">true</xsl:attribute></xsl:if>
             <head>
                 <title><xsl:value-of select="@title" /></title>
                 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
                 <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-                <link href="/index-0.0.11.css" rel="stylesheet" />
                 <link href="/bootstrap-4.3.1.min.css" rel="stylesheet" />
+                <link href="/index-0.0.12.css" rel="stylesheet" />
                 <script src="/jquery-3.4.1.min.js" type="application/javascript" />
                 <script src="/popper-1.15.0.min.js" type="application/javascript" />
                 <script src="/bootstrap-4.3.1.min.js" type="application/javascript" />
                 <xsl:if test="not(debug)">
                     <script src='https://www.google.com/recaptcha/api.js' />
                 </xsl:if>
-                <!--<script src="/index-0.0.1.js" type="application/javascript" />-->
+                <script src="/index-0.0.1.js" type="application/javascript" />
             </head>
             <body>
                 <xsl:if test="menu">
                     <header>
                         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                            <a class="" href="/" title="Головна сторінка">
+                            <a class="navbar-brand" href="/" title="Головна сторінка">
                                 <img src="/logo.png" width="100" alt="{@logo}" />
                             </a>
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,7 +66,6 @@
                                             <a class="nav-link" href="{@uri}"><xsl:value-of select="@title" /></a>
                                         </li>
                                     </xsl:for-each>
-                                    <li class="nav-item" />
                                 </ul>
                                 <form class="form-inline my-2 my-lg-0" action="/пошук">
                                     <input class="form-control mr-sm-2" type="search" placeholder="Пошук" aria-label="search" />

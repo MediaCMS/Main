@@ -20,11 +20,22 @@ class Home extends Controller {
      */
     public function run(): void {
 
-        $params = ['_status' => 1, '_orderField' => 'time', '_orderDirection' => 1, '_limit' => $this->limit];
+        $articleController = $this->router->getSchema('Article');
+
+        $params = ['_status' => 1, '_orderField' => 'time', '_orderDirection' => 1, '_limit' => 6];
 
         $this->database->call('ArticleGetIndex', $params);
 
-        $this->setItems('articles', 'article');
+        $articlesNode = $this->node->addChild('articles');
+
+        while($row = $this->database->getResult()) {
+
+            $articleNode = $articlesNode->addChild('article');
+
+            $row['uri'] = '/' . $articleController['alias'] . '/' . $row['alias'];
+
+            $this->view->setItem($articleNode, $row);
+        }
     }
 
     /**
