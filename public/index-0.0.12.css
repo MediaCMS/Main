@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /** Головний файл стилів  @author      Артем Висоцький <a.vysotsky@gmail.com> @package     MediaCMS\Main @link        https://github.com/MediaCMS/Main @copyright   GNU General Public License v3 */
-html { font-size: calc(12px + 0.5vw); }
+html { font-size: calc(16px + 0.1vw); }
 html body img { border-radius: 3%; }
 html body pre { overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; }
 html body main { min-height: 70vh; }

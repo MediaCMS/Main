@@ -47,10 +47,10 @@
             <div class="row mt-4">
                 <xsl:for-each select="articles/article[position()>3]">
                     <div class="col-md-4">
-                        <div class="card shadow-sm">
+                        <div class="card h-100">
                         <img data-uri="{@image}" alt="{@title}" class="card-img-top" />
                             <div class="card-body">
-                                <h3 class="card-title"><xsl:value-of select="@title" /></h3>
+                                <h4 class="card-title"><xsl:value-of select="@title" /></h4>
                                 <p class="card-text"><xsl:value-of select="@description" /></p>
                                 <a href="{@uri}" class="btn btn-primary">Читати</a>
                             </div>
