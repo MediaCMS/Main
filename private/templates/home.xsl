@@ -13,7 +13,7 @@
 
     <xsl:template match="main/home">
         <div class="top">
-            <div id="carousel" class="carousel slide carousel-fade" data-ride="carousel" data-interval="4000">
+            <div id="carousel" class="carousel slide carousel-fade" data-ride="carousel" data-interval="5000">
                 <ol class="carousel-indicators">
                     <li data-target="#carousel" data-slide-to="0" class="active" />
                     <li data-target="#carousel" data-slide-to="1" />

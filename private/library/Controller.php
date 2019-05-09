@@ -211,7 +211,7 @@ abstract class Controller {
      */
     public function __destruct() {
 
-        if (DEVELOPMENT) {
+        if ($_SESSION['debug']) {
 
             $queries = null;
 

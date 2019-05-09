@@ -10,7 +10,7 @@
 
 use MediaCMS\Main\Router;
 use MediaCMS\Main\Exception;
-//use \Exception as ExceptionBase;
+
 
 session_start();
 
@@ -18,9 +18,26 @@ set_error_handler('exceptionErrorHandler');
 
 spl_autoload_register('autoload');
 
-try {
 
-    require_once(PATH_PRIVATE . '/settings.php');
+require_once(PATH_PRIVATE . '/settings.php');
+
+
+if (!isset($_SESSION['debug'])) $_SESSION['debug'] = false;
+
+if (isset($_GET['dbg'])) {
+
+    if (!$_SESSION['debug'] && (strlen($_GET['dbg']) > 0) && ($_GET['dbg'] == DEBUG)) {
+
+        $_SESSION['debug'] = true;
+
+    } else {
+
+        $_SESSION['debug'] = false;
+    }
+}
+
+
+try {
 
     $router = new Router();
 
@@ -40,7 +57,7 @@ try {
 
 //    MediaCMS\Panel\Log::append($message);
 
-    if (DEVELOPMENT) {
+    if ($_SESSION['debug']) {
 
         if ($exception->xdebug_message) {
 

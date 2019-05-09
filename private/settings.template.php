@@ -44,5 +44,5 @@ define('RECAPTCHA_PUBLIC', '');
 /** Таємний ключ reCaptcha */
 define('RECAPTCHA_PRIVATE', '');
 
-/** Ознка виконання сторінки в режимі розробки */
-define('DEVELOPMENT', false);
+/** Ключ для активації режиму відлагодження */
+define('DEBUG', '');

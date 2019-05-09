@@ -58,6 +58,17 @@ class Router {
     }
 
     /**
+     * Повертає елемент ідентифікатора сторінки
+     *
+     * @param integer $key Ключ елемента
+     * @return string|null Назва елемента
+     */
+    public function getDebug(int $key): ?string {
+
+        return $this->uri[$key] ?? null;
+    }
+
+    /**
      * Отримує та зберігає ідентифікатор сторінки у вигляді переліку його елементів
      */
     private function setURI(): void {

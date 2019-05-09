@@ -70,7 +70,7 @@ class View {
 
         $this->xml->addAttribute('copyright', TITLE . ' @ ' . date('Y'));
 
-        if (DEVELOPMENT) $this->xml->addChild('debug');
+        if ($_SESSION['debug']) $this->xml->addChild('debug');
     }
 
     /**
@@ -433,7 +433,7 @@ class View {
 
         $alert = $exception->getMessage();
 
-        if (DEVELOPMENT) {
+        if ($_SESSION['debug']) {
 
             if (!is_null($exception->getFile()))
 
