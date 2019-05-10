@@ -38,6 +38,5 @@ $(function(){
         });
         let uri = $(this).data('uri').slice(0, -8) + imageCurrentWidthTitle + '.jpg';
         $(this).attr('src', photo.host + photo.path + uri);
-console.log($(this).attr('src'));
     });
 });

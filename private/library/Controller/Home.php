@@ -11,7 +11,6 @@
 namespace MediaCMS\Main\Controller;
 
 use MediaCMS\Main\Controller;
-use MediaCMS\Main\Exception;
 
 class Home extends Controller {
 
@@ -26,28 +25,19 @@ class Home extends Controller {
 
         $this->database->call('ArticleGetIndex', $params);
 
+        $articles = $this->database->getResults();
+
+        shuffle($articles); // видалити, додано для демо сайта
+
         $articlesNode = $this->node->addChild('articles');
 
-        while($row = $this->database->getResult()) {
+        foreach($articles as $article) {
 
             $articleNode = $articlesNode->addChild('article');
 
-            $row['uri'] = '/' . $articleController['alias'] . '/' . $row['alias'];
+            $article['uri'] = '/' . $articleController['alias'] . '/' . $article['alias'];
 
-            $this->view->setItem($articleNode, $row);
-        }
-    }
-
-    /**
-     * Виводить коментар
-     */
-    public function view(): void {
-
-        if (is_null($this->router->getURI(2))) {
-
-            $this->router->redirect('/' . $this->router->getURI(0));
-
-            throw new Exception('Відсутній ідентифікатор коментаря');
+            $this->view->setItem($articleNode, $article);
         }
     }
 }

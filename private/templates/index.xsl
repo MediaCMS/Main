@@ -37,14 +37,14 @@
                 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
                 <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
                 <link href="/bootstrap-4.3.1.min.css" rel="stylesheet" />
-                <link href="/index-0.0.12.css" rel="stylesheet" />
+                <link href="/index-0.0.13.css" rel="stylesheet" />
                 <script src="/jquery-3.4.1.min.js" type="application/javascript" />
                 <script src="/popper-1.15.0.min.js" type="application/javascript" />
                 <script src="/bootstrap-4.3.1.min.js" type="application/javascript" />
                 <xsl:if test="not(debug)">
                     <script src='https://www.google.com/recaptcha/api.js' />
                 </xsl:if>
-                <script src="/index-0.0.1.js" type="application/javascript" />
+                <script src="/index-0.0.2.js" type="application/javascript" />
             </head>
             <body>
                 <xsl:if test="menu">
@@ -135,6 +135,19 @@
                 <xsl:attribute name="alt"><xsl:value-of select="$title" /></xsl:attribute>
             </xsl:if>
         </img>
+    </xsl:template>
+
+    <xsl:template name="card">
+        <div class="card h-100">
+            <div class="card-img-top">
+                <img data-uri="{@image}" alt="{@title}" class="" />
+            </div>
+            <div class="card-body">
+                <h4 class="card-title"><xsl:value-of select="@title" /></h4>
+                <p class="card-text"><xsl:value-of select="@description" /></p>
+            </div>
+            <a href="{@uri}" title="{@title}"/>
+        </div>
     </xsl:template>
 
     <xsl:template name="index2">
