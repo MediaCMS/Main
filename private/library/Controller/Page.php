@@ -14,6 +14,19 @@ use MediaCMS\Main\Controller;
 
 class Page extends Controller {
 
+    /** @var string Заголовок контролера */
+    protected $title = 'Сторінки';
+
+    /** @var string Опис контролера */
+    protected $description = 'Статичні сторінки сайту (сторінка в розробці)';
+
+    /** @var string Ключові слова контролера */
+    protected $keywords = '';
+
+    /** @var string Зображення контролера */
+    protected $image = '';
+
+
     /**
      * Головний метод контролера
      */

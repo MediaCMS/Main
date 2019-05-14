@@ -14,12 +14,25 @@ use MediaCMS\Main\Controller;
 
 class Home extends Controller {
 
+    /** @var string Заголовок контролера */
+    protected $title = 'Головна сторінка';
+
+    /** @var string Опис контролера */
+    protected $description = 'Медіа - демонстраційний сайт інтернет-видання розробленої на MediaCMS (сторінка в розробці)';
+
+    /** @var string Ключові слова контролера */
+    protected $keywords = '';
+
+    /** @var string Зображення контролера */
+    protected $image = '';
+
+
     /**
      * Головний метод контролера
      */
     public function run(): void {
 
-        $articleController = $this->router->getSchema('Article');
+        $articleAlias = $this->router->getAliasByController('Article');
 
         $params = ['_status' => 1, '_orderField' => 'time', '_orderDirection' => 1, '_limit' => 6];
 
@@ -35,7 +48,7 @@ class Home extends Controller {
 
             $articleNode = $articlesNode->addChild('article');
 
-            $article['uri'] = '/' . $articleController['alias'] . '/' . $article['alias'];
+            $article['uri'] = '/' . $articleAlias . '/' . $article['alias'];
 
             $this->view->setItem($articleNode, $article);
         }

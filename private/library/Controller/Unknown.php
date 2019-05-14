@@ -14,6 +14,19 @@ use MediaCMS\Main\Controller;
 
 class Unknown extends Controller {
 
+    /** @var string Заголовок контролера */
+    protected $title = '';
+
+    /** @var string Опис контролера */
+    protected $description = '';
+
+    /** @var string Ключові слова контролера */
+    protected $keywords = '';
+
+    /** @var string Зображення контролера */
+    protected $image = '';
+
+
     /**
      * Сторінка не знайдена
      */

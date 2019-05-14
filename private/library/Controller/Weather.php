@@ -14,6 +14,19 @@ use MediaCMS\Main\Controller;
 
 class Weather extends Controller {
 
+    /** @var string Заголовок контролера */
+    protected $title = 'Погода';
+
+    /** @var string Опис контролера */
+    protected $description = 'Прогноз погоди на деклька днів (сторінка в розробці)';
+
+    /** @var string Ключові слова контролера */
+    protected $keywords = '';
+
+    /** @var string Зображення контролера */
+    protected $image = '';
+
+
     /**
      * Головний метод контролера
      */

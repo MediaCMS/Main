@@ -12,26 +12,17 @@ namespace MediaCMS\Main;
 
 class Router {
 
-    /** @var string Адреса файла схеми сайта */
-    protected $file = '/schema.json';
+    /** @var string Адреса файла контролерів сайта */
+    protected $file = '/controllers.json';
 
     /** @var array Перелік частин адреси сторінки */
     protected $uri;
 
-    /** @var array Схема сайта */
-    protected $schema;
-
-    /** @var string Заголовок сторінки */
-    protected $title;
-
-    /** @var string Опис сторінки */
-    protected $description = '';
-
-    /** @var string Зображення сторінки */
-    protected $image = '';
-
     /** @var string Назва поточного контролера */
     protected $controller;
+
+    /** @var array Перелік контролерів */
+    protected $controllers;
 
     /** @var array Перелік кодів та опису переадресації */
     protected $redirects = [
@@ -53,6 +44,8 @@ class Router {
     public function __construct() {
 
         $this->setURI();
+
+        $this->setControllers();
 
         $this->route();
     }
@@ -103,110 +96,35 @@ class Router {
     }
 
     /**
+     * Зчитує та зберігає контролери сайта
+     */
+    public function setControllers() {
+
+        $controllers = file_get_contents(PATH_PRIVATE . $this->file);
+
+        $this->controllers = json_decode($controllers, true);
+    }
+
+    /**
+     * Повертає контролери сайта
+     *
+     * @return array Перелік контролерів
+     */
+    public function getControllers(): array {
+
+        return $this->controllers;
+    }
+
+    /**
      * Вибирає контролер та дію
+     *
+     * ToDo: CacheIt!
      */
     private function route(): void {
 
-        $alias = $this->getURI(0);
+        $controller = array_search($this->getURI(0), $this->controllers);
 
-        if (is_null($alias)) {
-
-            $this->controller = 'Main';
-
-        } else {
-
-            $this->setSchema();
-
-            foreach($this->schema as $controller => &$params) {
-
-                if ($params['alias'] != $alias) continue;
-
-                $this->controller = $controller;
-
-                $this->title = $params['title'];
-
-                $this->description = $params['description'];
-
-                $this->image = $params['image'];
-
-                $params['active'] = true;
-
-                break;
-            }
-
-            if (!isset($this->controller)) {
-
-                $this->title = 'Сторінка не знайдена';
-
-                $this->description = 'Запиувана Вами стрінка відсутня на нашому сайті';
-
-                $this->controller = 'Unknown';
-            }
-        }
-    }
-
-    /**
-     * Отримує та зберігає схему сайта
-     *
-     * ToDo: CacheIt! (with alias key)
-     */
-    private function setSchema(): void {
-
-        $this->schema = json_decode(
-
-            file_get_contents(PATH_PRIVATE . $this->file), true
-        );
-    }
-
-    /**
-     * Повертає всю схему сайту чи тільки параметри певного контролера
-     *
-     * @param string|null $controller Назва затребуваного контролера
-     * @return array Схема або параметри контролера
-     */
-    public function getSchema(string $controller = null): array {
-
-        return (isset($controller)) ? $this->schema[$controller] : $this->schema;
-    }
-
-    /**
-     * Зберігає найменування поточної сторінки
-     *
-     * @param string $title Текст назви
-     */
-    protected function setTitle(string $title): void {
-
-        $this->title = $title;
-    }
-
-    /**
-     * Повертає найменування сторінки
-     *
-     * @return string Текст назви
-     */
-    public function getTitle(): string {
-
-        return $this->title;
-    }
-
-    /**
-     * Повертає опис поточної сторінки
-     *
-     * @return string Текст опису
-     */
-    public function getDescription(): string {
-
-        return $this->description;
-    }
-
-    /**
-     * Повертає зображення поточної сторінки
-     *
-     * @return string Адреса файла зображення
-     */
-    public function getImage(): string {
-
-        return $this->image;
+        $this->controller = ($controller !== false) ? $controller : 'Unknown';
     }
 
     /**
@@ -217,6 +135,18 @@ class Router {
     public function getController(): string {
 
         return $this->controller;
+    }
+
+    /**
+     * Повертає псевдонім вказаного контролера
+     *
+     *
+     * @param string $controller Назва затребуваного контролера
+     * @return string Псевдонім контролера
+     */
+    public function getAliasByController(string $controller): string {
+
+        return $this->controllers[$controller];
     }
 
     /**

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<root title="" description="" keywords="" image="">
+    <menu>
+        <item title="Головна" uri="/" description="Головна сторінка" />
+        <item title="Статті" uri="/статті" />
+        <item title="Категорії" uri="/категорії" />
+        <item title="Мітки" uri="/мітки" />
+        <item title="Автори" uri="/автори" />
+        <item title="Архів" uri="/архів" hidden="true" />
+        <item title="Сторінки" uri="/сторінки" hidden="true" />
+        <item title="Контакти" uri="/сторінки/контакти" />
+        <item title="Про нас" uri="/сторінки/про-нас" />
+        <item title="Послуги" uri="/сторінки/послуги" />
+        <item title="Пошук" uri="/пошук" hidden="true" />
+        <item title="Погода" uri="/погода" hidden="true" />
+        <item title="Мапа" uri="/мапа" hidden="true" />
+        <item title="Стрічки" uri="/стрічки" hidden="true" />
+        <item title="Реєстрація" uri="/доступ/реєстрація" hidden="true" />
+        <item title="Вхід" uri="/доступ/вхід" hidden="true" />
+        <item title="Вихід" uri="/доступ/вихід" login="true" hidden="true" />
+        <item title="Тест" uri="/тест" login="true" hidden="true" />
+    </menu>
+    <main />
+</root>

@@ -29,6 +29,18 @@ abstract class Controller {
     /** @var array Дані поточного користувача */
     protected $user;
 
+    /** @var string Заголовок контролера */
+    protected $title = '';
+
+    /** @var string Опис контролера */
+    protected $description = '';
+
+    /** @var string Ключові слова контролера */
+    protected $keywords = '';
+
+    /** @var string Зображення контролера */
+    protected $image = '';
+
     /** @var integer Кількість записів на сторінку в списку */
     protected $limit = 10;
 
@@ -53,13 +65,11 @@ abstract class Controller {
 
         try {
 
-            $this->view->setTitle($this->router->getTitle());
+            $this->view->setTitle($this->title);
 
-            $this->view->setDescription($this->router->getDescription());
+            $this->view->setDescription($this->description);
 
-            $this->view->setImage($this->router->getImage());
-
-            $this->view->setMenu($this->router->getSchema());
+            $this->view->setImage($this->image);
 
             $this->node = $this->view->setNode($this->router->getController());
 
@@ -92,13 +102,13 @@ abstract class Controller {
 
         $categories = [];
 
-        $categoryController = $this->router->getSchema('Category');
+        $categoryAlias = $this->router->getAliasByController('Category');
 
         $this->database->call('CategoryGetList');
 
         while($category = $this->database->getResult()) {
 
-            if (($this->router->getURI(0) == $categoryController['alias'])
+            if (($this->router->getURI(0) == $categoryAlias)
 
                 && ($this->router->getURI(1) == $category['alias']))
 
@@ -107,7 +117,7 @@ abstract class Controller {
             $categories[] = $category;
         }
 
-        $this->view->setCategories($categories, $categoryController['alias']);
+        $this->view->setCategories($categories, $categoryAlias);
     }
 
     /**

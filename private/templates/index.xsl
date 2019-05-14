@@ -34,6 +34,8 @@
             <xsl:if test="debug"><xsl:attribute name="data-debug">true</xsl:attribute></xsl:if>
             <head>
                 <title><xsl:value-of select="@title" /></title>
+                <meta name="description" content="{@description}" />
+                <meta name="keywords" content="{@keywords}" />
                 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
                 <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
                 <link href="/bootstrap-4.3.1.min.css" rel="stylesheet" />
@@ -101,10 +103,13 @@
                         <xsl:apply-templates select="main/*" />
                     </div>
                 </main>
-                <footer class="text-center my-5">
+                <footer class="container text-center my-5">
+                    <div class="alert alert-info my-5" role="alert">
+                        Демонстраційний сайт <a href="https://github.com/MediaCMS" title="MediaCMS" class="alert-link">MediaCMS</a> (в розробці)
+                    </div>
                     <nav class="text-center big">
                         <ul class="list-inline">
-                            <xsl:for-each select="menu/item">
+                            <xsl:for-each select="menu/item[not(@hidden)or(@hidden!='true')]">
                                 <li class="list-inline-item">
                                     <a href="{@uri}" title="{@description}"><xsl:value-of select="@title" /></a>
                                     <xsl:if test="position() &lt; last()">&#0160;&#0160;&#8226;</xsl:if>

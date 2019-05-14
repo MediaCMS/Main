@@ -14,8 +14,11 @@ use \SimpleXMLElement, \DOMDocument, \XSLTProcessor;
 
 class View {
 
+    /** @var string Загальний xml-файл вигляду */
+    protected $fileXML = '/templates/index.xml';
+
     /** @var string Загальний xsl-файл вигляду */
-    protected $fileXSL = 'templates/index.xsl';
+    protected $fileXSL = '/templates/index.xsl';
 
     /** @var SimpleXMLElement Дерево вигляду */
     protected $xml;
@@ -38,15 +41,7 @@ class View {
      */
     public function __construct() {
 
-        $xml = '<?xml version="1.0" encoding="utf-8" ?><root><main /></root>';
-
-        $this->xml = new SimpleXMLElement($xml);
-
-        $this->xml->addAttribute('title', TITLE);
-
-        $this->xml->addAttribute('description', '');
-
-        $this->xml->addAttribute('image', '');
+        $this->xml = simplexml_load_file(PATH_PRIVATE . $this->fileXML);
 
         $host = idn_to_utf8($_SERVER['HTTP_HOST'], 0, INTL_IDNA_VARIANT_UTS46);
 
@@ -84,16 +79,6 @@ class View {
     }
 
     /**
-     * Повертає заголовок сторінки
-     *
-     * @return string Текст заголовка
-     */
-    public function getTitle(): string {
-
-        return $this->xml->attributes()->title;
-    }
-
-    /**
      * Додає у вигляд опис сторінки
      *
      * @param string $description Текст опису
@@ -104,16 +89,6 @@ class View {
     }
 
     /**
-     * Повертає опис сторінки
-     *
-     * @return string Текст опису
-     */
-    public function getDescription(): string {
-
-        return $this->xml->attributes()->description;
-    }
-
-    /**
      * Додає у вигляд зображення сторінки
      *
      * @param string $image Відносна адреса зображення
@@ -121,45 +96,6 @@ class View {
     public function setImage(string $image): void {
 
         $this->xml->attributes()->image = $image;
-    }
-
-    /**
-     * Повертає зображення сторінки
-     *
-     * @return string Відносна адреса зображення
-     */
-    public function getImage(): string {
-
-        return $this->xml->attributes()->image;
-    }
-
-    /**
-     * Додає у вигляд головне меню
-     *
-     * @param array $schema Схема сайту
-     */
-    public function setMenu(array $schema): void {
-
-         $this->xml->addChild('menu');
-
-        foreach($schema as $params) {
-
-            if (isset($params['isMenu']) && ($params['isMenu'] === false)) continue;
-
-            if (isset($params['isLogin']) && (!isset($this->xml->user))) continue;
-
-            $itemNode = $this->xml->menu->addChild('item');
-
-            $itemNode->addAttribute('title', $params['title']);
-
-            $itemNode->addAttribute('description', $params['description']);
-
-            $itemNode->addAttribute('uri', '/' . $params['alias']);
-
-            if (isset($params['active']))
-
-                $itemNode->addAttribute('active', 1);
-        }
     }
 
     /**
@@ -321,7 +257,7 @@ class View {
 
         if ($page > 1) {
 
-            $title = $this->getTitle();
+            $title = $this->xml->attributes()->title;
 
             $title = sprintf('%s (сторінка №%d)', $title, $page);
 
@@ -473,7 +409,7 @@ class View {
 
         $xsl = new DOMDocument('1.0', 'UTF-8');
 
-        $xslFile = PATH_PRIVATE . DIRECTORY_SEPARATOR . $this->fileXSL;
+        $xslFile = PATH_PRIVATE . $this->fileXSL;
 
         $xsl->load($xslFile, LIBXML_NOCDATA);
 

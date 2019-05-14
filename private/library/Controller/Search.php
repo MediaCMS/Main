@@ -14,6 +14,19 @@ use MediaCMS\Main\Controller;
 
 class Search extends Controller {
 
+    /** @var string Заголовок контролера */
+    protected $title = 'Пошук';
+
+    /** @var string Опис контролера */
+    protected $description = 'Сторінка пошуку по сайту (сторінка в розробці)';
+
+    /** @var string Ключові слова контролера */
+    protected $keywords = '';
+
+    /** @var string Зображення контролера */
+    protected $image = '';
+
+
     /**
      * Головний метод контролера
      */

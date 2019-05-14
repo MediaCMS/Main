@@ -1,6 +1,6 @@
 <?php
 /**
- * Контролер мапи
+ * Контролер для роботи з доступом до сайту
  *
  * @author      Артем Висоцький <a.vysotsky@gmail.com>
  * @package     MediaCMS\Main
@@ -12,13 +12,13 @@ namespace MediaCMS\Main\Controller;
 
 use MediaCMS\Main\Controller;
 
-class Map extends Controller {
+class Access extends Controller {
 
     /** @var string Заголовок контролера */
-    protected $title = 'Мапа';
+    protected $title = 'Доступ на сайт';
 
     /** @var string Опис контролера */
-    protected $description = 'Мапа сайту (сторінка в розробці)';
+    protected $description = 'Сторінка операцій з доступом на сайт';
 
     /** @var string Ключові слова контролера */
     protected $keywords = '';

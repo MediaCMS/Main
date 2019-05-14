@@ -14,6 +14,19 @@ use MediaCMS\Main\Controller;
 
 class User extends Controller {
 
+    /** @var string Заголовок контролера */
+    protected $title = 'Автори';
+
+    /** @var string Опис контролера */
+    protected $description = 'Перелік авторів статей сайту (сторінка в розробці)';
+
+    /** @var string Ключові слова контролера */
+    protected $keywords = '';
+
+    /** @var string Зображення контролера */
+    protected $image = '';
+
+
     /**
      * Головний метод контролера
      */

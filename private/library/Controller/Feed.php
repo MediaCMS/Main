@@ -14,6 +14,19 @@ use MediaCMS\Main\Controller;
 
 class Feed extends Controller {
 
+    /** @var string Заголовок контролера */
+    protected $title = 'Стрічки';
+
+    /** @var string Опис контролера */
+    protected $description = 'RSS-канал нових статей (сторінка в розробці)';
+
+    /** @var string Ключові слова контролера */
+    protected $keywords = '';
+
+    /** @var string Зображення контролера */
+    protected $image = '';
+
+
     /**
      * Головний метод контролера
      */
