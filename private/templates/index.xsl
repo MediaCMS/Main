@@ -17,6 +17,8 @@
 
     <xsl:variable name="imagePath" select="concat(/root/@photoHost, /root/@photoPath)" />
 
+    <xsl:variable name="image2" select="@image" />
+
     <xsl:include href="home.xsl" />
     <xsl:include href="article.xsl" />
     <xsl:include href="category.xsl" />
@@ -46,7 +48,7 @@
                 <xsl:if test="not(debug)">
                     <script src='https://www.google.com/recaptcha/api.js' />
                 </xsl:if>
-                <script src="/index-0.0.2.js" type="application/javascript" />
+                <script src="/index-0.0.3.js" type="application/javascript" />
             </head>
             <body>
                 <xsl:if test="menu">
@@ -72,6 +74,7 @@
                                 <form class="form-inline my-2 my-lg-0" action="/пошук">
                                     <input class="form-control mr-sm-2" type="search" placeholder="Пошук" aria-label="search" />
                                 </form>
+                                <!--
                                 <div title="{user/@roleTitle}" class="user text-light"><xsl:value-of select="user/@title" />
                                     <xsl:choose>
                                         <xsl:when test="string-length(user/@image) &gt; 0">
@@ -83,6 +86,7 @@
                                         <xsl:otherwise><img src="/user.png" alt="{user/@title}" /></xsl:otherwise>
                                     </xsl:choose>
                                 </div>
+                                -->
                             </div>
                         </nav>
                     </header>
@@ -135,9 +139,14 @@
     <xsl:template name="image">
         <xsl:param name="uri" />
         <xsl:param name="title" />
-        <img data-uri="{$uri}">
-            <xsl:if test="string-length($title) &gt; 0">
+        <xsl:param name="class" select="''" />
+        <xsl:variable name="width" select="substring($uri, 41, 4)" />
+        <img src="{$imagePath}{substring($uri, 1, 40)}0320.jpg" data-width="{$width}">
+            <xsl:if test="$title &gt; 0">
                 <xsl:attribute name="alt"><xsl:value-of select="$title" /></xsl:attribute>
+            </xsl:if>
+            <xsl:if test="$class &gt; 0">
+                <xsl:attribute name="class"><xsl:value-of select="$class" /></xsl:attribute>
             </xsl:if>
         </img>
     </xsl:template>
@@ -145,7 +154,10 @@
     <xsl:template name="card">
         <div class="card h-100">
             <div class="card-img-top">
-                <img data-uri="{@image}" alt="{@title}" class="" />
+                <xsl:call-template name="image">
+                    <xsl:with-param name="uri" select="@image" />
+                    <xsl:with-param name="title" select="@title" />
+                </xsl:call-template>
             </div>
             <div class="card-body">
                 <h4 class="card-title"><xsl:value-of select="@title" /></h4>
