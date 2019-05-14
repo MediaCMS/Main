@@ -24,7 +24,11 @@
                         <xsl:if test="position()=1">
                             <xsl:attribute name="class">carousel-item active</xsl:attribute>
                         </xsl:if>
-                        <img data-uri="{@image}" class="d-block" alt="{@title}" />
+                        <xsl:call-template name="image">
+                            <xsl:with-param name="uri" select="@image" />
+                            <xsl:with-param name="title" select="@title" />
+                            <xsl:with-param name="class" select="'d-block'" />
+                        </xsl:call-template>
                         <div class="gradient" />
                         <div class="carousel-caption">
                             <h2><xsl:value-of select="@title" /></h2>
