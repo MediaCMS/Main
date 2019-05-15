@@ -89,6 +89,16 @@ class View {
     }
 
     /**
+     * Додає у вигляд ключові слова сторінки
+     *
+     * @param string $keywords Ключові слова
+     */
+    public function setKeywords(string $keywords): void {
+
+        $this->xml->attributes()->keywords = $keywords;
+    }
+
+    /**
      * Додає у вигляд зображення сторінки
      *
      * @param string $image Відносна адреса зображення

@@ -103,6 +103,13 @@
                         <xsl:if test="not(main/home)">
                             <h1><xsl:value-of select="@title" /></h1>
                             <p><xsl:value-of select="@description" /></p>
+                            <xsl:if test="@image">
+                                <xsl:call-template name="image">
+                                    <xsl:with-param name="uri" select="@image" />
+                                    <xsl:with-param name="title" select="@title" />
+                                    <xsl:with-param name="class" select="'w-100'" />
+                                </xsl:call-template>
+                            </xsl:if>
                         </xsl:if>
                         <xsl:apply-templates select="main/*" />
                     </div>
@@ -142,10 +149,10 @@
         <xsl:param name="class" select="''" />
         <xsl:variable name="width" select="substring($uri, 41, 4)" />
         <img src="{$imagePath}{substring($uri, 1, 40)}0320.jpg" data-width="{$width}">
-            <xsl:if test="$title &gt; 0">
+            <xsl:if test="string-length($title) &gt; 0">
                 <xsl:attribute name="alt"><xsl:value-of select="$title" /></xsl:attribute>
             </xsl:if>
-            <xsl:if test="$class &gt; 0">
+            <xsl:if test="string-length($class) &gt; 0">
                 <xsl:attribute name="class"><xsl:value-of select="$class" /></xsl:attribute>
             </xsl:if>
         </img>

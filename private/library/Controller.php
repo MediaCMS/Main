@@ -65,12 +65,6 @@ abstract class Controller {
 
         try {
 
-            $this->view->setTitle($this->title);
-
-            $this->view->setDescription($this->description);
-
-            $this->view->setImage($this->image);
-
             $this->node = $this->view->setNode($this->router->getController());
 
             if (isset($_SESSION['user'])) {
@@ -121,19 +115,25 @@ abstract class Controller {
     }
 
     /**
-     * Головний метод контролера
+     * Головний метод контролера (шаблон)
      */
-    public function run(): void {}
+    public function run(): void {
+
+        $alias = $this->router->getURI(1);
+
+        if (isset($alias))
+
+            $this->view($alias);
+
+        else
+
+            $this->index();
+    }
 
     /**
-     * Виводить список (додатково)
+     * Виводить список об'єктів з БД (шаблон)
      */
-    protected function secondary(): void {}
-
-    /**
-     * Виводить список
-     */
-    public function index(): void {
+    protected function index(): void {
 
         $page = (isset($_GET['page'])) ? $_GET['page'] : 1;
 
@@ -162,24 +162,49 @@ abstract class Controller {
     }
 
     /**
-     * Отримує дані з БД
+     * Виводить дані про об'єкт з БД (шаблон)
      *
-     * @param integer $id Ідентифікатор набору даних
-     * @return array Дані
+     * @param string $alias Псевдонім об'єкту
      */
-    protected function get(int $id): array {
+    protected function view(string $alias): void {
 
-        $this->database->call($this->router->getController() . 'Get', $id);
+        $this->database->call($this->router->getController() . 'GetByAlias', $alias);
 
         $data = $this->database->getResult();
 
-        $this->view->setItem($this->node, $data);
+        $this->title = $data['title'];
 
-        return $data;
+        $this->description = $data['description'];
+
+        $this->keywords = $data['tags'];
+
+        $this->image = $data['image'];
+/*
+        if (isset($data['text'])) {
+
+            preg_match('/<img src="([^"])"/', $data['text'], $matches);
+
+            if (count($matches[1]) > 0) {
+
+                foreach($matches[1] as &$img) {
+
+                    preg_match('/src="/./././.{32}\.(.){4}\.jpg"/', $img, $widthMax);
+
+
+                    $img = preg_replace('/<img src="([^"])"/', '<img src=""$1', $data['text']);
+                }
+            }
+
+            $data['text'] = preg_replace('/<img src="([^"])"/', '<img src=""$1', $data['text']);
+        }
+*/
+        $viewNode = $this->node->addChild('view');
+
+        $this->view->setItem($viewNode, $data);
     }
 
     /**
-     * Додає у вигляд результат запиту з БД
+     * Додає у вигляд результат запиту з БД (шаблон)
      *
      * @param string $itemsTitle Назва загального елемента
      * @param string $itemTitle Назва дочірніх елементів
@@ -220,6 +245,14 @@ abstract class Controller {
      * Деструктор контроллера
      */
     public function __destruct() {
+
+        $this->view->setTitle($this->title);
+
+        $this->view->setDescription($this->description);
+
+        $this->view->setKeywords($this->keywords);
+
+        $this->view->setImage($this->image);
 
         if ($_SESSION['debug']) {
 

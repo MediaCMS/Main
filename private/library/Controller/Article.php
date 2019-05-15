@@ -32,6 +32,24 @@ class Article extends Controller {
      */
     public function run(): void {
 
+        parent::run();
+    }
 
+    /**
+     * Виводить список об'єктів з БД
+     */
+    protected function index(): void {
+
+        parent::index();
+    }
+
+    /**
+     * Виводить дані про об'єкт з БД
+     *
+     * @param string $alias Псевдонім об'єкту
+     */
+    protected function view(string $alias): void {
+
+        parent::view($alias);
     }
 }

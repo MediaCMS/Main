@@ -16,9 +16,9 @@
     </xsl:template>
 
     <xsl:template match="main/article/view">
-        <div>
-            <xsl:value-of select="." />
-        </div>
+        <p><xsl:value-of select="@user" /></p>
+        <p><xsl:value-of select="@tags" /></p>
+        <xsl:value-of select="@text" disable-output-escaping="yes"/>
     </xsl:template>
 
 </xsl:stylesheet>
