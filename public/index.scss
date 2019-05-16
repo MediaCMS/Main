@@ -38,6 +38,13 @@ html {
             }
           }
         }
+        &.controller-article {
+          div.text {
+            figure {width: calc(320px + 40vw); max-width: 100%; text-align: center; margin: 0 auto;
+              img {width: 100%;}
+            }
+          }
+        }
         div.card {position: relative;
           div.card-img-top {width: 100%; padding-top: 66.66%; overflow: hidden; position: relative;
             img {min-width: 100%; min-height: 100%; margin: auto;

@@ -9,15 +9,14 @@
  * @copyright   GNU General Public License v3
  */
 -->
-<xsl:stylesheet version="1.0" exclude-result-prefixes="exslt"
+<xsl:stylesheet version="1.0" exclude-result-prefixes="exslt my"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:exslt="http://exslt.org/common">
+                xmlns:exslt="http://exslt.org/common"
+                xmlns:my="https://github.com/MediaCMS">
 
     <xsl:output method="html" indent="no" encoding="UTF-8" media-type="text/html" />
 
     <xsl:variable name="imagePath" select="concat(/root/@photoHost, /root/@photoPath)" />
-
-    <xsl:variable name="image2" select="@image" />
 
     <xsl:include href="home.xsl" />
     <xsl:include href="article.xsl" />
@@ -41,14 +40,14 @@
                 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
                 <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
                 <link href="/bootstrap-4.3.1.min.css" rel="stylesheet" />
-                <link href="/index-0.0.13.css" rel="stylesheet" />
+                <link href="/index.css?v=14" rel="stylesheet" />
                 <script src="/jquery-3.4.1.min.js" type="application/javascript" />
                 <script src="/popper-1.15.0.min.js" type="application/javascript" />
                 <script src="/bootstrap-4.3.1.min.js" type="application/javascript" />
                 <xsl:if test="not(debug)">
                     <script src='https://www.google.com/recaptcha/api.js' />
                 </xsl:if>
-                <script src="/index-0.0.3.js" type="application/javascript" />
+                <script src="/index.js?v=3" type="application/javascript" />
             </head>
             <body>
                 <xsl:if test="menu">
@@ -157,7 +156,13 @@
             </xsl:if>
         </img>
     </xsl:template>
-
+<!--
+    <xsl:template match="@*|node()" mode="text">
+        <xsl:copy>11111
+            <xsl:apply-templates select="@*|node()" mode="text" />
+        </xsl:copy>
+    </xsl:template>
+-->
     <xsl:template name="card">
         <div class="card h-100">
             <div class="card-img-top">

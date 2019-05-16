@@ -200,6 +200,17 @@ abstract class Controller {
 */
         $viewNode = $this->node->addChild('view');
 
+        if (isset($data['text'])) {
+
+            $textNode = $viewNode->addChild('text');
+
+            $textChilds = new SimpleXMLElement('<root>' . $data['text'] . '</root>');
+
+            $this->view->addTree($textNode, $textChilds);
+
+            unset($data['text']);
+        }
+
         $this->view->setItem($viewNode, $data);
     }
 
