@@ -17,11 +17,11 @@
     </xsl:template>
 
     <xsl:template match="main/article/view">
+        <xsl:apply-templates select="text" />
         <div class="panel">
             <p><xsl:value-of select="@user" /></p>
             <p><xsl:value-of select="@tags" /></p>
         </div>
-        <xsl:apply-templates select="text" />
     </xsl:template>
 
 <!--
