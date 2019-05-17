@@ -19,8 +19,8 @@
     <xsl:template match="main/article/view">
         <xsl:apply-templates select="text" />
         <div class="panel">
-            <p><xsl:value-of select="@user" /></p>
-            <p><xsl:value-of select="@tags" /></p>
+            <p><strong>Автор:</strong>&#160;<xsl:value-of select="@user" /></p>
+            <p><strong>Мітки:</strong>&#160;<xsl:value-of select="@tags" /></p>
         </div>
     </xsl:template>
 
