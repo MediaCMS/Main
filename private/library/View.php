@@ -455,11 +455,12 @@ class View {
     /**
      * Конвертує SimpleXMLElement в масив
      *
+     * ToDO: fix debug view bug
+     *
      * @param SimpleXMLElement $object Елемент XML
      * @param array|null $out Масив для наповнення
      * @return array Масив з даними
      */
-
     private function toArray(SimpleXMLElement $object, $out = []): array {
 
         foreach($object->attributes() as $key => $value)

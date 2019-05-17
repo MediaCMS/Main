@@ -27,7 +27,7 @@ class Page extends Controller {
     /** @var string Зображення контролера */
     protected $image = '';
 
-    
+
     /**
      * Виводить дані про об'єкт з БД (розширення)
      *
