@@ -179,34 +179,14 @@ abstract class Controller {
         $this->keywords = $data['tags'];
 
         $this->image = $data['image'];
-/*
-        if (isset($data['text'])) {
 
-            preg_match('/<img src="([^"])"/', $data['text'], $matches);
-
-            if (count($matches[1]) > 0) {
-
-                foreach($matches[1] as &$img) {
-
-                    preg_match('/src="/./././.{32}\.(.){4}\.jpg"/', $img, $widthMax);
-
-
-                    $img = preg_replace('/<img src="([^"])"/', '<img src=""$1', $data['text']);
-                }
-            }
-
-            $data['text'] = preg_replace('/<img src="([^"])"/', '<img src=""$1', $data['text']);
-        }
-*/
         $viewNode = $this->node->addChild('view');
 
         if (isset($data['text'])) {
 
-            $textNode = $viewNode->addChild('text');
+            $textNode = new SimpleXMLElement('<text>' . $data['text'] . '</text>');
 
-            $textChilds = new SimpleXMLElement('<root>' . $data['text'] . '</root>');
-
-            $this->view->addTree($textNode, $textChilds);
+            $this->view->addTree($viewNode, $textNode);
 
             unset($data['text']);
         }

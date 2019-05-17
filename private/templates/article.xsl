@@ -10,10 +10,7 @@
  */
 -->
 <!--<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">-->
-<xsl:stylesheet version="1.0" exclude-result-prefixes="exslt my"
-                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:exslt="http://exslt.org/common"
-                xmlns:my="https://github.com/MediaCMS">
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
     <xsl:template match="main/article/index">
 <!--        <xsl:call-template name="index" />-->
@@ -24,12 +21,10 @@
             <p><xsl:value-of select="@user" /></p>
             <p><xsl:value-of select="@tags" /></p>
         </div>
-        <xsl:apply-templates select="text/root" />
+        <xsl:apply-templates select="text" />
     </xsl:template>
 
-    <xsl:template match="article/view/text/root">
-        <div class="text"><xsl:apply-templates select="*" mode="html" /></div>
-    </xsl:template>
+<!--
 
     <xsl:template match="@* | node()" mode="html">
         <xsl:copy>
@@ -50,5 +45,5 @@
             <xsl:attribute name="data-width"><xsl:value-of select="$width" /></xsl:attribute>
         </img>
     </xsl:template>
-
+-->
 </xsl:stylesheet>

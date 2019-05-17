@@ -38,11 +38,9 @@ html {
             }
           }
         }
-        &.controller-article {
-          div.text {
-            figure {width: calc(320px + 40vw); max-width: 100%; text-align: center; margin: 0 auto;
-              img {width: 100%;}
-            }
+        div.text {
+          figure {width: calc(320px + 40vw); max-width: 100%; text-align: center; margin: 0 auto;
+            img {width: 100%;}
           }
         }
         div.card {position: relative;
