@@ -98,7 +98,7 @@ abstract class Controller {
 
         $categoryAlias = $this->router->getAliasByController('Category');
 
-        $this->database->call('CategoryGetList');
+        $this->database->call('CategoryGetAll');
 
         while($category = $this->database->getResult()) {
 
