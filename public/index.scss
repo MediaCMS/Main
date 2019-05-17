@@ -39,9 +39,7 @@ html {
           }
         }
         div.text {
-          figure {width: calc(320px + 40vw); max-width: 100%; text-align: center; margin: 0 auto;
-            img {width: 100%;}
-          }
+          img {max-width: 100%; margin: 0 auto; display: block;}
         }
         div.card {position: relative;
           div.card-img-top {width: 100%; padding-top: 66.66%; overflow: hidden; position: relative;
