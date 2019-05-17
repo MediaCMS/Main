@@ -8,7 +8,7 @@
         <item title="Автори" uri="/автори" />
         <item title="Архів" uri="/архів" hidden="true" />
         <item title="Сторінки" uri="/сторінки" hidden="true" />
-        <item title="Контакти" uri="/сторінки/контакти" />
+        <item title="Контакти" uri="/сторінки/звязок" />
         <item title="Про нас" uri="/сторінки/про-нас" />
         <item title="Послуги" uri="/сторінки/послуги" />
         <item title="Пошук" uri="/пошук" hidden="true" />

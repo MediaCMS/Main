@@ -18,7 +18,7 @@ class Home extends Controller {
     protected $title = 'Головна сторінка';
 
     /** @var string Опис контролера */
-    protected $description = 'Медіа - демонстраційний сайт інтернет-видання розробленої на MediaCMS (сторінка в розробці)';
+    protected $description = 'Медіа - демонстраційний сайт інтернет-видання розробленої на MediaCMS';
 
     /** @var string Ключові слова контролера */
     protected $keywords = '';

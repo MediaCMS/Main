@@ -272,7 +272,7 @@ class View {
 
         $paginationNode = $this->node->addChild('pagination');
 
-        $paginationNode->addAttribute('uri', '/' . $alias . '/список');
+        $paginationNode->addAttribute('uri', '/' . $alias);
 
         $paginationNode->addAttribute('page', $page);
 
@@ -466,17 +466,17 @@ class View {
 
             $out['@' . $key] = (string) $value;
 
-        foreach ($object as $index => $node) {
+            foreach ($object as $index => $node) {
 
-            if (is_object($node)) {
+                if (is_object($node)) {
 
-                $out[$index][] = $this->toArray($node);
+                    $out[$index][] = (count($node) == 1) ? $object : $this->toArray($node);
 
-            } else {
+                } else {
 
-                $out[$index] = $node;
+                    $out[$index] = $node;
+                }
             }
-        }
 
         //$out[$index] = (is_object($node)) ? self::xml2array($node) : print_r($node, true);
 

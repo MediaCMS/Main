@@ -48,6 +48,19 @@ html {
           }
           a {width: 100%; height: 100%;position: absolute; top: 0; bottom: 0; z-index: 100;}
         }
+        div.media {position: relative;
+          div.media-image {padding-top: 20%; overflow: hidden; position: relative;
+            img {min-width: 100%; min-height: 100%; margin: auto;
+              position: absolute; top:-100%; left:-100%; right: -100%; bottom:-100%;}
+          }
+          a {width: 100%; height: 100%;position: absolute; top: 0; bottom: 0; z-index: 100;}
+        }
+        div.action-index {
+          ul {
+            li {
+            }
+          }
+        }
       }
     }
 

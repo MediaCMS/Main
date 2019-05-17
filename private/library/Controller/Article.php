@@ -11,6 +11,7 @@
 namespace MediaCMS\Main\Controller;
 
 use MediaCMS\Main\Controller;
+use \SimpleXMLElement;
 
 class Article extends Controller {
 
@@ -18,7 +19,7 @@ class Article extends Controller {
     protected $title = 'Статті';
 
     /** @var string Опис контролера */
-    protected $description = 'Список статей сайту (сторінка в розробці)';
+    protected $description = 'Список статей сайту';
 
     /** @var string Ключові слова контролера */
     protected $keywords = '';
@@ -28,28 +29,44 @@ class Article extends Controller {
 
 
     /**
-     * Головний метод контролера
-     */
-    public function run(): void {
-
-        parent::run();
-    }
-
-    /**
-     * Виводить список об'єктів з БД
-     */
-    protected function index(): void {
-
-        parent::index();
-    }
-
-    /**
-     * Виводить дані про об'єкт з БД
+     * Виводить дані про об'єкт з БД (розширення)
      *
-     * @param string $alias Псевдонім об'єкту
+     * @param SimpleXMLElement $node Посилання на елемент виводу
+     * @param array $data Посилання на дані об'єкта
      */
-    protected function view(string $alias): void {
+    protected function viewExtended(SimpleXMLElement $node, array &$data): void {
 
-        parent::view($alias);
+        $textNode = new SimpleXMLElement('<text>' . $data['text'] . '</text>');
+
+        $this->view->addTree($node, $textNode);
+
+        $keywords = [];
+
+        $tagControllerAlias = $this->router->getAliasByController('Tag');
+
+        $tags = explode(',', $data['tags']);
+
+        $tagsNode = $node->addChild('tags');
+
+        foreach($tags as $tag) {
+
+            $tagArray = explode('/', $tag);
+
+            $tagNode = $tagsNode->addChild('tag');
+
+            $tagNode->addAttribute('title', $tagArray[0]);
+
+            $tagNode->addAttribute('uri', '/' . $tagControllerAlias . '/' . $tagArray[1]);
+
+            $keywords[] = $tagArray[0];
+        }
+
+        $this->keywords = implode(', ', $keywords);
+
+        $userControllerAlias = $this->router->getAliasByController('User');
+
+        $data['userURI'] = '/' . $userControllerAlias . '/' . $data['userAlias'];
+
+        unset($data['text'], $data['tags']);
     }
 }

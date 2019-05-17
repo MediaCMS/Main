@@ -11,6 +11,7 @@
 namespace MediaCMS\Main\Controller;
 
 use MediaCMS\Main\Controller;
+use \SimpleXMLElement;
 
 class Page extends Controller {
 
@@ -26,12 +27,20 @@ class Page extends Controller {
     /** @var string Зображення контролера */
     protected $image = '';
 
-
+    
     /**
-     * Головний метод контролера
+     * Виводить дані про об'єкт з БД (розширення)
+     *
+     * @param SimpleXMLElement $node Посилання на елемент виводу
+     * @param array $data Посилання на дані об'єкта
      */
-    public function run(): void {
+    protected function viewExtended(SimpleXMLElement $node, array &$data): void {
 
+        $textNode = new SimpleXMLElement('<text>' . $data['text'] . '</text>');
 
+        $this->view->addTree($node, $textNode);
+
+        unset($data['text']);
     }
+
 }

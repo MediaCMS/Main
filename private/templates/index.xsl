@@ -101,8 +101,8 @@
                     <div class="body controller-{name(main/*/.)} action-{name(main/*/*/.)} mt-4">
                         <xsl:if test="not(main/home)">
                             <h1><xsl:value-of select="@title" /></h1>
-                            <p><xsl:value-of select="@description" /></p>
                             <xsl:if test="@image!=''">
+                                <p><xsl:value-of select="@description" /></p>
                                 <xsl:call-template name="image">
                                     <xsl:with-param name="uri" select="@image" />
                                     <xsl:with-param name="title" select="@title" />

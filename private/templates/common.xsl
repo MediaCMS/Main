@@ -40,42 +40,62 @@
 -->
     <xsl:template name="card">
         <div class="card h-100">
-            <div class="card-img-top">
-                <xsl:call-template name="image">
-                    <xsl:with-param name="uri" select="@image" />
-                    <xsl:with-param name="title" select="@title" />
-                </xsl:call-template>
-            </div>
+            <xsl:if test="@image">
+                <div class="card-img-top">
+                    <xsl:call-template name="image">
+                        <xsl:with-param name="uri" select="@image" />
+                        <xsl:with-param name="title" select="@title" />
+                    </xsl:call-template>
+                </div>
+            </xsl:if>
             <div class="card-body">
-                <h4 class="card-title"><xsl:value-of select="@title" /></h4>
+                <h5 class="card-title"><xsl:value-of select="@title" /></h5>
                 <p class="card-text"><xsl:value-of select="@description" /></p>
             </div>
             <a href="{@uri}" title="{@title}"/>
         </div>
     </xsl:template>
 
-    <xsl:template name="index2">
-        <div class="items">
+    <xsl:template name="media">
+        <div class="media row">
+            <div class="media-image col-sm-4">
+                <xsl:call-template name="image">
+                    <xsl:with-param name="uri" select="@image" />
+                    <xsl:with-param name="title" select="@title" />
+                </xsl:call-template>
+            </div>
+            <div class="media-body col-sm-8">
+                <h3 class="mt-0 mb-1"><xsl:value-of select="@title" /></h3>
+                <p><xsl:value-of select="@description" /></p>
+            </div>
+            <a href="{@uri}" title="{@title}"/>
+        </div>
+    </xsl:template>
+
+    <xsl:template match="main/*/index | main/*/view/index">
+        <div class="list row mt-4">
             <xsl:for-each select="items/item">
-                <div class="item">
-                    <div class="image"><xsl:value-of select="@image" /></div>
-                    <div class="title"><xsl:value-of select="@title" /></div>
-                    <div class="description"><xsl:value-of select="@description" /></div>
-                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 my-2"><xsl:call-template name="card" /></div>
             </xsl:for-each>
         </div>
         <xsl:apply-templates select="pagination" />
     </xsl:template>
 
-    <xsl:template match="view/text">
+    <xsl:template match="main/*/view">
+        <xsl:apply-templates select="@*" />
+        <xsl:apply-templates select="text" />
+        <xsl:apply-templates select="index" />
+    </xsl:template>
+
+    <xsl:template match="main/*/view/text">
         <div class="text"><xsl:apply-templates /></div>
     </xsl:template>
 
-    <xsl:template match="view/text//p">
+    <xsl:template match="main/*/view/text//p">
         <xsl:copy><xsl:apply-templates /></xsl:copy>
     </xsl:template>
 
-    <xsl:template match="view/text//img">
+    <xsl:template match="main/*/view/text//img">
         <xsl:copy>
             <xsl:apply-templates />
             <xsl:variable name="offset" select="string-length(@src) - 8" />
@@ -85,25 +105,6 @@
         </xsl:copy>
     </xsl:template>
 
-<!--
-    <xsl:template match="view/text/p">
-        123<xsl:copy-of select="." />
-    </xsl:template>
-
-    <xsl:template match="view/text/*/img">
-        <xsl:copy>
-            <xsl:attribute name="data-test"><xsl:value-of select="@src" /></xsl:attribute>
-            <xsl:variable name="offset" select="string-length(@src) - 8" />
-            <xsl:variable name="width" select="substring(@src, $offset + 1, 4)" />
-            <xsl:attribute name="src"><xsl:value-of select="substring(@src, 1, $offset)" />0320.jpg</xsl:attribute>
-            <xsl:attribute name="data-width"><xsl:value-of select="$width" /></xsl:attribute>
-        </xsl:copy>
-    </xsl:template>
-
-    <xsl:template match="view/text2/*">
-        987<xsl:copy-of select="." />
-    </xsl:template>
--->
     <xsl:template match="pagination">
         <nav aria-label="Page navigation example" class="mt-5">
             <ul class="pagination justify-content-center">
@@ -113,21 +114,21 @@
                 </li>
                 <li class="page-item">
                     <xsl:if test="@page = 1"><xsl:attribute name="class">page-item disabled</xsl:attribute></xsl:if>
-                    <a href="{@uri}/{@page - 1}" title="Попередня сторінка" class="page-link">&lt;</a>
+                    <a href="{@uri}?сторінка={@page - 1}" title="Попередня сторінка" class="page-link">&lt;</a>
                 </li>
                 <xsl:for-each select="pages/page">
                     <li class="page-item">
                         <xsl:if test="@value=../../@page"><xsl:attribute name="class">page-item active</xsl:attribute></xsl:if>
-                        <a href="{../../@uri}/{@value}" title="{@title}" class="page-link"><xsl:value-of select="@value" /></a>
+                        <a href="{../../@uri}?сторінка={@value}" title="{@title}" class="page-link"><xsl:value-of select="@value" /></a>
                     </li>
                 </xsl:for-each>
                 <li class="page-item">
                     <xsl:if test="@page = @pages"><xsl:attribute name="class">page-item disabled</xsl:attribute></xsl:if>
-                    <a href="{@uri}/{@page + 1}" title="Наступна сторінка" class="page-link">&gt;</a>
+                    <a href="{@uri}?сторінка={@page + 1}" title="Наступна сторінка" class="page-link">&gt;</a>
                 </li>
                 <li class="page-item">
                     <xsl:if test="@page = @pages"><xsl:attribute name="class">page-item disabled</xsl:attribute></xsl:if>
-                    <a href="{@uri}/{@pages}" title="Остання сторінка" class="page-link">&gt;&gt;</a>
+                    <a href="{@uri}?сторінка={@pages}" title="Остання сторінка" class="page-link">&gt;&gt;</a>
                 </li>
             </ul>
         </nav>

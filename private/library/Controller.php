@@ -41,8 +41,13 @@ abstract class Controller {
     /** @var string Зображення контролера */
     protected $image = '';
 
-    /** @var integer Кількість записів на сторінку в списку */
-    protected $limit = 10;
+    /** @var array Фільтр списку */
+    protected $filter = [
+
+        '_status' => 1, '_orderField' => 'time', '_orderDirection' => 1,
+
+        '_offset' => 0, '_limit' => 10
+    ];
 
     /** @var \Exception Виняток */
     protected $exception;
@@ -75,7 +80,6 @@ abstract class Controller {
             }
 
             $this->setCategories();
-
 
             $this->run();
 
@@ -127,39 +131,60 @@ abstract class Controller {
 
         else
 
-            $this->index();
+            $this->index($this->node, $this->router->getController());
     }
 
     /**
      * Виводить список об'єктів з БД (шаблон)
+     *
+     * @param SimpleXMLElement $node Посилання на елемент виводу
+     * @param string $controller Назва контролера об'єктів
      */
-    protected function index(): void {
+    protected function index(SimpleXMLElement $node, string $controller = 'Article'): void {
 
-        $page = (isset($_GET['page'])) ? $_GET['page'] : 1;
+        $page = (isset($_GET['сторінка'])) ? $_GET['сторінка'] : 1;
 
-        $offset = ($page - 1) * $this->limit;
+        $this->filter['_offset'] = ($page - 1) * $this->filter['_limit'];
 
-        $this->database->call($this->router->getController() . 'GetIndex');
+        $this->database->call($controller . 'GetIndex', $this->filter);
 
-        $itemsNode = $this->node->addChild('items');
+        $indexNode = $node->addChild('index');
+
+        $itemsNode = $indexNode->addChild('items');
 
         $i = 1;
+
+        $items = [];
 
         while($item = $this->database->getResult()) {
 
             $itemNode = $itemsNode->addChild('item');
 
-            $item['position'] = $offset + $i;
+            $item['position'] = $this->filter['_offset'] + $i;
+
+            $item['uri'] = '/' . $this->router->getAliasByController($controller) . '/' . $item['alias'];
 
             $this->view->setItem($itemNode, $item);
+
+            $items[] = $item;
 
             $i ++;
         }
 
-        $pages = ceil($this->database->getFoundRows() / $this->limit);
+        $this->indexExtended($indexNode, $items);
+
+        $pages = ceil($this->database->getFoundRows() / $this->filter['_limit']);
 
         $this->view->setPagination($page, $pages, $this->router->getURI(0));
     }
+
+    /**
+     * Виводить список об'єктів з БД (розширення)
+     *
+     * @param SimpleXMLElement $node Елемент виводу
+     * @param array $data Дані об'єктів
+     */
+    protected function indexExtended(SimpleXMLElement $node, array $data): void {}
 
     /**
      * Виводить дані про об'єкт з БД (шаблон)
@@ -176,23 +201,24 @@ abstract class Controller {
 
         $this->description = $data['description'];
 
-        $this->keywords = $data['tags'];
+        $this->keywords = $data['title'];
 
         $this->image = $data['image'];
 
         $viewNode = $this->node->addChild('view');
 
-        if (isset($data['text'])) {
-
-            $textNode = new SimpleXMLElement('<text>' . $data['text'] . '</text>');
-
-            $this->view->addTree($viewNode, $textNode);
-
-            unset($data['text']);
-        }
+        $this->viewExtended($viewNode, $data);
 
         $this->view->setItem($viewNode, $data);
     }
+
+    /**
+     * Виводить дані про об'єкт з БД (розширення)
+     *
+     * @param SimpleXMLElement $node Посилання на елемент виводу
+     * @param array $data Посилання на дані об'єкта
+     */
+    protected function viewExtended(SimpleXMLElement $node, array &$data): void {}
 
     /**
      * Додає у вигляд результат запиту з БД (шаблон)

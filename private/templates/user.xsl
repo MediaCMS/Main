@@ -11,12 +11,6 @@
 -->
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
-    <xsl:template match="main/user/index">
-     </xsl:template>
-
-    <xsl:template match="main/user/view">
-    </xsl:template>
-
     <xsl:template match="main/user/login">
          <div class="card d-table mx-auto">
             <div class="card-header">Авторизація</div>

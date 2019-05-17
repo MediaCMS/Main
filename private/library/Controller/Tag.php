@@ -11,6 +11,7 @@
 namespace MediaCMS\Main\Controller;
 
 use MediaCMS\Main\Controller;
+use \SimpleXMLElement;
 
 class Tag extends Controller {
 
@@ -28,10 +29,15 @@ class Tag extends Controller {
 
 
     /**
-     * Головний метод контролера
+     * Виводить дані про об'єкт з БД (розширення)
+     *
+     * @param SimpleXMLElement $node Посилання на елемент виводу
+     * @param array $data Посилання на дані об'єкта
      */
-    public function run(): void {
+    protected function viewExtended(SimpleXMLElement $node, array &$data): void {
 
+        $this->filter['tagID'] = $data['id'];
 
+        $this->index($node);
     }
 }

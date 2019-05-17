@@ -11,6 +11,7 @@
 namespace MediaCMS\Main\Controller;
 
 use MediaCMS\Main\Controller;
+use \SimpleXMLElement;
 
 class User extends Controller {
 
@@ -32,6 +33,22 @@ class User extends Controller {
      */
     public function run(): void {
 
+        $this->filter['roleID'] = 4;
 
+        parent::run();
     }
+
+    /**
+     * Виводить дані про об'єкт з БД (розширення)
+     *
+     * @param SimpleXMLElement $node Посилання на елемент виводу
+     * @param array $data Посилання на дані об'єкта
+     */
+    protected function viewExtended(SimpleXMLElement $node, array &$data): void {
+
+        $this->filter['userID'] = $data['id'];
+
+        $this->index($node);
+    }
+
 }
