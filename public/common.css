@@ -1,0 +1,12 @@
+@charset "UTF-8";
+/** Спільний файл стилів  @author      Артем Висоцький <a.vysotsky@gmail.com> @package     MediaCMS\Main @link        https://github.com/MediaCMS/Main @copyright   GNU General Public License v3 */
+html body .mw-sm { max-width: 540px; }
+html body .mw-md { max-width: 720px; }
+html body .mw-lg { max-width: 960px; }
+html body .mw-xl { max-width: 1140px; }
+html body #debug div.mapper table tbody { line-height: 180%; }
+html body #debug div.mapper table tbody td.string { font-size: 1.2rem; font-family: "Courier New",Courier,monospace; margin: 0; }
+html body #debug div.mapper table tbody td.string pre { color: green; white-space: pre-wrap; margin: 0; }
+html body #debug div.mapper table tbody td.string pre span { color: blue; font-weight: normal; }
+
+/*# sourceMappingURL=common.css.map */

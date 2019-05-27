@@ -11,9 +11,9 @@
 -->
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
-    <xsl:template match="@*|node()">
+    <xsl:template match="@*|node()" mode="html">
         <xsl:copy>
-            <xsl:apply-templates select="@*|node()" />
+            <xsl:apply-templates select="@*|node()" mode="html" />
         </xsl:copy>
     </xsl:template>
 
@@ -103,6 +103,10 @@
             <xsl:attribute name="src"><xsl:value-of select="substring(@src, 1, $offset)" />0320.jpg</xsl:attribute>
             <xsl:attribute name="data-width"><xsl:value-of select="$width" /></xsl:attribute>
         </xsl:copy>
+    </xsl:template>
+
+    <xsl:template match="main/*">
+        <xsl:apply-templates select="*" />
     </xsl:template>
 
     <xsl:template match="pagination">

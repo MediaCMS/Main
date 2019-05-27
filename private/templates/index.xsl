@@ -40,14 +40,16 @@
                 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
                 <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
                 <link href="/bootstrap-4.3.1.min.css" rel="stylesheet" />
-                <link href="/index.css?v=14" rel="stylesheet" />
+                <link href="/common.css?v=1" rel="stylesheet" />
+                <link href="/index.css?v=15" rel="stylesheet" />
                 <script src="/jquery-3.4.1.min.js" type="application/javascript" />
                 <script src="/popper-1.15.0.min.js" type="application/javascript" />
                 <script src="/bootstrap-4.3.1.min.js" type="application/javascript" />
                 <xsl:if test="not(debug)">
                     <script src='https://www.google.com/recaptcha/api.js' />
                 </xsl:if>
-                <script src="/index.js?v=3" type="application/javascript" />
+                <script src="/common.js?v=1" type="application/javascript" />
+                <script src="/index.js?v=4" type="application/javascript" />
             </head>
             <body>
                 <xsl:if test="menu">

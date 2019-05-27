@@ -65,20 +65,6 @@ html {
     }
 
     footer {}
-
-    #debug {
-      div.mapper {
-        table {
-          tbody {line-height: 180%;
-            td.string {font-size: 1.2rem; font-family: "Courier New",Courier,monospace; margin: 0;
-              pre {color: green; white-space: pre-wrap; margin: 0;
-                span {color: blue; font-weight: normal;}
-              }
-            }
-          }
-        }
-      }
-    }
   }
 }
 

@@ -1,0 +1,31 @@
+/**
+ * Спільний файл стилів
+ *
+ * @author      Артем Висоцький <a.vysotsky@gmail.com>
+ * @package     MediaCMS\Main
+ * @link        https://github.com/MediaCMS/Main
+ * @copyright   GNU General Public License v3
+ */
+html {
+  body {
+    .mw-sm {max-width: 540px;}
+    .mw-md {max-width: 720px;}
+    .mw-lg {max-width: 960px;}
+    .mw-xl {max-width: 1140px;}
+
+    #debug {
+      div.mapper {
+        table {
+          tbody {line-height: 180%;
+            td.string {font-size: 1.2rem; font-family: "Courier New",Courier,monospace; margin: 0;
+              pre {color: green; white-space: pre-wrap; margin: 0;
+                span {color: blue; font-weight: normal;}
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
