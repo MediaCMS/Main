@@ -6,6 +6,7 @@
  * @link        https://github.com/MediaCMS/Main
  * @copyright   GNU General Public License v3
  */
+
 html {
   font-size: calc(16px + 0.1vw);
   body {
@@ -19,6 +20,11 @@ html {
 
     header {
       nav {
+        ul {
+          li {
+            margin: 0;
+          }
+        }
       }
     }
 

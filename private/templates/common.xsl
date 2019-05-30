@@ -72,6 +72,10 @@
         </div>
     </xsl:template>
 
+    <xsl:template match="main/*">
+        <xsl:apply-templates select="." />
+    </xsl:template>
+
     <xsl:template match="main/*/index | main/*/view/index">
         <div class="list row mt-4">
             <xsl:for-each select="items/item">
@@ -82,13 +86,13 @@
     </xsl:template>
 
     <xsl:template match="main/*/view">
-        <xsl:apply-templates select="@*" />
+<!--        <xsl:apply-templates select="@*" />-->
         <xsl:apply-templates select="text" />
         <xsl:apply-templates select="index" />
     </xsl:template>
 
     <xsl:template match="main/*/view/text">
-        <div class="text"><xsl:apply-templates /></div>
+        <div class="text"><xsl:apply-templates mode="html" /></div>
     </xsl:template>
 
     <xsl:template match="main/*/view/text//p">

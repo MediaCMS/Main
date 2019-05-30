@@ -39,9 +39,9 @@
                 <meta name="keywords" content="{@keywords}" />
                 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
                 <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-                <link href="/bootstrap-4.3.1.min.css" rel="stylesheet" />
-                <link href="/common.css?v=1" rel="stylesheet" />
-                <link href="/index.css?v=15" rel="stylesheet" />
+                <link href="/bootstrap.min.css?v=1" rel="stylesheet" />
+                <link href="/common.min.css?v=1" rel="stylesheet" />
+                <link href="/index.min.css?v=15" rel="stylesheet" />
                 <script src="/jquery-3.4.1.min.js" type="application/javascript" />
                 <script src="/popper-1.15.0.min.js" type="application/javascript" />
                 <script src="/bootstrap-4.3.1.min.js" type="application/javascript" />
@@ -54,27 +54,37 @@
             <body>
                 <xsl:if test="menu">
                     <header>
-                        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                            <a class="navbar-brand" href="/" title="Головна сторінка">
-                                <img src="/logo.png" width="100" alt="{@logo}" />
-                            </a>
-                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon" />
-                            </button>
-                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                <ul class="navbar-nav mr-auto ml-4">
-                                    <xsl:for-each select="categories/category">
-                                        <li class="nav-item">
-                                            <xsl:if test="@active">
-                                                <xsl:attribute name="class">nav-item active</xsl:attribute>
-                                            </xsl:if>
-                                            <a class="nav-link" href="{@uri}"><xsl:value-of select="@title" /></a>
-                                        </li>
-                                    </xsl:for-each>
-                                </ul>
-                                <form class="form-inline my-2 my-lg-0" action="/пошук">
-                                    <input class="form-control mr-sm-2" type="search" placeholder="Пошук" aria-label="search" />
-                                </form>
+                        <nav>
+                            <div class="logo">
+                                <a href="/" title="Головна сторінка">
+                                    <img src="/logo.png" width="100" alt="{@logo}" />
+                                </a>
+                            </div>
+                            <div class="toggler">
+                                <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span />
+                                </button>
+                            </div>
+                            <div class="collapse" id="navbarSupportedContent">
+                                <div class="menu">
+                                    <ul>
+                                        <xsl:for-each select="categories/category">
+                                            <li>
+                                                <a href="{@uri}">
+                                                    <xsl:if test="@active">
+                                                        <xsl:attribute name="class">active</xsl:attribute>
+                                                    </xsl:if>
+                                                    <xsl:value-of select="@title" />
+                                                </a>
+                                            </li>
+                                        </xsl:for-each>
+                                    </ul>
+                                </div>
+                                <div class="search">
+                                    <form action="/пошук">
+                                        <input type="search" placeholder="Пошук" aria-label="search" />
+                                    </form>
+                                </div>
                                 <!--
                                 <div title="{user/@roleTitle}" class="user text-light"><xsl:value-of select="user/@title" />
                                     <xsl:choose>
