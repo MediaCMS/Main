@@ -336,9 +336,7 @@ class View {
 
         $this->xml->addAttribute('timestamp', time());
 
-        $xml = $this->toArray($this->xml);
-
-        $xml = print_r((array) $xml, true);
+        $xml = print_r($this->xml, true);
 
         $xml = preg_replace('/\s*(\(|\))\n/', "\n", $xml);
 
@@ -451,37 +449,4 @@ class View {
 
         return $xslt->transformToXML($xml);
     }
-
-    /**
-     * Конвертує SimpleXMLElement в масив
-     *
-     * ToDO: fix debug view bug
-     *
-     * @param SimpleXMLElement $object Елемент XML
-     * @param array|null $out Масив для наповнення
-     * @return array Масив з даними
-     */
-    private function toArray(SimpleXMLElement $object, $out = []): array {
-
-        foreach($object->attributes() as $key => $value)
-
-            $out['@' . $key] = (string) $value;
-
-            foreach ($object as $index => $node) {
-
-                if (is_object($node)) {
-
-                    $out[$index][] = (count($node) == 1) ? $object : $this->toArray($node);
-
-                } else {
-
-                    $out[$index] = $node;
-                }
-            }
-
-        //$out[$index] = (is_object($node)) ? self::xml2array($node) : print_r($node, true);
-
-        return $out;
-    }
-
 };
