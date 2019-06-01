@@ -27,7 +27,9 @@ class Log {
 
         $string['time'] = date('Y-m-d H:i:s');
 
-        $string['ip'] = sprintf("[%21s]", System::getIP() . ':' . $_SERVER['REMOTE_PORT']);
+        $string['ip'] = sprintf("[%16s]", System::getIP());
+
+        $string['port'] = sprintf("[%5s]", $_SERVER['REMOTE_PORT']);
 
         $string['description'] = '"' . $message . '"';
 
@@ -44,9 +46,9 @@ class Log {
     /**
      * Додає запис в файл лога для винятка
      *
-     * @param Exception $exception Виняток, що повинно записатись в лог-файл
+     * @param \Exception $exception Виняток, що повинно записатись в лог-файл
      */
-    public static function appendException(Exception $exception) {
+    public static function appendException(\Exception $exception) {
 
         $message = [$exception->getMessage(), $exception->getFile(), $exception->getLine(), $exception->getCode()];
 

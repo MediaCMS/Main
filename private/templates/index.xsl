@@ -102,17 +102,25 @@
                         </nav>
                     </header>
                 </xsl:if>
-                <xsl:if test="alert">
-                    <div class="container text-center my-3">
-                        <div class="alert alert-{alert/@type} d-inline-block" role="alert">
-                            <xsl:value-of select="alert/@text" />
-                        </div>
-                    </div>
-                </xsl:if>
                 <main class="container">
+                    <xsl:if test="alert">
+                        <div class="container text-center my-3">
+                            <div class="alert alert-{alert/@type} d-inline-block" role="alert">
+                                <xsl:value-of select="alert/@text" />
+                            </div>
+                        </div>
+                    </xsl:if>
                     <div class="body controller-{name(main/*/.)} action-{name(main/*/*/.)} mt-4">
                         <xsl:if test="not(main/home)">
                             <h1><xsl:value-of select="@title" /></h1>
+                            <xsl:if test="@date!=''">
+                                <p><strong>Дата:</strong>&#160;<xsl:value-of select="@date" /></p>
+                            </xsl:if>
+                            <xsl:if test="author/@title!=''">
+                                <p>
+                                    <strong>Автор:</strong>&#160;<a href="{author/@uri}"><xsl:value-of select="author/@title" /></a>
+                                </p>
+                            </xsl:if>
                             <xsl:if test="@image!=''">
                                 <p><xsl:value-of select="@description" /></p>
                                 <xsl:call-template name="image">

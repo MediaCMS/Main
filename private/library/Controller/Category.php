@@ -22,7 +22,7 @@ class Category extends Controller {
     protected $description = 'Перелік категорій сайту (сторінка в розробці)';
 
     /** @var string Ключові слова контролера */
-    protected $keywords = '';
+    protected $keywords = 'категорії';
 
     /** @var string Зображення контролера */
     protected $image = '';
@@ -39,5 +39,23 @@ class Category extends Controller {
         $this->filter['categoryID'] = $data['id'];
 
         $this->index($node);
+    }
+
+    /**
+     * Додає у вигляд сторінку з 404-ю помилкою
+     */
+    protected function notFound(): void {
+
+        $this->title = 'Невідома категорія';
+
+        $this->description = sprintf('Невідомий псевдонім категорії "%s"', $this->router->getURI(1));
+
+        $this->keywords = 'Невідома категорія, сторінка не знайдена, 404 Not Found';
+
+        $this->image = '';
+
+        $this->view->setAlert($this->description, 'danger');
+
+        header('HTTP/1.x 404 Not Found');
     }
 }

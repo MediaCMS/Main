@@ -22,7 +22,7 @@ class Article extends Controller {
     protected $description = 'Список статей сайту';
 
     /** @var string Ключові слова контролера */
-    protected $keywords = '';
+    protected $keywords = 'статті';
 
     /** @var string Зображення контролера */
     protected $image = '';

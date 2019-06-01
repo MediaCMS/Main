@@ -10,7 +10,7 @@
 
 use MediaCMS\Main\Router;
 use MediaCMS\Main\Exception;
-
+use MediaCMS\Main\Log;
 
 session_start();
 
@@ -45,17 +45,15 @@ try {
 
     $controller = new $controller($router);
 
-    //call_user_func([$controller, 'run']);
-
 } catch (Exception $exception) {
+
+    Log::appendException($exception);
 
     header('HTTP/1.x 500 Internal Server Error');
 
     $message = [$exception->getMessage(), $exception->getFile(), $exception->getLine(), $exception->getCode()];
 
     $message = vsprintf('%s (%s:%d, %d)', $message);
-
-//    MediaCMS\Panel\Log::append($message);
 
     if ($_SESSION['debug']) {
 

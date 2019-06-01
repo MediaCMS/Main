@@ -15,10 +15,6 @@
         <xsl:apply-templates select="text" />
         <div class="panel">
             <p>
-                <strong>Автор:</strong>&#160;
-                <a href="{@userURI}"><xsl:value-of select="@userTitle" /></a>
-            </p>
-            <p>
                 <strong>Мітки:</strong>&#160;
                 <xsl:for-each select="tags/tag">
                     <a href="{@uri}"><xsl:value-of select="@title" /></a>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<root title="" description="" keywords="" image="">
+<root title="" description="" keywords="" image="" date="">
+    <author title="" image="" uri="" />
     <menu>
         <item title="Головна" uri="/" description="Головна сторінка" />
         <item title="Статті" uri="/статті" />

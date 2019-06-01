@@ -109,6 +109,37 @@ class View {
     }
 
     /**
+     * Додає у вигляд дату створення сторінки
+     *
+     * @param string $date Дата сторінки
+     */
+    public function setDate(string $date): void {
+
+        $this->xml->attributes()->date = $date;
+    }
+
+    /**
+     * Додає у вигляд автора сторінки
+     *
+     * @param array $author Дані автора сторінки
+     *  string $author['title'] Назва автора
+     *  string $author['image'] Відносна адреса зображення автора
+     *  string $author['uri'] Відносна адреса власної сторінки автора
+     */
+    public function setAuthor(array $author): void {
+
+        $this->xml->author->attributes()->title = $author['title'];
+
+        if (isset($author['image']))
+
+            $this->xml->author->attributes()->image = $author['image'];
+
+        if (isset($author['uri']))
+
+            $this->xml->author->attributes()->uri = $author['uri'];
+    }
+
+    /**
      * Додає у вигляд категорії
      *
      * @param array $categories Масив з категоріями
@@ -308,24 +339,6 @@ class View {
     }
 
     /**
-     * Додає у вигляд сторінку з 404-ю помилкою
-     *
-     * @param string $uri Відносна адреса сторінки
-     */
-    public function pageNotFound(string $uri): void {
-
-        $this->xml->addChild('pageNotFound');
-
-        $this->xml->attributes()->title = 'Сторінка не знайдена';
-
-        $description = sprintf('Сторінка "%s" не знайдена', $uri);
-
-        $this->xml->attributes()->description = $description;
-
-        header('HTTP/1.x 404 Not Found');
-    }
-
-    /**
      * Додає у вигляд відлагодження
      *
      * @param array $queries SQL-запити мапера
@@ -395,9 +408,9 @@ class View {
     /**
      * Додає у вигляд трасування
      *
-     * @param Exception $exception Виняток
+     * @param \Exception $exception Виняток
      */
-    public function setException(Exception $exception): void {
+    public function setException(\Exception $exception): void {
 
         $alert = $exception->getMessage();
 

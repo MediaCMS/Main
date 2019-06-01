@@ -83,13 +83,13 @@ abstract class Controller {
 
             $this->run();
 
-        } catch (Exception $exception) {
+        } catch (\Exception $exception) {
 
             header('HTTP/1.x 500 Internal Server Error');
 
             $this->view->setException($exception);
 
-            Log::append($exception);
+            Log::appendException($exception);
         }
     }
 
@@ -197,6 +197,11 @@ abstract class Controller {
 
         $data = $this->database->getResult();
 
+        if (!isset($data)) {
+
+            $this->notFound(); return;
+        }
+
         $this->title = $data['title'];
 
         $this->description = $data['description'];
@@ -204,6 +209,27 @@ abstract class Controller {
         $this->keywords = $data['title'];
 
         $this->image = $data['image'];
+
+        if (isset($data['userTitle'])) {
+
+            $this->view->setDate(System::getDate('l, d f Y року', strtotime($data['time'])));
+
+            $author['title'] = $data['userTitle'];
+
+            if (isset($data['userImage']))
+
+                $author['image'] = $data['userImage'];
+
+            if (isset($data['userAlias']))
+
+                $author['uri'] =
+
+                    '/' . $this->router->getAliasByController('User') .
+
+                    '/' . $data['userAlias'];
+
+            $this->view->setAuthor($author);
+        }
 
         $viewNode = $this->node->addChild('view');
 
@@ -236,6 +262,28 @@ abstract class Controller {
 
             $this->view->setItem($childNode, $row);
         }
+    }
+
+    /**
+     * Додає у вигляд сторінку з 404-ю помилкою
+     */
+    protected function notFound(): void {
+
+        $this->title = 'Сторінка не знайдена';
+
+        $request = urldecode( $_SERVER['REQUEST_URI']);
+
+        $description = sprintf('Запитувана вами сторінка "%s" не знайдена', $request);
+
+        $this->description = $description;
+
+        $this->keywords = 'Сторінка не знайдена, 404 Not Found';
+
+        $this->image = '';
+
+        $this->view->setAlert($description, 'danger');
+
+        header('HTTP/1.x 404 Not Found');
     }
 
     /**
