@@ -65,6 +65,8 @@ class View {
 
         $this->xml->addAttribute('copyright', TITLE . ' @ ' . date('Y'));
 
+        if (DEVELOPMENT) $this->xml->addAttribute('development', 'true');
+
         if ($_SESSION['debug']) $this->xml->addChild('debug');
     }
 

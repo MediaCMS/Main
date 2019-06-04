@@ -6,6 +6,30 @@
  * @link        https://github.com/MediaCMS/Main
  * @copyright   GNU General Public License v3
  */
+
+console.log('index.js was loaded');
+
+const DEVELOPMENT = (document.documentElement.hasAttribute('data-development'));
+
+console.log('development: '+DEVELOPMENT);
+
+const DEBUG = (document.documentElement.hasAttribute('data-debug'));
+
+console.log('debug: '+DEBUG);
+
+/* Google Tag*/
+if (!DEVELOPMENT) {
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=UA-141467326-1';
+    document.head.appendChild(script);
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-141467326-1');
+}
+
 $(function(){
     /*
     let photo = {

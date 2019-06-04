@@ -32,6 +32,7 @@
         <html xml:lang="uk" lang="uk" dir="ltr" id="root">
             <xsl:attribute name="data-photo-host"><xsl:value-of select="@photoHost" /></xsl:attribute>
             <xsl:attribute name="data-photo-path"><xsl:value-of select="@photoPath" /></xsl:attribute>
+            <xsl:if test="@development"><xsl:attribute name="data-development">true</xsl:attribute></xsl:if>
             <xsl:if test="debug"><xsl:attribute name="data-debug">true</xsl:attribute></xsl:if>
             <head>
                 <title><xsl:value-of select="@title" /></title>
