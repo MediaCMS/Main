@@ -22,7 +22,7 @@ spl_autoload_register('autoload');
 require_once(PATH_PRIVATE . '/settings.php');
 
 
-if (!isset($_SESSION['debug'])) $_SESSION['debug'] = false;
+if (!isset($_SESSION['debug'])) $_SESSION['debug'] = DEVELOPMENT;
 
 if (isset($_GET['dbg'])) {
 

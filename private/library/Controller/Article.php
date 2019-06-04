@@ -38,7 +38,11 @@ class Article extends Controller {
 
         $textNode = new SimpleXMLElement('<text>' . $data['text'] . '</text>');
 
-        $this->view->addTree($node, $textNode);
+        $this->view->add($node, $textNode);
+
+        //$this->view->addXML($node, '<text>' . $data['text'] . '</text>');
+
+        //$this->view->addTree2($node, $textNode);
 
         $keywords = [];
 

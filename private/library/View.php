@@ -254,27 +254,20 @@ class View {
     }
 
     /**
-     * Додає у вигляд SimpleXMLElement
+     * Додає у вигляд XML-дерево
      *
      * @param SimpleXMLElement $parent Елемент, в який необхідно додати
-     * @param SimpleXMLElement $tree Елемент, який необхідно додати
-     * @param string $namespace Простір назв
+     * @param SimpleXMLElement $child Елемент, який необхідно додати
      */
-    public function addTree(SimpleXMLElement $parent, SimpleXMLElement $tree, string $namespace = null) {
+    public function add(SimpleXMLElement $parent, SimpleXMLElement $child) {
 
-        $node = $parent->addChild($tree->getName(), (string) $tree, $namespace);
+        $parentDOM = dom_import_simplexml($parent);
 
-        foreach($tree->attributes() as $attr => $value)
+        $childDOM = dom_import_simplexml($child);
 
-            $node->addAttribute($attr, $value);
+        $childDOM = $parentDOM->ownerDocument->importNode($childDOM, true);
 
-        $namespaces = array_merge(array(null), $tree->getNameSpaces(true));
-
-        foreach($namespaces as $space)
-
-            foreach ($tree->children($space) as $child)
-
-                $this->addTree($node, $child, $space);
+        $parentDOM->appendChild($childDOM);
     }
 
     /**

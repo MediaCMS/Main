@@ -95,11 +95,11 @@
         <div class="text"><xsl:apply-templates mode="html" /></div>
     </xsl:template>
 
-    <xsl:template match="main/*/view/text//p">
-        <xsl:copy><xsl:apply-templates /></xsl:copy>
+    <xsl:template match="main/*/view/text//p" mode="html">
+        <xsl:copy><xsl:apply-templates mode="html" /></xsl:copy>
     </xsl:template>
 
-    <xsl:template match="main/*/view/text//img">
+    <xsl:template match="main/*/view/text//img" mode="html">
         <xsl:copy>
             <xsl:apply-templates />
             <xsl:variable name="offset" select="string-length(@src) - 8" />
