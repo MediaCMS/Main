@@ -38,7 +38,7 @@ class Page extends Controller {
 
         $textNode = new SimpleXMLElement('<text>' . $data['text'] . '</text>');
 
-        $this->view->addTree($node, $textNode);
+        $this->view->add($node, $textNode);
 
         unset($data['text']);
     }

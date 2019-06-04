@@ -50,7 +50,7 @@
                     <script src='https://www.google.com/recaptcha/api.js' />
                 </xsl:if>
                 <script src="/common.js?v=1" type="application/javascript" />
-                <script src="/index.js?v=4" type="application/javascript" />
+                <script src="/index.js?v=5" type="application/javascript" />
             </head>
             <body>
                 <xsl:if test="menu">
