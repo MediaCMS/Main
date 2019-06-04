@@ -164,6 +164,8 @@ abstract class Controller {
 
             $item['uri'] = '/' . $this->router->getAliasByController($controller) . '/' . $item['alias'];
 
+            if ($controller != 'Article') unset($item['user']);
+
             $this->view->setItem($itemNode, $item);
 
             $items[] = $item;

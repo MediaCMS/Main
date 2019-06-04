@@ -50,7 +50,9 @@
             </xsl:if>
             <div class="card-body">
                 <h5 class="card-title"><xsl:value-of select="@title" /></h5>
-                <p class="small"><i><xsl:value-of select="@user" /></i></p>
+                <xsl:if test="@user">
+                    <p class="small"><i><xsl:value-of select="@user" /></i></p>
+                </xsl:if>
                 <p class="card-text"><xsl:value-of select="@description" /></p>
             </div>
             <a href="{@uri}" title="{@title} ({@user})"/>
