@@ -67,7 +67,7 @@
                             <div class="collapse" id="navbarSupportedContent">
                                 <div class="menu">
                                     <ul>
-                                        <xsl:for-each select="categories/category[position() &lt; 6]">
+                                        <xsl:for-each select="categories/category[position() &lt; 7]">
                                             <li>
                                                 <a href="{@uri}">
                                                     <xsl:if test="@active">
@@ -82,7 +82,7 @@
                                                 ...
                                             </a>
                                             <div class="dropdown-menu" aria-labelledby="menuDropdown">
-                                                <xsl:for-each select="categories/category[position() &gt; 5]">
+                                                <xsl:for-each select="categories/category[position() &gt; 6]">
                                                     <a href="{@uri}">
                                                         <xsl:if test="@active">
                                                             <xsl:attribute name="class">active</xsl:attribute>
