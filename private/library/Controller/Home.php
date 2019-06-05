@@ -32,7 +32,11 @@ class Home extends Controller {
      */
     public function run(): void {
 
-        $articleAlias = $this->router->getAliasByController('Article');
+        $articleControllerAlias = $this->router->getAliasByController('Article');
+
+        $categoryControllerAlias = $this->router->getAliasByController('Category');
+
+        $userControllerAlias = $this->router->getAliasByController('User');
 
         $params = ['_status' => 1, '_orderField' => 'time', '_orderDirection' => 1, '_limit' => 6];
 
@@ -48,7 +52,11 @@ class Home extends Controller {
 
             $articleNode = $articlesNode->addChild('article');
 
-            $article['uri'] = '/' . $articleAlias . '/' . $article['alias'];
+            $article['uri'] = '/' . $articleControllerAlias . '/' . $article['alias'];
+
+            $article['categoryURI'] = '/' . $categoryControllerAlias . '/' . $article['categoryAlias'];
+
+            $article['userURI'] = '/' . $userControllerAlias . '/' . $article['userAlias'];
 
             $this->view->setItem($articleNode, $article);
         }

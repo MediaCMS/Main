@@ -31,31 +31,35 @@
             </xsl:if>
         </img>
     </xsl:template>
-<!--
-    <xsl:template match="@*|node()" mode="text">
-        <xsl:copy>11111
-            <xsl:apply-templates select="@*|node()" mode="text" />
-        </xsl:copy>
-    </xsl:template>
--->
+
     <xsl:template name="card">
         <div class="card h-100">
-            <xsl:if test="@image">
-                <div class="card-img-top">
-                    <xsl:call-template name="image">
-                        <xsl:with-param name="uri" select="@image" />
-                        <xsl:with-param name="title" select="@title" />
-                    </xsl:call-template>
-                </div>
-            </xsl:if>
-            <div class="card-body">
-                <h5 class="card-title"><xsl:value-of select="@title" /></h5>
-                <xsl:if test="@user">
-                    <p class="small"><i><xsl:value-of select="@user" /></i></p>
+            <div class="card-img-top">
+                <xsl:if test="@image != ''">
+                    <a href="{@uri}" title="{@title} ({@user})">
+                        <xsl:call-template name="image">
+                            <xsl:with-param name="uri" select="@image" />
+                            <xsl:with-param name="title" select="@title" />
+                        </xsl:call-template>
+                    </a>
                 </xsl:if>
-                <p class="card-text"><xsl:value-of select="@description" /></p>
             </div>
-            <a href="{@uri}" title="{@title} ({@user})"/>
+            <div class="card-body">
+                <h5 class="card-title">
+                    <a href="{@uri}" title="{@title} ({@user})"><xsl:value-of select="@title" /></a>
+                </h5>
+                <xsl:if test="@userTitle">
+                    <p class="small">
+                        <a href="{@userURI}" title="{@userTitle}"><i><xsl:value-of select="@userTitle" /></i></a>
+                    </p>
+                </xsl:if>
+                <p class="card-text">
+                    <xsl:value-of select="@description" /></p>
+                <xsl:if test="@categoryTitle">
+                    <a href="{@categoryURI}" class="btn btn-primary" title="{@categoryTitle}"><xsl:value-of select="@categoryTitle" /></a>
+                </xsl:if>
+            </div>
+
         </div>
     </xsl:template>
 

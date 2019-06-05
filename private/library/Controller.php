@@ -137,8 +137,8 @@ abstract class Controller {
     /**
      * Виводить список об'єктів з БД (шаблон)
      *
-     * @param SimpleXMLElement $node Посилання на елемент виводу
-     * @param string $controller Назва контролера об'єктів
+     * @param SimpleXMLElement $indexNode Елемент виводу
+     * @param string $controller Назва контролера
      */
     protected function index(SimpleXMLElement $node, string $controller = 'Article'): void {
 
@@ -152,41 +152,31 @@ abstract class Controller {
 
         $itemsNode = $indexNode->addChild('items');
 
-        $i = 1;
-
-        $items = [];
-
         while($item = $this->database->getResult()) {
 
             $itemNode = $itemsNode->addChild('item');
 
-            $item['position'] = $this->filter['_offset'] + $i;
-
             $item['uri'] = '/' . $this->router->getAliasByController($controller) . '/' . $item['alias'];
 
-            if ($controller != 'Article') unset($item['user']);
+            if (isset($item['categoryAlias']))
+
+                $item['categoryURI'] =
+
+                    '/' . $this->router->getAliasByController('Category') . '/' . $item['categoryAlias'];
+
+            if (isset($item['userAlias']))
+
+                $item['userURI'] =
+
+                    '/' . $this->router->getAliasByController('User') . '/' . $item['userAlias'];
 
             $this->view->setItem($itemNode, $item);
-
-            $items[] = $item;
-
-            $i ++;
         }
-
-        $this->indexExtended($indexNode, $items);
 
         $pages = ceil($this->database->getFoundRows() / $this->filter['_limit']);
 
         $this->view->setPagination($page, $pages, $this->router->getURI(0));
     }
-
-    /**
-     * Виводить список об'єктів з БД (розширення)
-     *
-     * @param SimpleXMLElement $node Елемент виводу
-     * @param array $data Дані об'єктів
-     */
-    protected function indexExtended(SimpleXMLElement $node, array $data): void {}
 
     /**
      * Виводить дані про об'єкт з БД (шаблон)

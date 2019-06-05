@@ -40,17 +40,15 @@
                 <meta name="keywords" content="{@keywords}" />
                 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
                 <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-                <link href="/bootstrap.min.css?v=1" rel="stylesheet" />
-                <link href="/common.min.css?v=1" rel="stylesheet" />
-                <link href="/index.min.css?v=15" rel="stylesheet" />
+                <link href="/bootstrap.min.css?v=2" rel="stylesheet" />
+                <link href="/index.min.css?v=17" rel="stylesheet" />
                 <script src="/jquery-3.4.1.min.js" type="application/javascript" />
                 <script src="/popper-1.15.0.min.js" type="application/javascript" />
                 <script src="/bootstrap-4.3.1.min.js" type="application/javascript" />
                 <xsl:if test="not(debug)">
                     <script src='https://www.google.com/recaptcha/api.js' />
                 </xsl:if>
-                <script src="/common.js?v=1" type="application/javascript" />
-                <script src="/index.js?v=5" type="application/javascript" />
+                <script src="/index.js?v=7" type="application/javascript" />
             </head>
             <body>
                 <xsl:if test="menu">
@@ -69,7 +67,7 @@
                             <div class="collapse" id="navbarSupportedContent">
                                 <div class="menu">
                                     <ul>
-                                        <xsl:for-each select="categories/category">
+                                        <xsl:for-each select="categories/category[position() &lt; 6]">
                                             <li>
                                                 <a href="{@uri}">
                                                     <xsl:if test="@active">
@@ -79,6 +77,21 @@
                                                 </a>
                                             </li>
                                         </xsl:for-each>
+                                        <li class="dropdown">
+                                            <a class="dropdown-toggle" href="#" id="menuDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                ...
+                                            </a>
+                                            <div class="dropdown-menu" aria-labelledby="menuDropdown">
+                                                <xsl:for-each select="categories/category[position() &gt; 5]">
+                                                    <a href="{@uri}">
+                                                        <xsl:if test="@active">
+                                                            <xsl:attribute name="class">active</xsl:attribute>
+                                                        </xsl:if>
+                                                        <xsl:value-of select="@title" />
+                                                    </a>
+                                                </xsl:for-each>
+                                            </div>
+                                        </li>
                                     </ul>
                                 </div>
                                 <div class="search">
