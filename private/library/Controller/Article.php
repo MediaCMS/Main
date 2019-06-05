@@ -67,6 +67,8 @@ class Article extends Controller {
 
         $this->keywords = implode(', ', $keywords);
 
+        $this->category = $data['category'];
+
         $userControllerAlias = $this->router->getAliasByController('User');
 
         $data['userURI'] = '/' . $userControllerAlias . '/' . $data['userAlias'];

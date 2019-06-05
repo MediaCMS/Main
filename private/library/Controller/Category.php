@@ -29,6 +29,33 @@ class Category extends Controller {
 
 
     /**
+     * Додає у вигляд категорії
+     */
+    public function setCategories(): void {
+
+        $categories = [];
+
+        $categoryAlias = $this->router->getAliasByController('Category');
+
+        $this->database->call('CategoryGetAll');
+
+        while($category = $this->database->getResult()) {
+
+            if (($this->router->getURI(0) == $categoryAlias)
+
+                && ($this->router->getURI(1) == $category['alias']))
+
+                $category['active'] = true;
+
+            $category['uri'] = '/'. $categoryAlias . '/' . $category['alias'];
+
+            $categories[] = $category;
+        }
+
+        $this->view->setCategories($categories);
+    }
+
+    /**
      * Виводить дані про об'єкт з БД (розширення)
      *
      * @param SimpleXMLElement $node Посилання на елемент виводу

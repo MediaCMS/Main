@@ -41,6 +41,9 @@ abstract class Controller {
     /** @var string Зображення контролера */
     protected $image = '';
 
+    /** @var integer Ідентифікатор активної категорії меню */
+    protected $category;
+
     /** @var array Фільтр списку */
     protected $filter = [
 
@@ -79,8 +82,6 @@ abstract class Controller {
                 $this->view->setUser($this->user);
             }
 
-            $this->setCategories();
-
             $this->run();
 
         } catch (\Exception $exception) {
@@ -106,16 +107,14 @@ abstract class Controller {
 
         while($category = $this->database->getResult()) {
 
-            if (($this->router->getURI(0) == $categoryAlias)
+            if ($category['id'] == $this->category) $category['active'] = true;
 
-                && ($this->router->getURI(1) == $category['alias']))
-
-                $category['active'] = true;
+            $category['uri'] = '/'. $categoryAlias . '/' . $category['alias'];
 
             $categories[] = $category;
         }
 
-        $this->view->setCategories($categories, $categoryAlias);
+        $this->view->setCategories($categories);
     }
 
     /**
@@ -137,7 +136,7 @@ abstract class Controller {
     /**
      * Виводить список об'єктів з БД (шаблон)
      *
-     * @param SimpleXMLElement $indexNode Елемент виводу
+     * @param SimpleXMLElement $node Елемент виводу
      * @param string $controller Назва контролера
      */
     protected function index(SimpleXMLElement $node, string $controller = 'Article'): void {
@@ -310,6 +309,8 @@ abstract class Controller {
         $this->view->setKeywords($this->keywords);
 
         $this->view->setImage($this->image);
+
+        $this->setCategories();
 
         if ($_SESSION['debug']) {
 

@@ -145,9 +145,8 @@ class View {
      * Додає у вигляд категорії
      *
      * @param array $categories Масив з категоріями
-     * @param string $alias Псевдонім контролера категорій
      */
-    public function setCategories(array $categories, string $alias): void {
+    public function setCategories(array $categories): void {
 
         $categoriesNode = $this->xml->addChild('categories');
 
@@ -157,7 +156,7 @@ class View {
 
             $categoryNode->addAttribute('title', $category['title']);
 
-            $categoryNode->addAttribute('uri', '/'. $alias . '/' . $category['alias']);
+            $categoryNode->addAttribute('uri', $category['uri']);
 
             if (isset($category['active']))
 
