@@ -46,7 +46,7 @@ abstract class Controller {
 
         '_status' => 1, '_orderField' => 'time', '_orderDirection' => 1,
 
-        '_offset' => 0, '_limit' => 10
+        '_offset' => 0, '_limit' => 12
     ];
 
     /** @var \Exception Виняток */
