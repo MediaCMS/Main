@@ -14,8 +14,8 @@
     <xsl:template match="main/article/view">
         <xsl:apply-templates select="text" />
         <div class="panel">
-            <p>
-                <strong>Мітки:</strong>&#160;
+            <p class="tags">
+                <strong>Мітки: </strong>
                 <xsl:for-each select="tags/tag">
                     <a href="{@uri}"><xsl:value-of select="@title" /></a>
                     <xsl:if test="position()!=last()">,&#160;</xsl:if>

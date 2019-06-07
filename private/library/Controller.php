@@ -203,7 +203,7 @@ abstract class Controller {
 
         if (isset($data['userTitle'])) {
 
-            $this->view->setDate(System::getDate('l, d f Y року', strtotime($data['time'])));
+            $this->view->setDate(System::getDate('j f Y року', strtotime($data['time'])));
 
             $author['title'] = $data['userTitle'];
 

@@ -41,14 +41,14 @@
                 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
                 <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
                 <link href="/bootstrap.min.css?v=2" rel="stylesheet" />
-                <link href="/index.min.css?v=17" rel="stylesheet" />
+                <link href="/index.min.css?v=18" rel="stylesheet" />
                 <script src="/jquery-3.4.1.min.js" type="application/javascript" />
                 <script src="/popper-1.15.0.min.js" type="application/javascript" />
                 <script src="/bootstrap-4.3.1.min.js" type="application/javascript" />
                 <xsl:if test="not(debug)">
                     <script src='https://www.google.com/recaptcha/api.js' />
                 </xsl:if>
-                <script src="/index.js?v=7" type="application/javascript" />
+                <script src="/index.js?v=8" type="application/javascript" />
             </head>
             <body>
                 <xsl:if test="menu">
@@ -124,24 +124,27 @@
                             </div>
                         </div>
                     </xsl:if>
+
                     <div class="body controller-{name(main/*/.)} action-{name(main/*/*/.)} mt-4">
                         <xsl:if test="not(main/home)">
-                            <h1><xsl:value-of select="@title" /></h1>
+                            <h1 class="mt-5"><xsl:value-of select="@title" /></h1>
                             <xsl:if test="@date!=''">
-                                <p><strong>Дата:</strong>&#160;<xsl:value-of select="@date" /></p>
-                            </xsl:if>
-                            <xsl:if test="author/@title!=''">
-                                <p>
-                                    <strong>Автор:</strong>&#160;<a href="{author/@uri}"><xsl:value-of select="author/@title" /></a>
+                                <p class="text-secondary small mt-1">
+                                    <i><xsl:value-of select="@date" /></i>
+                                    <xsl:if test="author/@title!=''">
+                                        &#160;—&#160;&#160;<a href="{author/@uri}"><xsl:value-of select="author/@title" /></a>
+                                    </xsl:if>
                                 </p>
                             </xsl:if>
                             <xsl:if test="@image!=''">
-                                <p><xsl:value-of select="@description" /></p>
-                                <xsl:call-template name="image">
-                                    <xsl:with-param name="uri" select="@image" />
-                                    <xsl:with-param name="title" select="@title" />
-                                    <xsl:with-param name="class" select="'w-100'" />
-                                </xsl:call-template>
+                                <p class="lead mt-4"><xsl:value-of select="@description" /></p>
+                                <p>
+                                    <xsl:call-template name="image">
+                                        <xsl:with-param name="uri" select="@image" />
+                                        <xsl:with-param name="title" select="@title" />
+                                        <xsl:with-param name="class" select="'w-100'" />
+                                    </xsl:call-template>
+                                </p>
                             </xsl:if>
                         </xsl:if>
                         <xsl:apply-templates select="main/*" />
