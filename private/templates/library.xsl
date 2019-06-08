@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!--
 /**
- * Файл виводу головної сторінки
+ * Бібліотека для виводу
  *
  * @author      Артем Висоцький <a.vysotsky@gmail.com>
  * @package     MediaCMS\Main
@@ -51,6 +51,49 @@
             <xsl:for-each select="articles/article[position()>3]">
                 <div class="col-md-4"><xsl:call-template name="card" /></div>
             </xsl:for-each>
+        </div>
+    </xsl:template>
+
+    <xsl:template match="main/article/view">
+        <xsl:apply-templates select="text" />
+        <div class="panel">
+            <p class="tags">
+                <strong>Мітки: </strong>
+                <xsl:for-each select="tags/tag">
+                    <a href="{@uri}"><xsl:value-of select="@title" /></a>
+                    <xsl:if test="position()!=last()">,&#160;</xsl:if>
+                </xsl:for-each>
+            </p>
+        </div>
+    </xsl:template>
+
+    <xsl:template match="main/user/login">
+        <div class="card d-table mx-auto">
+            <div class="card-header">Авторизація</div>
+            <div class="card-body ">
+                <form class="form" method="POST">
+                    <div class="form-group">
+                        <input type="email" name="email" value="{@email}" placeholder="Логін" class="form-control text-center" />
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password" placeholder="Пароль" class="form-control text-center" />
+                    </div>
+                    <xsl:if test="not(/root/debug)">
+                        <div class="form-group">
+                            <div class="recaptcha">
+                                <div class="g-recaptcha" data-size="normal"
+                                     data-sitekey="{/root/@recaptcha}" />
+                                <div class="logo" />
+                                <div class="right" />
+                                <div class="bottom" />
+                            </div>
+                        </div>
+                    </xsl:if>
+                    <div class="form-group text-center pt-3">
+                        <input type="submit" name="submit" value="Авторизуватись" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
         </div>
     </xsl:template>
 

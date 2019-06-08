@@ -17,15 +17,8 @@
 
     <xsl:variable name="imagePath" select="concat(/root/@photoHost, /root/@photoPath)" />
 
+    <xsl:include href="library.xsl" />
     <xsl:include href="common.xsl" />
-    <xsl:include href="home.xsl" />
-    <xsl:include href="article.xsl" />
-    <xsl:include href="category.xsl" />
-    <xsl:include href="tag.xsl" />
-    <xsl:include href="page.xsl" />
-    <xsl:include href="user.xsl" />
-    <xsl:include href="test.xsl" />
-    <xsl:include href="cache.xsl" />
 
     <xsl:template match="/*">
         <xsl:text disable-output-escaping="yes">&lt;!DOCTYPE html></xsl:text>
