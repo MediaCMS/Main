@@ -1,0 +1,65 @@
+html {min-height: 100%; font-size: calc(12px + 0.5vw);
+  body {
+    min-height: 100vh; color: #303030; line-height: calc(130% + 0.5vw); background-color: #ffffff;
+    padding: 0; margin: 0; position: relative;
+    header, footer {
+      a {
+        &.active { /*pointer-events: none;cursor: default; */ text-decoration: none; color: black; }
+      }
+    }
+    img {border-radius: 1%;}
+
+    main {
+      div.card {
+        div.card-img-top {width: 100%; padding-top: 66.66%; overflow: hidden; position: relative;
+          img {width: 100%; height: 100%; object-fit: cover;
+             position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+          }
+        }
+      }
+      .box {max-width: 768px; font-weight: 300; margin: 50px auto;}
+      .screen {min-width: 100vw; height: 50vh;text-align: center;vertical-align: middle; display: table-cell;}
+
+      &#home-index {
+        #carousel {
+          text-shadow: 1px 1px #000;
+          .carousel-item {height: 80vh; overflow: hidden;
+            img {width: 100%; height: 100%; object-fit: cover;}
+          }
+          .carousel-item:hover {cursor: pointer;}
+        }
+      }
+
+      &#article-view, &#page-view {
+        .body {
+          p {max-width: 768px; margin: 30px auto;
+            &.image {max-width: 100%;}
+            iframe {margin: 0 auto; display: block;}
+          }
+          img {max-width: 100%; margin: 0 auto;}
+          figure {text-align: center;
+            figcaption {font: italic 0.9rem Serif; text-align: center; margin: 10px;}
+          }
+         }
+        .tags {max-width: 768px; margin: 30px auto;
+          a {padding: 0 5px;}
+        }
+      }
+
+      &#search-index {
+        .container {max-width: 960px;
+          #___gcse_0 {
+            .gs-web-image-box, .gs-promotion-image-box {width: auto;}
+            .gs-web-image-box .gs-image, .gs-promotion-image-box .gs-promotion-image {max-width: 320px; max-height: 240px;}
+            .gsc-control-cse, .gsc-control-cse .gsc-table-result {font-size: 0.9rem; line-height: 150%;}
+          }
+        }
+      }
+
+    }
+
+    footer {
+      div.alert {max-width: 768px; margin: 20px auto;}
+    }
+  }
+}
