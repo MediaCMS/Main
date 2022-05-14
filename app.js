@@ -3,7 +3,7 @@
 import express from "express";
 import process from "process";
 import { MongoClient } from 'mongodb';
-import cors from "cors";
+//import cors from "cors";
 import routes from "./routes.js";
 import settings from "./settings.js";
 
@@ -24,7 +24,7 @@ for (const [controllerName, controller] of Object.entries(routes)) {
     ).default(db, controller);
 }
 
-app.use(cors(settings.cors));
+//app.use(cors(settings.cors));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
