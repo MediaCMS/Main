@@ -1,8 +1,7 @@
 .git
-dist/index.js
-dist/index.js.LICENSE.txt
 node_modules
-src/settings.js
+public/sitemap.xml
 .gitignore
-settings.js
+log
+config.js
 package-lock.json
