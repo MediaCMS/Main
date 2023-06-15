@@ -26,7 +26,7 @@ function filter(query) {
     const page = request.query?.page ?? 1;
     const stages = [
         { $match: match },
-        { $order: order },
+        { $order: { [order.field] : order.direction }},
         { $skip: (page - 1) * config.limit },
         { $limit: config.limit }
     ];

@@ -1,20 +1,34 @@
-import db, { ObjectId } from '../db.js';
+import db from '../db.js';
 
 export default {
 
-    find: async (request, response) => {
-        const stages = filter(request.query);
-        stages[0].$match.role = new ObjectId("61fae1ba6be8f90a409ecda6");
-        const users = await db.collection('users').aggregate(stages).toArray();
-        response.json(users);
+    index: async (request, response) => {
+        const view = {
+            title: 'Автори', 
+            description: 'Список авторів публікацій',
+            keywords: 'автори'
+        };
+        const stages = [
+            { $lookup: {
+                from: 'roles', 
+                localField: 'role',
+                foreignField: '_id',
+                as: 'role'
+            }},
+            { $unwind: '$role' },
+            ...filter(request.query)
+        ];
+        stages[0].$match.role.lavel = { $gt: 2 };
+        view.users = await db.collection('users')
+            .aggregate(stages).toArray();
+        response.render('users/list', view);
     },
 
-    findOne: async (request, response) => {
-        const match = {
-            alias: request.params.alias,
+    view: async (request, response) => {
+        const user = await db.collection('users').find({
+            alias: request.params.slug,
             status: true
-        };
-        const user = await db.collection('users').find(match).next();
-        response.json(user);
+        }).next();
+        response.render('users/view', user);
     }
 }

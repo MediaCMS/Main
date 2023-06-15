@@ -2,18 +2,23 @@ import db, { filter } from '../db.js';
 
 export default {
 
-    find: async (request, response) => {
+    index: async (request, response) => {
+        const view = {
+            title: "Сторінки",
+            description: "Список сторінок сайту",
+            keywords: "сторінки"
+        };
         const stages = filter(request.query);
-        const pages = await db.collection('pages').aggregate(stages).toArray();
-        response.json(pages);
+        view.pages = await db.collection('pages')
+            .aggregate(stages).toArray();
+        response.render('pages/list', view);
     },
 
-    findOne: async (request, response) => {
-        const match = {
-            alias: request.params.alias,
+    view: async (request, response) => {
+        const page = await db.collection('pages').find({
+            alias: request.params.slug,
             status: true
-        };
-        const page = await db.collection('pages').find(match).next();
-        response.json(page);
+        }).next();
+        response.render('pages/view', page);
     }
 }

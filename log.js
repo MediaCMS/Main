@@ -4,15 +4,15 @@ import config from './config.js';
 const logStream = fs.createWriteStream(config.log, { flags: 'a' });
 
 export default async function log(msg) {
-    let message = '';
-    if (typeof msg === 'Error') {
+    let message = '', stack = {};
+    if (msg instanceof Error) {
         message = error.name + ': ' + error.message;
         if (typeof error.stack !== 'undefined') {
-            const stackLine = error.stack.split('\n')[1];
-            if (typeof stackLine !== 'undefined') {
-                const stackIndex = stackLine.indexOf('at ') + 3;
-                const stackFile = stackLine.slice(stackIndex, stackLine.indexOf('at ').length);
-                message += ' [' + stackFile + ']';
+            stack.line = error.stack.split('\n')[1];
+            if (stack.line !== 'undefined') {
+                stack.index = stack.line.indexOf('at ') + 3;
+                stack.file = stack.line.slice(stack.index);
+                message += ' [' + stack.file + ']';
             }
         }
     } else {

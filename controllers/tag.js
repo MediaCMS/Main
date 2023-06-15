@@ -2,18 +2,23 @@ import db, { filter } from '../db.js';
 
 export default {
 
-    find: async (request, response) => {
+    index: async (request, response) => {
+        const view = {
+            title: "Мітки",
+            description: "Список міток публікацій",
+            keywords: "мітки"
+        };
         const stages = filter(request.query);
-        const tags = await db.collection('tags').aggregate(stages).toArray();
-        response.json(tags);
+        view.tags = await db.collection('tags')
+            .aggregate(stages).toArray();
+        response.render('tags/list', view);
     },
 
-    findOne: async (request, response) => {
-        const match = {
-            alias: request.params.alias,
+    view: async (request, response) => {
+        const tag = await db.collection('tags').find({
+            alias: request.params.slug,
             status: true
-        };
-        const tag = await db.collection('tags').find(match).next();
-        response.json(tag);
+        }).next();
+        response.render('tags/view', tag);
     }
 }

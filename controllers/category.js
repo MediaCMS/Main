@@ -2,19 +2,24 @@ import db, { filter } from '../db.js';
 
 export default {
 
-    find: async (request, response) => {
+    index: async (request, response) => {
+        const view = {
+            title: "Категорії",
+            description: "Список категорій публікацій",
+            keywords: "категорії"
+        };
         const stages = filter(request.query);
-        const categories = await db.collection('categories')
+        view.categories = await db.collection('categories')
             .aggregate(stages).toArray();
-        response.json(categories);
+        response.render('categories/list', view);
     },
 
-    findOne: async (request, response) => {
-        const match = {
-            alias: request.params.alias,
-            status: true
-        };
-        const category = await db.collection('categories').find(match).next();
-        response.json(category);
+    view: async (request, response) => {
+        const category = await db.collection('categories')
+            .find({
+                alias: request.params.slug,
+                status: true
+            }).next();
+        response.render('categories/view', category);
      }
 }
