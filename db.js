@@ -1,10 +1,37 @@
 import { MongoClient, ObjectId } from 'mongodb';
-import LRUCache from 'lru-cache';
 import config from './config.js';
 
 const client = new MongoClient(config.db);
-const cache = new LRUCache({ max: config.cache });
 const db = client.db();
 await client.connect();
 
-export { db as default, client, ObjectId, cache };
+function filter(query) {
+    const match = { status: true }
+    if ('category' in query) {
+        match['category._id'] = new ObjectId(query.category);
+    }
+    if ('tag' in query) {
+        match.tags = new ObjectId(query.tag);
+    }
+    if ('user' in query) {
+        match['user._id'] = new ObjectId(query.user);
+    }
+    const order = { field: 'title', direction: 1 }
+    if ('orderField' in query) {
+        order.field = query['orderField'];
+    }
+    if ('orderDirection' in query) {
+        order.direction = parseInt(query['orderDirection']);
+    }
+    const page = request.query?.page ?? 1;
+    const stages = [
+        { $match: match },
+        { $order: order },
+        { $skip: (page - 1) * config.limit },
+        { $limit: config.limit }
+    ];
+    //console.log(stages);
+    return stages;
+}
+
+export { db as default, client, ObjectId, filter };
