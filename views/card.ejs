@@ -1,0 +1,25 @@
+<div class="card" style="width: 18rem;">
+    <% if (typeof image !== 'undefined') {%>
+        <a href="<%= url %>"">
+            <img src="<%= image %>" class="card-img-top" alt="<%= title %>" />
+        </a>
+    <% } %>
+    <div class="card-body">
+        <h5 class="card-title"><%= title %></h5>
+        <% if (typeof subTitle !== 'undefined') { %>
+            <h6 class="card-subtitle mb-2 text-muted">
+                <% if (typeof subTitle === "object") {%>
+                    <a href="<%= subTitle.url %>"><%= subTitle.text %></a>
+                <% } else { %>
+                    <%= subTitle %>
+                <% } %>
+            </h6>
+        <% } %>
+        <p class="card-text"><%= text %></p>
+        <% if (typeof button !=='undefined' ) { %>
+            <a href="<%= button.url %>" class="btn btn-primary">
+                <%= button.text %>
+            </a>
+        <% } %>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+<div id="slideshow" className="carousel slide carousel-fade my-4"
+    data-bs-ride="carousel" data-interval="5000">
+    <div class="carousel-indicators">
+        <% top.forEach((post, index)=> { %>
+            <button type="button" class="<%= (index === 0) ? 'active' : '' %>"
+                aria-current="<%= (index === 0) ? 'true' : '' %>"
+                aria-label="Slide 1" data-bs-target="#slideshow"
+                data-bs-slide-to="<%= index %>">
+            </button>
+        <% }) %>
+    </div>
+    <div className="carousel-inner">
+        <% top.forEach((post, index)=> { %>
+            <div class="carousel-item text-center align-middle h-100 <%= (index === 0) ? 'active' : '' %>"
+                onclick="window.location='/<%= post.uri %>'">
+                <img src="<%= images.blank %>" data-url="<%= post.image %>"
+                    alt="<%= post.title %>"
+                    class="vw-100 vh-100 object-fit-cover position-absolute top-0 start-0 z-n1" />
+                <div
+                    class="carousel-caption text-center align-middle pt-2 d-inline-block position-static">
+                    <h2 class="text-center d-inline-block">
+                        <a href="/<%= post.uri %>" class="text-white fw-bold">
+                            <%= post.title %>
+                        </a>
+                    </h2>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#slideshow" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Попередній</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#slideshow" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Наступний</span>
+    </button>
+</div>
+<div className="row">
+    <% posts.forEach(post => { %>
+        <div className="col">
+            <%- include('card', {
+                title:  post.title,
+                subTitle: {
+                    text: post.user.title,
+                    url: post.user.alias
+                },
+                text: post.description, 
+                image: post.image,
+                url: post.alias,
+                button: {
+                    text: post.category.title,
+                    url: post.category.alias
+                }
+            }); %>
+        </div>
+    <% }) %>
+</div>
