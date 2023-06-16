@@ -3,7 +3,7 @@ import db from '../db.js';
 export default {
 
     index: async (request, response) => {
-        const view = {
+        const data = {
             title: 'Автори', 
             description: 'Список авторів публікацій',
             keywords: 'автори'
@@ -19,9 +19,9 @@ export default {
             ...filter(request.query)
         ];
         stages[0].$match.role.lavel = { $gt: 2 };
-        view.users = await db.collection('users')
+        data.users = await db.collection('users')
             .aggregate(stages).toArray();
-        response.render('users/list', view);
+        response.render('users/list', data);
     },
 
     view: async (request, response) => {

@@ -3,15 +3,15 @@ import db, { filter } from '../db.js';
 export default {
 
     index: async (request, response) => {
-        const view = {
+        const data = {
             title: "Категорії",
             description: "Список категорій публікацій",
             keywords: "категорії"
         };
         const stages = filter(request.query);
-        view.categories = await db.collection('categories')
+        data.categories = await db.collection('categories')
             .aggregate(stages).toArray();
-        response.render('categories/list', view);
+        response.render('categories/list', data);
     },
 
     view: async (request, response) => {

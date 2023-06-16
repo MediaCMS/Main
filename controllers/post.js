@@ -2,17 +2,8 @@ import db, { filter } from '../db.js';
 
 export default {
 
-    home: async (request, response) => {
-        const view = {
-            title: 'Категорії',
-            description: 'Список категорій публікацій',
-            keywords: 'категорії'
-        };
-        response.render('posts/home', view);
-    },
-
     index: async (request, response) => {
-        const view = {
+        const data = {
             title: 'Публікації',
             description: 'Список публікацій сайту',
             keywords: 'публікації'
@@ -42,9 +33,9 @@ export default {
             ...stages
         ];
         stages[1].$order = { 'time': 0 };
-        view.posts = await db.collection('posts')
+        data.posts = await db.collection('posts')
             .aggregate().toArray();
-        response.render('posts/list', view);
+        response.render('posts/list', data);
     },
 
     view: async (request, response) => {
