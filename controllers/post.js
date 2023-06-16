@@ -34,7 +34,7 @@ export default {
         ];
         stages[1].$order = { 'time': 0 };
         data.posts = await db.collection('posts')
-            .aggregate().toArray();
+            .aggregate(stages).toArray();
         response.render('posts/list', data);
     },
 

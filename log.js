@@ -3,32 +3,16 @@ import config from './config.js';
 
 const logStream = fs.createWriteStream(config.log, { flags: 'a' });
 
-export default async function log(msg) {
-    let message = '', stack = {};
-    if (msg instanceof Error) {
-        message = error.name + ': ' + error.message;
-        if (typeof error.stack !== 'undefined') {
-            stack.line = error.stack.split('\n')[1];
-            if (stack.line !== 'undefined') {
-                stack.index = stack.line.indexOf('at ') + 3;
-                stack.file = stack.line.slice(stack.index);
-                message += ' [' + stack.file + ']';
-            }
+export default async function log(data) {
+    let message = (new Date()).toISOString() + '  ';
+    if (data instanceof Error) {
+        message += data.name + ' ' + data.message + '\n';
+        if (data?.stack) {
+            message += data?.stack + '\n';
         }
     } else {
-        message = msg;
+        message += data + '\n';
     }
-    const date = new Date();
-    message = date.getFullYear() +
-        '-' + padStart(date.getMonth() + 1) +
-        '-' + padStart(date.getDate()) +
-        ' ' + padStart(date.getHours()) +
-        ':' + padStart(date.getMinutes()) +
-        ':' + padStart(date.getSeconds()) +
-        ' ' + message + '\n';
+    message += '\n';
     logStream.write(message);
-}
-
-function padStart(value, length = 2, symbol = '0') {
-    return value.toString().padStart(length, symbol);
 }

@@ -16,17 +16,17 @@ function filter(query) {
     if ('user' in query) {
         match['user._id'] = new ObjectId(query.user);
     }
-    const order = { field: 'title', direction: 1 }
-    if ('orderField' in query) {
-        order.field = query['orderField'];
+    const sort = { field: 'title', direction: 1 }
+    if ('sortField' in query) {
+        sort.field = query['sortField'];
     }
-    if ('orderDirection' in query) {
-        order.direction = parseInt(query['orderDirection']);
+    if ('sortOrder' in query) {
+        sort.order = parseInt(query['sortOrder']);
     }
-    const page = request.query?.page ?? 1;
+    const page = query?.page ?? 1;
     const stages = [
         { $match: match },
-        { $order: { [order.field] : order.direction }},
+        { $sort: { [sort.field]: sort.order }},
         { $skip: (page - 1) * config.limit },
         { $limit: config.limit }
     ];
