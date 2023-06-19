@@ -43,14 +43,14 @@
                 title:  post.title,
                 subTitle: {
                     text: post.user.title,
-                    url: post.user.alias
+                    url: '/категорії' + post.user.alias
                 },
                 text: post.description, 
                 image: post.image,
                 url: post.alias,
                 button: {
                     text: post.category.title,
-                    url: post.category.alias
+                    url: '/автори' + post.category.alias
                 }
             }); %>
         </div>

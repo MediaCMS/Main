@@ -1,7 +1,8 @@
 <div class="card" style="width: 18rem;">
     <% if (typeof image !== 'undefined') {%>
         <a href="<%= url %>"">
-            <img src="<%= image %>" class="card-img-top" alt="<%= title %>" />
+            <img src="<%= images.blank %>" data-src="<%= image %>"
+                class="card-img-top" alt="<%= title %>" />
         </a>
     <% } %>
     <div class="card-body">
