@@ -1,5 +1,5 @@
 import express from "express";
-import { client } from './db.js';
+import db, { client } from './db.js';
 import log from './log.js';
 import menu from './menu.js';
 import router from './router.js';
@@ -47,6 +47,8 @@ app.use(async function (request, response, next) {
     response.locals.google = config.google;
     response.locals.facebook = config.facebook;
     response.locals.copyright = config.copyright;
+    response.locals.categories = await db.collection('categories')
+        .find({ status: true }).toArray();
     next();
 });
 

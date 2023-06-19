@@ -39,7 +39,7 @@
 <div className="row">
     <% posts.forEach(post => { %>
         <div className="col">
-            <%- include('card', {
+            <%- include('partials/card', {
                 title:  post.title,
                 subTitle: {
                     text: post.user.title,

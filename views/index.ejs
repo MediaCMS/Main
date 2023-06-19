@@ -55,9 +55,7 @@
     </head>
     <body class="p-0 m-0 position-relative">
         <header class="row gx-0 fixed-top">
-            <div class="brand col text-start">
-                <a href="/" title="<%= slogan %>" class="btn btn-success m-2"><%= name %></a>
-            </div>
+            <%- include('partials/navigation', { categories }) %>
         </header>
         <div class="share col text-end position-fixed">
             <div class="fb-like" data-href="<%= url %>" data-layout="button"
@@ -73,23 +71,21 @@
             <% } %>
             <%- include(view) %>
         </main>
-        <!--
         <footer class="text-center mt-5">
             <ul class="nav justify-content-center">
-                <%/* menu.forEach(item => { %>
+                <% menu.forEach(item => { %>
                     <li class="nav-item">
-                        <a href="<%= item.uri %>" title="<%= item.description %>"
-                            class="nav-link small p-2 <%= (item.uri === uri) ? 'disabled' : '' %>">
+                        <a href="<%= item.url %>" title="<%= item.description %>"
+                            class="nav-link small p-2 <%= (item.url === path) ? 'disabled' : '' %>">
                             <%= item.title %>
                         </a>
                     </li>
-                <% })*/ %>
+                <% }) %>
             </ul>
             <p class="text-muted small mt-3">
                 <%- name + " &copy; " + copyright %>
             </p>
         </footer>
-        -->
         <div id="fb-root"></div>
     </body>
 </html>

@@ -6,7 +6,6 @@ const images = {
 
 // adapt image
 function adaptImage(uri, width, height = null) {
-    console.log(uri, width, height)
     const container = { width, height }
     const size = uri.match(/\/(\d{3,4})\.jpg$/) // x(\d{3,4})
     const maximum = { width: parseInt(size[1]), height: parseInt(size[1]) / 1.777 }
