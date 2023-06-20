@@ -30,12 +30,11 @@ app.use(function (request, response, next) {
 
 app.use(async function (request, response, next) {
     request.url = decodeURI(request.url);
+    response.locals.name = config.name;
     response.locals.host = config.host;
     response.locals.idn = config.idn;
     response.locals.path = decodeURI(request.originalUrl).split("?").shift();
     response.locals.url = response.locals.host + response.locals.uri;
-    response.locals.name = config.name;
-    response.locals.slogan = config.slogan;
     response.locals.menu = menu;
     response.locals.images = config.image;
     //response.locals.thumbnail = '/3/1/0/310d02c77b398b6b17c8bbdbf286922e/thumbnail.jpg'
@@ -48,7 +47,7 @@ app.use(async function (request, response, next) {
     response.locals.facebook = config.facebook;
     response.locals.copyright = config.copyright;
     response.locals.categories = await db.collection('categories')
-        .find({ status: true }).toArray();
+        .find({ status: true }).sort({ order: 1 }).toArray();
     next();
 });
 

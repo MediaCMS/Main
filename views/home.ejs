@@ -1,16 +1,16 @@
-<div id="slideshow" className="carousel slide carousel-fade my-4"
+<div id="slideshow" class="carousel slide carousel-fade my-4"
     data-bs-ride="carousel" data-interval="5000">
     <div class="carousel-indicators">
-        <% top.forEach((post, index)=> { %>
-            <button type="button" class="<%= (index === 0) ? 'active' : '' %>"
-                aria-current="<%= (index === 0) ? 'true' : '' %>"
+        <% for(let i = 0; i < 3; i ++) { %>
+            <button type="button" class="<%= !i ? 'active' : '' %>"
+                aria-current="<%= !i ? 'true' : '' %>"
                 aria-label="Slide 1" data-bs-target="#slideshow"
-                data-bs-slide-to="<%= index %>">
+                data-bs-slide-to="<%= i %>">
             </button>
-        <% }) %>
+        <% } %>
     </div>
-    <div className="carousel-inner">
-        <% top.forEach((post, index)=> { %>
+    <div class="carousel-inner">
+        <% posts.slice(0, 3).forEach((post, index)=> { %>
             <div class="carousel-item text-center align-middle h-100 <%= (index === 0) ? 'active' : '' %>"
                 onclick="window.location='/<%= post.uri %>'">
                 <img src="<%= images.blank %>" data-url="<%= post.image %>"
@@ -36,23 +36,30 @@
         <span class="visually-hidden">Наступний</span>
     </button>
 </div>
-<div className="row">
-    <% posts.forEach(post => { %>
-        <div className="col">
+<div class="row m-0">
+    <% posts.slice(3).forEach(post => { %>
+        <div class="col">
             <%- include('partials/card', {
                 title:  post.title,
                 subTitle: {
                     text: post.user.title,
-                    url: '/категорії' + post.user.alias
+                    url: '/автори/' + post.user.alias
                 },
                 text: post.description, 
                 image: post.image,
-                url: post.alias,
+                url: '/публікації/' + post.alias,
                 button: {
                     text: post.category.title,
-                    url: '/автори' + post.category.alias
+                    url: '/категорії/' + post.category.alias
                 }
             }); %>
         </div>
+    <% }) %>
+</div>
+<div class="cloud text-center my-5 mx-auto">
+    <% tags.forEach(tag => { %>
+        <a href="/мітки/<%= tag.alias %>" class="size-<%= 10 - (tag.posts * 2) %> text-nowrap d-inline-block">
+            <%= tag.title %>
+        </a>
     <% }) %>
 </div>

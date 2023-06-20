@@ -30,9 +30,25 @@ export default async (request, response) => {
         }},
         ...stages
     ];
-    const posts = await db.collection('posts')
+    data.posts = await db.collection('posts')
         .aggregate(stages).toArray();
-    data.top = posts.slice(0, 3);
-    data.posts = posts.slice(3);
+    /*
+    data.tags = await db.collection('tags')
+        .find({ status: true }).sort({ order: 1 }).toArray();
+    */
+    data.tags = await db.collection('tags')
+        .aggregate([
+        { $lookup: {
+            from: 'posts', 
+            localField: '_id', 
+            foreignField: 'tags', 
+            as: 'posts'
+        } },
+        { $project: {
+            title: true, alias: true, posts: { $size: '$posts' }, status: true }
+        },
+        { $match: { posts: { $gt: -1 }, status: true } },
+
+    ]).toArray();
     response.render('home', data);
 }

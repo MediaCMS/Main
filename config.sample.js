@@ -1,4 +1,5 @@
 export default {
+    name: 'Медіа',
     host: 'media',
     protocol: 'https',
     ip: '127.0.1.1',

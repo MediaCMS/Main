@@ -1,14 +1,18 @@
 <div class="card" style="width: 18rem;">
     <% if (typeof image !== 'undefined') {%>
-        <a href="<%= url %>"">
-            <img src="<%= images.blank %>" data-src="<%= image %>"
-                class="card-img-top" alt="<%= title %>" />
-        </a>
+        <div class="card-img-top">
+            <a href="<%= url %>"">
+                <img src="<%= images.blank %>" data-src="<%= image %>"
+                    alt="<%= title %>" />
+            </a>
+        </div>
     <% } %>
     <div class="card-body">
-        <h5 class="card-title"><%= title %></h5>
+        <h5 class="card-title text-reset">
+            <a href="<%= url %>""><%= title %></a>
+        </h5>
         <% if (typeof subTitle !== 'undefined') { %>
-            <h6 class="card-subtitle mb-2 text-muted">
+            <h6 class="card-subtitle m-3 small text-muted">
                 <% if (typeof subTitle === "object") {%>
                     <a href="<%= subTitle.url %>"><%= subTitle.text %></a>
                 <% } else { %>

@@ -4,60 +4,38 @@ html { min-height: 100%; font-size: calc(16px + 0.5vw) !important;
     h1, h2, h3, h4, h5, h6 { text-align: center; }
     a {
       color: #231F20; text-decoration: none;
-      &:hover { color: #6A7796; text-decoration: none; }
+      &:hover { color: #6A7796; text-decoration: underline; }
       &:active { color: #6A7796; text-decoration: none; }
     }
 
-    h1, h2, article p, div#cloud { font-weight: 500; font-family: 'Lora', serif; }
+    h1, h2, article p, #cloud { font-weight: 500; font-family: 'Lora', serif; }
+    
+    //header {}
 
-    header {
-      .brand {
-        a { font: 700 1rem 'Lora', serif; text-shadow: 0 0 black; }
-      }
-    }
-
-    div.share { top: 12px; right: calc(1px + 0.5vw); z-index: 100;
+    /*
+    .share { top: 12px; right: calc(1px + 0.5vw); z-index: 100;
       .fb-like { display: block;
         span { width: auto !important; display: block;
           iframe { width: 220px !important; position: static !important; }
         }
       }
     }
-
+    */
     main { min-height: 60vh;
-      #widgets {
-        .fb-page { width: 300px; }
-        #hotels24 { width: 300px; line-height: 130%; font-size: 14px;
-          input { font-size: 14px; line-height: 180%; }
-          .date-input { margin: 0 -1px; }
-        }
-      }
-      #comments { max-width: 960px; }
-      #more { max-width: 960px;
-        div.post {
-          width: 318px; height: 200px; margin: 1px; 
-          background-position: center; background-size: cover;
-          a { font: 700 36px 'Lora', serif; text-shadow: 1px 1px 1px black; 
-            span { line-height: 200px; }
-          }
-        }
-      }
-      .box { max-width: 768px; font-weight: 300; margin: 50px auto; }
-      .screen { min-width: 100vw; height: 50vh; text-align: center; vertical-align: middle; display: table-cell; }
-
       &#home {
-        #slideshow {
-          text-shadow: 1px 1px #000;
-          .carousel-item { line-height: 100vh; 
-            img { object-fit: cover; z-index: -1; }
-            .carousel-caption {
-              max-width: 70%; line-height: 100%; font-family: 'Open Sans', sans-serif; 
-              h2 { font-size: calc(25px + 5vw); line-height: 100%; }
+        .carousel {
+          .carousel-inner {
+            .carousel-item {
+              min-height: 70vh;  line-height: 100vh; overflow: hidden; position: relative;
+              img { object-fit: cover; z-index: -1; }
+              .carousel-caption {
+                max-width: 70%; line-height: 100%; font-family: 'Open Sans', sans-serif; 
+                h2 { font-size: calc(25px + 5vw); line-height: 100%; }
+              }
             }
           }
-          .carousel-item:hover { cursor: pointer; }
         }
-        #cloud {
+        .cloud {
           max-width: 960px; line-height: 500%; margin: 15vh auto;
           a { line-height: 150%;
             &.size-1 { font-size: 3.0rem; margin: 12px 25px; }
@@ -73,7 +51,7 @@ html { min-height: 100%; font-size: calc(16px + 0.5vw) !important;
           }
         }
       }
-
+      /*
       &#post-list {
         ul { max-width: 640px;
           li { line-height: 180%;
@@ -94,7 +72,8 @@ html { min-height: 100%; font-size: calc(16px + 0.5vw) !important;
           }
         }
       }
-
+      */
+      /*
       &#search {
         .container { max-width: 960px;
           #___gcse_0 {
@@ -104,11 +83,39 @@ html { min-height: 100%; font-size: calc(16px + 0.5vw) !important;
           }
         }
       }
-
-      &#feedback {
-        div.box {
-          form { max-width: 640px; margin: 50px auto; }
+      */
+      /*
+      #comments { max-width: 960px; }
+      #more { max-width: 960px;
+        .post {
+          width: 318px; height: 200px; margin: 1px; 
+          background-position: center; background-size: cover;
+          a { font: 700 36px 'Lora', serif; text-shadow: 1px 1px 1px black; 
+            span { line-height: 200px; }
+          }
         }
+      }
+      */
+      .box { max-width: 768px; font-weight: 300; margin: 50px auto; }
+      .screen { min-width: 100vw; height: 50vh; text-align: center; vertical-align: middle; display: table-cell; }
+      .card { position: relative; margin: 0 auto;
+        .card-img-top {
+          width: 100%; padding-top: 66.66%; overflow: hidden; position: relative;
+          img {
+            min-width: 100%; min-height: 100%; max-width: 100%; margin: auto;
+            position: absolute; top:-100%; left:-100%; right: -100%; bottom:-100%;
+          }
+        }
+      }
+      .media { position: relative;
+        .media-image {
+          padding-top: 20%; overflow: hidden; position: relative;
+          img {
+            min-width: 100%; min-height: 100%; margin: auto;
+            position: absolute; top:-100%; left:-100%; right: -100%; bottom:-100%;
+          }
+        }
+        a { width: 100%; height: 100%;position: absolute; top: 0; bottom: 0; z-index: 100; }
       }
     }
   }
