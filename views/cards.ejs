@@ -1,0 +1,7 @@
+<div class="container row p-0 my-0 mx-auto">
+    <% cards.forEach(card => { %>
+        <div class="col p-0 my-3">
+            <%- include('card', card); %>
+        </div>
+    <% }) %>
+</div>

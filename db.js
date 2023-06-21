@@ -6,9 +6,9 @@ const db = client.db();
 await client.connect();
 
 function filter(query) {
-    const match = { status: true }
+    const match = {}
     if ('category' in query) {
-        match['category._id'] = new ObjectId(query.category);
+        match.tags = new ObjectId(query.category);
     }
     if ('tag' in query) {
         match.tags = new ObjectId(query.tag);
@@ -16,7 +16,8 @@ function filter(query) {
     if ('user' in query) {
         match['user._id'] = new ObjectId(query.user);
     }
-    const sort = { field: 'title', direction: 1 }
+    match['status'] = true;
+    const sort = { field: 'title', order: 1 }
     if ('sortField' in query) {
         sort.field = query['sortField'];
     }
@@ -34,4 +35,10 @@ function filter(query) {
     return stages;
 }
 
-export { db as default, client, ObjectId, filter };
+function skip(page = 1) {
+    return (page - 1) * config.limit;
+}
+
+const limit = config.limit;
+
+export { db as default, client, ObjectId, filter, skip, limit };

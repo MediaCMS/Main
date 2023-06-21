@@ -1,0 +1,12 @@
+<%- include('../cards', {
+    cards: posts.map(post => ({
+        title:  post.title,
+        subTitle: {
+            text: post.user.title,
+            url: '/автори/' + post.user.alias
+        },
+        text: post.description, 
+        image: post.image,
+        url: '/публікації/' + post.alias,
+    }))
+}); %>

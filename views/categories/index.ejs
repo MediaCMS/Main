@@ -1,0 +1,8 @@
+<%- include('../cards', {
+    cards: categories.map(category => ({
+        title:  category.title,
+        text: category.description, 
+        image: category.image,
+        url: '/категорії/' + category.alias
+    }))
+}); %>
