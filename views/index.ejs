@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="uk" dir="ltr" id="root">
     <head>
-        <title><%= title ? title + ' — ' + name : name %></title>
+        <title><%= title !== name ? title + ' — ' + name : name %></title>
         <meta property="og:title" content="<%= title %>" />
         <meta itemprop="name" content="<%= title %>">
         <meta name="description" content="<%= description %>" />
@@ -55,7 +55,7 @@
     </head>
     <body class="p-0 m-0 position-relative">
         <header class="row gx-0 fixed-top">
-            <%- include('partials/navigation', { categories }) %>
+            <%- include('navigation', { categories }) %>
         </header>
         <div class="share col text-end position-fixed">
             <div class="fb-like" data-href="<%= url %>" data-layout="button"
@@ -64,7 +64,9 @@
         </div>
         <main id="<%= view.replace('/', '-') %>">
             <% if (title !== name) {%>
-                <h1 class="text-center" data-name="<%= name %>"><u><%= title %></u></h1>
+                <h1 class="container" style="margin: 6rem auto 2rem;">
+                    <u><%= title %></u>
+                </h1>
             <% } %>
             <% if (message) {%>
                 <div class="box alert alert-danger"><%= message %></div>

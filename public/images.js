@@ -33,27 +33,17 @@ function adaptImage(uri, width, height = null) {
 const slideshow = document.querySelector('#home #slideshow')
 slideshow && slideshow.querySelectorAll('img').forEach(image => {
     image.src = adaptImage(
-        image.dataset.url, slideshow.offsetWidth, slideshow.offsetHeight
+        image.dataset.src, slideshow.offsetWidth, slideshow.offsetHeight
     )
     return image
 })
-
-// lazyload article main background image adaptive
-const main = document.querySelector('article div.main[data-image]')
-if (main) {
-    main.style.backgroundImage = `url('${
-        adaptImage(
-            main.dataset.image, main.offsetWidth, main.offsetHeight
-        )
-    }')`
-}
 
 // lazyload article images adaptive
 const imagesObserver = new IntersectionObserver((entries, self) => {
     for (const entrie of entries) {
         if (!entrie.isIntersecting) continue
         entrie.target.src = adaptImage(
-            entrie.target.dataset.url, entrie.target.offsetWidth
+            entrie.target.dataset.src, entrie.target.offsetWidth
         )
         self.unobserve(entrie.target)
     }

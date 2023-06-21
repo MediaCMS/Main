@@ -13,13 +13,13 @@
         <% posts.slice(0, 3).forEach((post, index)=> { %>
             <div class="carousel-item text-center align-middle h-100 <%= (index === 0) ? 'active' : '' %>"
                 onclick="window.location='/<%= post.uri %>'">
-                <img src="<%= images.blank %>" data-url="<%= post.image %>"
+                <img src="<%= images.blank %>" data-src="<%= post.image %>"
                     alt="<%= post.title %>"
                     class="vw-100 vh-100 object-fit-cover position-absolute top-0 start-0 z-n1" />
                 <div
                     class="carousel-caption text-center align-middle pt-2 d-inline-block position-static">
                     <h2 class="text-center d-inline-block">
-                        <a href="/<%= post.uri %>" class="text-white fw-bold">
+                        <a href="/публікації/<%= post.alias %>" class="text-white fw-bold">
                             <%= post.title %>
                         </a>
                     </h2>
@@ -39,7 +39,7 @@
 <div class="row m-0">
     <% posts.slice(3).forEach(post => { %>
         <div class="col">
-            <%- include('partials/card', {
+            <%- include('card', {
                 title:  post.title,
                 subTitle: {
                     text: post.user.title,

@@ -5,8 +5,9 @@ export default async (request, response) => {
         description: 'Новини',
         keywords: 'новини, статті, медіа'
     };
-    let stages = filter(request.query);
-    stages[1].$sort = { 'time': -1 };
+    let stages = filter({
+        sortField: 'time', sortOrder: -1, ...request.query
+    });
     stages = [
         { $lookup: {
             from: 'categories', 

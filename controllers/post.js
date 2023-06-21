@@ -1,3 +1,4 @@
+import config from '../config.js';
 import db, { filter } from '../db.js';
 
 export default {
@@ -8,7 +9,9 @@ export default {
             description: 'Список публікацій сайту',
             keywords: 'публікації'
         };
-        const stages = filter(request.query);
+        let stages = filter({
+            sortField: 'time', sortOrder: 1, ...request.query
+        });
         stages = [
             { $lookup: {
                 from: 'categories', 
@@ -32,14 +35,13 @@ export default {
             }},
             ...stages
         ];
-        stages[1].$order = { 'time': 0 };
         data.posts = await db.collection('posts')
             .aggregate(stages).toArray();
-        response.render('posts/list', data);
+        response.render('posts/index', data);
     },
 
     view: async (request, response) => {
-        const post = await db.collection('articles')
+        const post = await db.collection('posts')
             .aggregate([
             { $lookup: {
                 from: 'categories',
@@ -66,6 +68,10 @@ export default {
                 status: true
             }}
         ]).next();
+        post.body = post.body.replace(
+            /<img\s+src="https:\/\/фото\.медіа\.укр\/сховище([^"]+)"/g,
+            `<img src="${config.image.blank}" data-src="$1"`
+        );
         response.render('posts/view', post);
     }
 }

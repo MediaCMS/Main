@@ -1,0 +1,20 @@
+<div class="container row p-0 my-0 mx-auto">
+    <% posts.forEach(post => { %>
+        <div class="col p-0 my-3">
+            <%- include('../card', {
+                title:  post.title,
+                subTitle: {
+                    text: post.user.title,
+                    url: '/автори/' + post.user.alias
+                },
+                text: post.description, 
+                image: post.image,
+                url: '/публікації/' + post.alias,
+                button: {
+                    text: post.category.title,
+                    url: '/категорії/' + post.category.alias
+                }
+            }); %>
+        </div>
+    <% }) %>
+</div>
