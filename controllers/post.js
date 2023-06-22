@@ -1,5 +1,5 @@
 import config from '../config.js';
-import db, { filter } from '../db.js';
+import db, { skip, limit } from '../db.js';
 
 export default {
 
@@ -9,65 +9,64 @@ export default {
             description: 'Список публікацій сайту',
             keywords: 'публікації'
         };
-        let stages = filter({
-            sortField: 'time', sortOrder: 1, ...request.query
-        });
-        stages = [
-            { $lookup: {
-                from: 'categories', 
-                localField: 'category', 
-                foreignField: '_id', 
-                as: 'category'
-            } },
-            { $unwind: '$category' },
-            { $lookup: {
-                from: 'users', 
-                localField: 'user', 
-                foreignField: '_id', 
-                as: 'user'
-            } },
-            { $unwind: '$user' },
-            { $project: {
-                time: 1, title: 1, description: 1, 
-                image: 1, tags: 1, alias: 1, status: 1,
-                category: { _id: 1, title: 1, alias: 1 },
-                user: { _id: 1, title: 1, alias: 1 }
-            }},
-            ...stages
-        ];
         data.posts = await db.collection('posts')
-            .aggregate(stages).toArray();
+            .aggregate([
+                { $match: { status: true } },
+                { $sort: { time: 1 } },
+                { $skip: skip(request.query?.page) },
+                { $limit: limit },
+                { $lookup: {
+                    from: 'categories', 
+                    localField: 'category', 
+                    foreignField: '_id', 
+                    as: 'category'
+                } },
+                { $unwind: '$category' },
+                { $lookup: {
+                    from: 'users',
+                    localField: 'user',
+                    foreignField: '_id',
+                    as: 'user'
+                } },
+                { $unwind: '$user' },
+                { $project: {
+                    time: true, title: true, description: true, 
+                    image: true, tags: true, alias: true, status: true,
+                    category: { title: true, alias: true },
+                    user: { title: true, alias: true }
+                }}
+            ]).toArray();
         response.render('posts/index', data);
     },
 
     view: async (request, response) => {
         const post = await db.collection('posts')
             .aggregate([
-            { $lookup: {
-                from: 'categories',
-                localField: 'category',
-                foreignField: '_id',
-                as: 'category'
-            }},
-            { $unwind: '$category' },
-            { $lookup: {
-                from: 'tags',
-                localField: 'tags',
-                foreignField: '_id',
-                as: 'tags'
-            }},
-            { $lookup: {
-                from: 'users', 
-                localField: 'user',
-                foreignField: '_id',
-                as: 'user'
-            }},
-            { $unwind: '$user' },
-            { $match: {
-                alias: request.params.slug,
-                status: true
-            }}
-        ]).next();
+                { $match: {
+                    alias: request.params.slug,
+                    status: true
+                }},
+                { $lookup: {
+                    from: 'categories',
+                    localField: 'category',
+                    foreignField: '_id',
+                    as: 'category'
+                }},
+                { $unwind: '$category' },
+                { $lookup: {
+                    from: 'tags',
+                    localField: 'tags',
+                    foreignField: '_id',
+                    as: 'tags'
+                }},
+                { $lookup: {
+                    from: 'users', 
+                    localField: 'user',
+                    foreignField: '_id',
+                    as: 'user'
+                }},
+                { $unwind: '$user' }
+            ]).next();
         post.body = post.body.replace(
             /<img\s+src="https:\/\/фото\.медіа\.укр\/сховище([^"]+)"/g,
             `<img src="${config.image.blank}" data-src="$1"`

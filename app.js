@@ -59,7 +59,6 @@ app.use(async function (request, response, next) {
     next();
 });
 
-
 app.use(router);
 
 app.use(async (error, request, response, next) => {

@@ -1,0 +1,8 @@
+<%- include('../cards', {
+    cards: tags.map(tag => ({
+        title: tag.title,
+        text: tag.description, 
+        image: tag.image,
+        url: '/мітки/' + tag.alias
+    }))
+}); %>

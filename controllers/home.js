@@ -1,55 +1,53 @@
-import db, { filter } from '../db.js';
+import db from '../db.js';
 
 export default async (request, response) => {
     const data = {
         description: 'Новини',
         keywords: 'новини, статті, медіа'
     };
-    let stages = filter({
-        sortField: 'time', sortOrder: -1, ...request.query
-    });
-    stages = [
-        { $lookup: {
-            from: 'categories', 
-            localField: 'category', 
-            foreignField: '_id', 
-            as: 'category'
-        } },
-        { $unwind: '$category' },
-        { $lookup: {
-            from: 'users', 
-            localField: 'user', 
-            foreignField: '_id', 
-            as: 'user'
-        } },
-        { $unwind: '$user' },
-        { $project: {
-            time: 1, title: 1, description: 1, 
-            image: 1, tags: 1, alias: 1, status: 1,
-            category: { _id: 1, title: 1, alias: 1 },
-            user: { _id: 1, title: 1, alias: 1 }
-        }},
-        ...stages
-    ];
     data.posts = await db.collection('posts')
-        .aggregate(stages).toArray();
-    /*
-    data.tags = await db.collection('tags')
-        .find({ status: true }).sort({ order: 1 }).toArray();
-    */
+        .aggregate([
+            { $match: { status: true } },
+            { $sort: { time: -1 } },
+            { $limit: 100 },
+            { $lookup: {
+                from: 'categories', 
+                localField: 'category', 
+                foreignField: '_id', 
+                as: 'category'
+            } },
+            { $unwind: '$category' },
+            { $lookup: {
+                from: 'users', 
+                localField: 'user', 
+                foreignField: '_id', 
+                as: 'user'
+            } },
+            { $unwind: '$user' },
+            { $project: {
+                time: true, title: true, description: true, 
+                image: true, tags: true, alias: true, status: true,
+                category: { title: true, alias: true },
+                user: { title: true, alias: true }
+            }}
+        ]).toArray();
     data.tags = await db.collection('tags')
         .aggregate([
-        { $lookup: {
-            from: 'posts', 
-            localField: '_id', 
-            foreignField: 'tags', 
-            as: 'posts'
-        } },
-        { $project: {
-            title: true, alias: true, posts: { $size: '$posts' }, status: true }
-        },
-        { $match: { posts: { $gt: -1 }, status: true } },
-
-    ]).toArray();
+            { $match: { status: true } },
+            { $lookup: {
+                from: 'posts', 
+                localField: '_id', 
+                foreignField: 'tags', 
+                as: 'posts'
+            } },
+            { $project: {
+                title: true, alias: true, 
+                posts: { $size: '$posts' },
+                status: true
+            } },
+            { $match: { posts: { $gt: -1 } } },
+            { $limit: 100 },
+            { $sort: { title: 1 } }
+        ]).toArray();
     response.render('home', data);
 }

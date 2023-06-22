@@ -1,6 +1,6 @@
 <%- include('../cards', {
     cards: posts.map(post => ({
-        title: post.title,
+        title:  post.title,
         subTitle: {
             text: post.user.title,
             url: '/автори/' + post.user.alias
@@ -8,9 +8,5 @@
         text: post.description, 
         image: post.image,
         url: '/публікації/' + post.alias,
-        button: {
-            text: post.category.title,
-            url: '/категорії/' + post.category.alias
-        }
     }))
 }); %>

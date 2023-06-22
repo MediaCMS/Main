@@ -1,0 +1,8 @@
+<%- include('../cards', {
+    cards: users.map(user => ({
+        title: user.title,
+        text: user.description, 
+        image: user.image,
+        url: '/автори/' + user.alias
+    }))
+}); %>

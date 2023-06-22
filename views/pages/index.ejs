@@ -1,0 +1,8 @@
+<%- include('../cards', {
+    cards: pages.map(page => ({
+        title: page.title,
+        text: page.description,
+        image: page.image,
+        url: '/сторінки/' + page.alias,
+    }))
+}); %>

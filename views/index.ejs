@@ -77,8 +77,10 @@
             <ul class="nav justify-content-center">
                 <% menu.forEach(item => { %>
                     <li class="nav-item">
-                        <a href="<%= item.url %>" title="<%= item.description %>"
-                            class="nav-link small p-2 <%= (item.url === path) ? 'disabled' : '' %>">
+                        <a href="<%= item.url %>" title="<%= item.description %>" data-path="<%= path %>" data-url="<%= item.url %>"
+                            class="nav-link small p-2 <%= (
+                                ((item.url.length > 1) && path.includes(item.url))
+                                || (path === item.url)) ? 'disabled' : '' %>">
                             <%= item.title %>
                         </a>
                     </li>

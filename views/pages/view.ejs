@@ -1,0 +1,9 @@
+<article class="container mt-5">
+    <% if (typeof image !== 'undefined') { %>
+        <div>
+            <img src="<%= images.blank %>" data-src="<%= image %>" />
+        </div>
+    <% } %>
+    <p><%= description %></p>
+    <%- body %>
+</article>
