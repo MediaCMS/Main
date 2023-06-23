@@ -1,8 +1,8 @@
 import config from '../config.js';
 import db, { skip, limit } from '../db.js';
+import cache from '../cache.js';
 
 export default {
-
     index: async (request, response) => {
         const data = {
             title: 'Публікації',
@@ -39,38 +39,45 @@ export default {
         response.render('posts/index', data);
     },
 
-    view: async (request, response) => {
-        const post = await db.collection('posts')
-            .aggregate([
-                { $match: {
-                    alias: request.params.slug,
-                    status: true
-                }},
-                { $lookup: {
-                    from: 'categories',
-                    localField: 'category',
-                    foreignField: '_id',
-                    as: 'category'
-                }},
-                { $unwind: '$category' },
-                { $lookup: {
-                    from: 'tags',
-                    localField: 'tags',
-                    foreignField: '_id',
-                    as: 'tags'
-                }},
-                { $lookup: {
-                    from: 'users', 
-                    localField: 'user',
-                    foreignField: '_id',
-                    as: 'user'
-                }},
-                { $unwind: '$user' }
-            ]).next();
-        post.body = post.body.replace(
-            /<img\s+src="https:\/\/фото\.медіа\.укр\/сховище([^"]+)"/g,
-            `<img src="${config.image.blank}" data-src="$1"`
-        );
+    view: async (request, response, next) => {
+        let post;
+        if (!cache.has(request.path)) {
+            post = await db.collection('posts')
+                .aggregate([
+                    { $match: {
+                        alias: request.params.slug,
+                        status: true
+                    } },
+                    { $lookup: {
+                        from: 'categories',
+                        localField: 'category',
+                        foreignField: '_id',
+                        as: 'category'
+                    } },
+                    { $unwind: '$category' },
+                    { $lookup: {
+                        from: 'tags',
+                        localField: 'tags',
+                        foreignField: '_id',
+                        as: 'tags'
+                    } },
+                    { $lookup: {
+                        from: 'users', 
+                        localField: 'user',
+                        foreignField: '_id',
+                        as: 'user'
+                    } },
+                    { $unwind: '$user' }
+                ]).next();
+            if (!post) return next(response.status(404));
+            post.body = post.body.replace(
+                /<img\s+src="https:\/\/фото\.медіа\.укр\/сховище([^"]+)"/g,
+                `<img src="${config.image.blank}" data-src="$1"`
+            );
+            cache.set(request.path, post);
+        } else {
+            post = cache.get(request.path);
+        }
         response.render('posts/view', post);
     }
 }

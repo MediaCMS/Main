@@ -21,7 +21,7 @@ export default {
     view: async (request, response) => {
         const page = await db.collection('pages')
             .find({
-                alias: request.params.slug,
+                alias: request.params.slug, 
                 status: true
             }).next();
         response.render('pages/view', page);

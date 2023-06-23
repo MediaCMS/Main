@@ -1,11 +1,24 @@
 import db from '../db.js';
+import cache from '../cache.js';
 
 export default async (request, response) => {
-    const data = {
-        description: 'Новини',
-        keywords: 'новини, статті, медіа'
-    };
-    data.posts = await db.collection('posts')
+    let data = {};
+    if (!cache.has(request.path)) {
+        data = {
+            description: 'Новини',
+            keywords: 'новини, статті, медіа'
+        };
+        data.posts = await getPosts();
+        data.tags = await getTags();
+        cache.set('/', data);
+    } else {
+        data = cache.get('/');
+    }
+    response.render('home', data);
+}
+
+async function getPosts() {
+    return await db.collection('posts')
         .aggregate([
             { $match: { status: true } },
             { $sort: { time: -1 } },
@@ -31,7 +44,10 @@ export default async (request, response) => {
                 user: { title: true, alias: true }
             }}
         ]).toArray();
-    data.tags = await db.collection('tags')
+}
+
+async function getTags() {
+    return await db.collection('tags')
         .aggregate([
             { $match: { status: true } },
             { $lookup: {
@@ -48,6 +64,5 @@ export default async (request, response) => {
             { $match: { posts: { $gt: -1 } } },
             { $limit: 100 },
             { $sort: { title: 1 } }
-        ]).toArray();
-    response.render('home', data);
+        ]).toArray();;
 }

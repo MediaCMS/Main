@@ -51,7 +51,7 @@ export default {
                 { $project: {
                     _id: false, time: false, order: false,
                     user: false, status: false
-                } }
+                } } 
             ]).next();
         response.render('categories/posts', data);
      }

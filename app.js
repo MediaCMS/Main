@@ -51,7 +51,7 @@ app.use(async function (request, response, next) {
     next();
 });
 
-app.use(async function (request, response, next) {
+app.use(async (request, response, next) => {
     const render = response.render;
     response.render = function (view, locals, callback) {
         render.call(this, 'index', { ...locals, ...{ view } }, callback);
@@ -61,6 +61,11 @@ app.use(async function (request, response, next) {
 
 app.use(router);
 
+app.use(async (request, response, next) => {
+    console.log(response)
+    console.log(response.status)
+    next();
+});
 app.use(async (error, request, response, next) => {
     console.error(error);
     if (response.headersSent) return next(error);
