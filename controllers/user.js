@@ -37,7 +37,7 @@ export default {
         response.render('users/index', data);
     },
 
-    posts: async (request, response) => {
+    posts: async (request, response, next) => {
         const data = await db.collection('users')
             .aggregate([
                 { $match: {
@@ -77,6 +77,10 @@ export default {
                     user: false, status: false
                 } }
             ]).next();
+        if (!data) {
+            response.status(404);
+            return next();
+        }
         response.render('users/posts', data);
     }
 }

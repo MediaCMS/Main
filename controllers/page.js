@@ -18,12 +18,16 @@ export default {
         response.render('pages/index', data);
     },
 
-    view: async (request, response) => {
+    view: async (request, response, next) => {
         const page = await db.collection('pages')
             .find({
                 alias: request.params.slug, 
                 status: true
             }).next();
+        if (!page) {
+            response.status(404);
+            return next();
+        }
         response.render('pages/view', page);
     }
 }

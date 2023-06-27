@@ -11,7 +11,14 @@ export default {
         widths: [320, 480, 640, 800, 960, 1280, 1600, 1920, 2560, 3840],
         blank: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
     },
-    key: '0123456789',
+    notFound: {
+        title: 'Сторінка не знайдена',
+        description: 'Сторінка за вашим запитом не знайдена на нашому сайті',
+        keywords: '404'
+    },
+    api: {
+        key: ''
+    },
     cache: 1_000,
     google: {
         analytics: '',

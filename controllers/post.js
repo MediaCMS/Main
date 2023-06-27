@@ -69,7 +69,10 @@ export default {
                     } },
                     { $unwind: '$user' }
                 ]).next();
-            if (!post) return next(response.status(404));
+            if (!post) {
+                response.status(404);
+                return next();
+            }
             post.body = post.body.replace(
                 /<img\s+src="https:\/\/фото\.медіа\.укр\/сховище([^"]+)"/g,
                 `<img src="${config.image.blank}" data-src="$1"`

@@ -13,7 +13,7 @@ export default {
         response.render('categories/index', data);
     },
 
-    posts: async (request, response) => {
+    posts: async (request, response, next) => {
         const data = await db.collection('categories')
             .aggregate([
                 { $match: {
@@ -53,6 +53,10 @@ export default {
                     user: false, status: false
                 } } 
             ]).next();
+        if (!data) {
+            response.status(404);
+            return next();
+        }
         response.render('categories/posts', data);
      }
 }

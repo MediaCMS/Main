@@ -15,18 +15,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.set('views', config.path + '/views');
 app.set('view engine', 'ejs');
-//app.locals.compileDebug = false; 
 if (app.get('env') === 'production') {
     app.set('trust proxy', 1);
 }
-/*
-app.use(function (request, response, next) {
-    //console.log(decodeURI(request.originalUrl));
-    //console.log(decodeURI(request.path), request.params, request.query);
-    //console.log(request.headers['x-api-key']);
-    next();
-});
-*/
 
 app.use(async function (request, response, next) {
     request.url = decodeURI(request.url);
@@ -37,7 +28,6 @@ app.use(async function (request, response, next) {
     response.locals.url = response.locals.host + response.locals.uri;
     response.locals.menu = menu;
     response.locals.images = config.image;
-    //response.locals.thumbnail = '/3/1/0/310d02c77b398b6b17c8bbdbf286922e/thumbnail.jpg'
     response.locals.title = config.name;
     response.locals.description = null;
     response.locals.keywords = null;
@@ -61,11 +51,6 @@ app.use(async (request, response, next) => {
 
 app.use(router);
 
-app.use(async (request, response, next) => {
-    console.log(response)
-    console.log(response.status)
-    next();
-});
 app.use(async (error, request, response, next) => {
     console.error(error);
     if (response.headersSent) return next(error);
@@ -75,7 +60,7 @@ app.use(async (error, request, response, next) => {
 
 process.on('unhandledRejection', async error => {
     console.log('Unhandled Rejection', error);
-    //await log(error);
+    await log(error);
     process.exit(1);
 })
 
@@ -85,6 +70,5 @@ process.on('SIGINT', async () => {
     server.close();
     console.log(`HTTP server closed`);
     await client.close()
-    //await db.end();
     process.exit(0);
 })
