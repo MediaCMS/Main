@@ -4,7 +4,7 @@ export default {
     protocol: 'https',
     ip: '127.0.1.1',
     port: 8888,
-    path: '/var/www/media/main',
+    root: '/var/www/media/main',
     db: 'mongodb://media:0123456789@localhost:27017/media',
     image: {
         host: 'https://photo.media',
@@ -16,9 +16,7 @@ export default {
         description: 'Сторінка за вашим запитом не знайдена на нашому сайті',
         keywords: '404'
     },
-    api: {
-        key: ''
-    },
+    key: '',
     cache: 1_000,
     google: {
         analytics: '',
@@ -31,5 +29,5 @@ export default {
     },
     copyright: '2023',
     limit: 100,
-    log: 'log'
+    log: '/log'
 }

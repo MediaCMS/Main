@@ -6,7 +6,7 @@ import config from '../config.js';
 export default async function (request, response) {
 
     const sitemap = new SitemapStream({ hostname: config.host });
-    const stream = fs.createWriteStream(config.path + '/public/sitemap.xml');
+    const stream = fs.createWriteStream(config.root + '/public/sitemap.xml');
 
     sitemap.pipe(stream);
     sitemap.write({ url: '/', changefreq: 'hourly', priority: 1.0 });

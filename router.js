@@ -31,7 +31,6 @@ router.get('/кеш', authenticate, cache.index);
 router.delete('/кеш', authenticate, cache.clear);
 
 router.get('/:slug', async (request, response, next) => {
-    console.log(request.params.slug)
     response.status(404);
     next();
 });
@@ -48,7 +47,7 @@ router.use(async (request, response, next) => {
 
 function authenticate(request, response, next) {
     if (!request?.header('x-api-key')
-        || (request.header('x-api-key') !== config.api.key) )
+        || (request.header('x-api-key') !== config.key) )
         return response.sendStatus(403); 
     next()
 }

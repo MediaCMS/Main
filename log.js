@@ -1,7 +1,7 @@
 import fs from 'fs';
 import config from './config.js';
 
-const logStream = fs.createWriteStream(config.log, { flags: 'a' });
+const logStream = fs.createWriteStream(config.root + config.log, { flags: 'a' });
 
 export default async function log(data) {
     let message = (new Date()).toISOString() + '  ';

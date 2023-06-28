@@ -1,9 +1,9 @@
-import express from "express";
+import express from 'express';
 import db, { client } from './db.js';
 import log from './log.js';
 import menu from './menu.js';
 import router from './router.js';
-import config from "./config.js";
+import config from './config.js';
 
 const app = express();
 const server = app.listen(config.port, config.ip, () => {
@@ -13,7 +13,7 @@ const server = app.listen(config.port, config.ip, () => {
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.set('views', config.path + '/views');
+app.set('views', config.root + '/views');
 app.set('view engine', 'ejs');
 if (app.get('env') === 'production') {
     app.set('trust proxy', 1);
