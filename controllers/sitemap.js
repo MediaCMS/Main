@@ -15,11 +15,11 @@ export default async function (request, response) {
     const posts = db.collection('posts')
         .find({ status: true })
         .sort({ time: 1 })
-        .project({ _id: 0, alias: 1 });
+        .project({ _id: 0, slug: 1 });
     while (await posts.hasNext()) {
         const post = await posts.next();
         sitemap.write({
-            url: `/публікації/${post.alias}`,
+            url: `/публікації/${post.slug}`,
             changefreq: 'never',
             priority: 0.3
         })
@@ -29,11 +29,11 @@ export default async function (request, response) {
     const categories = db.collection('categories')
         .find({ status: true })
         .sort({ order: 1 })
-        .project({ _id: 0, alias: 1 });
+        .project({ _id: 0, slug: 1 });
     while (await categories.hasNext()) {
         const category = await categories.next();
         sitemap.write({
-            url: `/категорії/${category.alias}`,
+            url: `/категорії/${category.slug}`,
             changefreq: 'hourly',
             priority: 0.3
         })
@@ -43,11 +43,11 @@ export default async function (request, response) {
     const tags = db.collection('tags')
         .find({ status: true })
         .sort({ title: 1 })
-        .project({ _id: 0, alias: 1 });
+        .project({ _id: 0, slug: 1 });
     while (await tags.hasNext()) {
         const tag = await tags.next();
         sitemap.write({
-            url: `/мітки/${tag.alias}`,
+            url: `/мітки/${tag.slug}`,
             changefreq: 'hourly',
             priority: 0.3
         })
@@ -57,11 +57,11 @@ export default async function (request, response) {
     const users = db.collection('users')
         .find({ status: true })
         .sort({ title: 1 })
-        .project({ _id: 0, alias: 1 });
+        .project({ _id: 0, slug: 1 });
     while (await users.hasNext()) {
         const user = await users.next();
         sitemap.write({ 
-            url: `/автори/${user.alias}`,
+            url: `/автори/${user.slug}`,
             changefreq: 'never',
             priority: 0.3
         })
@@ -71,11 +71,11 @@ export default async function (request, response) {
     const pages = db.collection('pages')
         .find({ status: true })
         .sort({ title: 1 })
-        .project({ _id: 0, alias: 1 });
+        .project({ _id: 0, slug: 1 });
     while (await pages.hasNext()) {
         const page = await pages.next();
         sitemap.write({
-            url: `/сторінки/${page.alias}`,
+            url: `/сторінки/${page.slug}`,
             changefreq: 'never',
             priority: 0.3
         })

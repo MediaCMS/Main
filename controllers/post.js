@@ -31,9 +31,9 @@ export default {
                 { $unwind: '$user' },
                 { $project: {
                     time: true, title: true, description: true, 
-                    image: true, tags: true, alias: true, status: true,
-                    category: { title: true, alias: true },
-                    user: { title: true, alias: true }
+                    image: true, tags: true, slug: true, status: true,
+                    category: { title: true, slug: true },
+                    user: { title: true, slug: true }
                 }}
             ]).toArray();
         response.render('posts/index', data);
@@ -45,7 +45,7 @@ export default {
             post = await db.collection('posts')
                 .aggregate([
                     { $match: {
-                        alias: request.params.slug,
+                        slug: request.params.slug,
                         status: true
                     } },
                     { $lookup: {

@@ -3,10 +3,10 @@
         title:  post.title,
         subTitle: {
             text: post.user.title,
-            url: '/автори/' + post.user.alias
+            url: '/автори/' + post.user.slug
         },
         text: post.description, 
         image: post.image,
-        url: '/публікації/' + post.alias,
+        url: '/публікації/' + post.slug,
     }))
 }); %>

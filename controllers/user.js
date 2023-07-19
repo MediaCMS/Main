@@ -26,7 +26,7 @@ export default {
                     as: 'posts'
                 } },
                 { $project: {
-                    title: true, description: true, image: true, alias: true,
+                    title: true, description: true, image: true, slug: true,
                     posts: { $size: '$posts' }
                 } },
                 { $match: { posts: { $gt: 0 } } },
@@ -41,7 +41,7 @@ export default {
         const data = await db.collection('users')
             .aggregate([
                 { $match: {
-                    alias: request.params.slug,
+                    slug: request.params.slug,
                     status: true
                 } },
                 { $lookup: {
@@ -66,8 +66,8 @@ export default {
                         { $unwind: '$category' },
                         { $project: {
                             _id: false, title: true, description: true,
-                            image: true, alias: true, status: true,
-                            category: { title: true, alias: true }
+                            image: true, slug: true, status: true,
+                            category: { title: true, slug: true }
                         } }
                     ],
                     as: 'posts'

@@ -39,9 +39,9 @@ async function getPosts() {
             { $unwind: '$user' },
             { $project: {
                 time: true, title: true, description: true, 
-                image: true, tags: true, alias: true, status: true,
-                category: { title: true, alias: true },
-                user: { title: true, alias: true }
+                image: true, tags: true, slug: true, status: true,
+                category: { title: true, slug: true },
+                user: { title: true, slug: true }
             }}
         ]).toArray();
 }
@@ -57,7 +57,7 @@ async function getTags() {
                 as: 'posts'
             } },
             { $project: {
-                title: true, alias: true, 
+                title: true, slug: true, 
                 posts: { $size: '$posts' },
                 status: true
             } },

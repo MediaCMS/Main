@@ -13,8 +13,8 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <% categories.slice(0, 6).forEach(category => { %>
                     <li class="nav-item">
-                        <a href="/категорії/<%= category.alias %>"
-                            class="nav-link <%= (path === '/категорії/' + category.alias) ? ' active' : '' %>">
+                        <a href="/категорії/<%= category.slug %>"
+                            class="nav-link <%= (path === '/категорії/' + category.slug) ? ' active' : '' %>">
                             <%= category.title %>
                         </a>
                     </li>
@@ -27,8 +27,8 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <% categories.slice(6).forEach(category => { %>
                             <li class="nav-item">
-                                <a href="/категорії/<%= category.alias %>"
-                                    class="nav-link<%= (path==='/категорії/' + category.alias) ? ' active' : '' %>">
+                                <a href="/категорії/<%= category.slug %>"
+                                    class="nav-link<%= (path==='/категорії/' + category.slug) ? ' active' : '' %>">
                                     <%= category.title %>
                                 </a>
                             </li>

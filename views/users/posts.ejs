@@ -3,10 +3,10 @@
         title:  post.title,
         text: post.description, 
         image: post.image,
-        url: '/публікації/' + post.alias,
+        url: '/публікації/' + post.slug,
         button: {
             text: post.category.title,
-            url: '/категорії/' + post.category.alias
+            url: '/категорії/' + post.category.slug
         }
     }))
 }); %>

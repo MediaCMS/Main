@@ -1,9 +1,9 @@
 <article class="container">
     <h5 style="margin-top: -1rem;">
-        <a href="/автори/<%= user.alias %>">
+        <a href="/автори/<%= user.slug %>">
             <i><%= user.title %></i>
         </a>, 
-        <a href="/категорії/<%= category.alias %>">
+        <a href="/категорії/<%= category.slug %>">
             <strong><%= category.title %></strong>
         </a>
     </h5>
@@ -15,7 +15,7 @@
     <p>
         <strong>Мітки: </strong>
         <%- tags.map(tag => 
-            `<a href="/мітки/${tag.alias}">${tag.title}</a>`
+            `<a href="/мітки/${tag.slug}">${tag.title}</a>`
         ).join(', ') %>
     </p>
 </article>

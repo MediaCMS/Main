@@ -21,7 +21,7 @@ export default {
     view: async (request, response, next) => {
         const page = await db.collection('pages')
             .find({
-                alias: request.params.slug, 
+                slug: request.params.slug, 
                 status: true
             }).next();
         if (!page) {
