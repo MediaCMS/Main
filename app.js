@@ -13,7 +13,8 @@ const server = app.listen(config.port, config.ip, () => {
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.set('views', config.root + '/views');
+app.use(express.static('public'));
+app.set('views', 'views');
 app.set('view engine', 'ejs');
 if (app.get('env') === 'production') {
     app.set('trust proxy', 1);

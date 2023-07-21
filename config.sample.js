@@ -5,7 +5,7 @@ export default {
     ip: '127.0.1.1',
     port: 8888,
     root: '/var/www/media/main',
-    db: 'mongodb://media:0123456789@localhost:27017/media',
+    db: 'mongodb://media:0123456789@127.0.0.1:27017/media',
     image: {
         host: 'https://photo.media',
         widths: [320, 480, 640, 800, 960, 1280, 1600, 1920, 2560, 3840],
