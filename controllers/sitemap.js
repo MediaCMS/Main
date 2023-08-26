@@ -11,7 +11,7 @@ export default async function (request, response) {
     sitemap.pipe(stream);
     sitemap.write({ url: '/', changefreq: 'hourly', priority: 1.0 });
 
-    sitemap.write({ url: '/публікації', changefreq: 'monthly', priority: 0.8 });
+    sitemap.write({ url: '/posts', changefreq: 'monthly', priority: 0.8 });
     const posts = db.collection('posts')
         .find({ status: true })
         .sort({ time: 1 })
@@ -19,13 +19,13 @@ export default async function (request, response) {
     while (await posts.hasNext()) {
         const post = await posts.next();
         sitemap.write({
-            url: `/публікації/${post.slug}`,
+            url: `/posts/${post.slug}`,
             changefreq: 'never',
             priority: 0.3
         })
     }
 
-    sitemap.write({ url: '/категорії', changefreq: 'monthly', priority: 0.5 });
+    sitemap.write({ url: '/categories', changefreq: 'monthly', priority: 0.5 });
     const categories = db.collection('categories')
         .find({ status: true })
         .sort({ order: 1 })
@@ -33,13 +33,13 @@ export default async function (request, response) {
     while (await categories.hasNext()) {
         const category = await categories.next();
         sitemap.write({
-            url: `/категорії/${category.slug}`,
+            url: `/categories/${category.slug}`,
             changefreq: 'hourly',
             priority: 0.3
         })
     }
 
-    sitemap.write({ url: '/мітки', changefreq: 'monthly', priority: 0.5 });
+    sitemap.write({ url: '/tags', changefreq: 'monthly', priority: 0.5 });
     const tags = db.collection('tags')
         .find({ status: true })
         .sort({ title: 1 })
@@ -47,13 +47,13 @@ export default async function (request, response) {
     while (await tags.hasNext()) {
         const tag = await tags.next();
         sitemap.write({
-            url: `/мітки/${tag.slug}`,
+            url: `/tags/${tag.slug}`,
             changefreq: 'hourly',
             priority: 0.3
         })
     }
 
-    sitemap.write({ url: '/автори', changefreq: 'monthly', priority: 0.1 });
+    sitemap.write({ url: '/users', changefreq: 'monthly', priority: 0.1 });
     const users = db.collection('users')
         .find({ status: true })
         .sort({ title: 1 })
@@ -61,13 +61,13 @@ export default async function (request, response) {
     while (await users.hasNext()) {
         const user = await users.next();
         sitemap.write({ 
-            url: `/автори/${user.slug}`,
+            url: `/users/${user.slug}`,
             changefreq: 'never',
             priority: 0.3
         })
     }
 
-    sitemap.write({ url: '/сторінки', changefreq: 'never', priority: 0.1 });
+    sitemap.write({ url: '/pages', changefreq: 'never', priority: 0.1 });
     const pages = db.collection('pages')
         .find({ status: true })
         .sort({ title: 1 })
@@ -75,13 +75,13 @@ export default async function (request, response) {
     while (await pages.hasNext()) {
         const page = await pages.next();
         sitemap.write({
-            url: `/сторінки/${page.slug}`,
+            url: `/pages/${page.slug}`,
             changefreq: 'never',
             priority: 0.3
         })
     }
 
-    sitemap.write({ url: '/пошук', changefreq: 'never', priority: 0.1 });
+    sitemap.write({ url: '/search', changefreq: 'never', priority: 0.1 });
     
     sitemap.end();
     response.end();

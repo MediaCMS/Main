@@ -3,14 +3,14 @@
         title: post.title,
         subTitle: {
             text: post.user.title,
-            url: '/автори/' + post.user.slug
+            url: '/users/' + post.user.slug
         },
         text: post.description, 
         image: post.image,
-        url: '/публікації/' + post.slug,
+        url: '/posts/' + post.slug,
         button: {
             text: post.category.title,
-            url: '/категорії/' + post.category.slug
+            url: '/categories/' + post.category.slug
         }
     }))
 }); %>

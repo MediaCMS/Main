@@ -7,7 +7,7 @@ export default {
     root: '/var/www/media/main',
     db: 'mongodb://media:0123456789@127.0.0.1:27017/media',
     image: {
-        host: 'https://photo.media',
+        host: 'https://image.example.com',
         widths: [320, 480, 640, 800, 960, 1280, 1600, 1920, 2560, 3840],
         blank: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
     },

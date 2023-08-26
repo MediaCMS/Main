@@ -14,21 +14,21 @@ import config from './config.js';
 const router = express.Router();
 
 router.get('/', home);
-router.get('/публікації', post.index);
-router.get('/публікації/:slug', post.view);
-router.get('/категорії', category.index);
-router.get('/категорії/:slug', category.posts);
-router.get('/мітки', tag.index);
-router.get('/мітки/:slug', tag.posts);
-router.get('/сторінки', page.index);
-router.get('/сторінки/:slug', page.view);
-router.get('/автори', user.index);
-router.get('/автори/:slug', user.posts);
-router.get('/пошук', search);
+router.get('/posts', post.index);
+router.get('/posts/:slug', post.view);
+router.get('/categories', category.index);
+router.get('/categories/:slug', category.posts);
+router.get('/tags', tag.index);
+router.get('/tags/:slug', tag.posts);
+router.get('/pages', page.index);
+router.get('/pages/:slug', page.view);
+router.get('/users', user.index);
+router.get('/users/:slug', user.posts);
+router.get('/search', search);
 router.get('/sitemap', authenticate, sitemap);
 
-router.get('/кеш', authenticate, cache.index);
-router.delete('/кеш', authenticate, cache.clear);
+router.get('/cache', authenticate, cache.index);
+router.delete('/cache', authenticate, cache.clear);
 
 router.get('/:slug', async (request, response, next) => {
     response.status(404);
