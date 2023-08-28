@@ -7,37 +7,37 @@ export default [
     {
         title: 'Публікації',
         description: 'Список публікацій сайту',
-        url: '/posts'
+        url: '/publikatsiyi'
     },
     {
         title: 'Мітки',
         description: 'Список міток публікацій',
-        url: '/tags'
+        url: '/mitky'
     },
     {
         title: 'Автори',
         description: 'Список авторів публікацій',
-        url: '/users'
+        url: '/korystuvachi'
     },
     {
         title: 'Пошук',
         description: 'Пошук по сайту',
-        url: '/search'
+        url: '/poshuk'
     },
     {
         title: 'Контакти',
         description: 'Наша адреса, номера телефонів та поштова скрині',
-        url: '/pages/контакти'
+        url: '/storinky/kontakty'
     },
     {
         title: 'Про проєкт',
         description: 'Додаткова інформація про проєкт',
-        url: '/pages/про-проєкт'
+        url: '/storinky/pro-proiekt'
     },
     {
         title: 'Послуги',
         description: 'Перелік наших послуг',
-        url: '/pages/послуги'
+        url: '/storinky/posluhy'
     }
 
 ]

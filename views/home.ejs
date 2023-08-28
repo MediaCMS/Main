@@ -19,7 +19,7 @@
                 <div
                     class="carousel-caption text-center align-middle pt-2 d-inline-block position-static">
                     <h2 class="text-center d-inline-block">
-                        <a href="/posts/<%= post.slug %>" class="text-white fw-bold">
+                        <a href="/publikatsiyi/<%= post.slug %>" class="text-white fw-bold">
                             <%= post.title %>
                         </a>
                     </h2>
@@ -43,14 +43,14 @@
                 title:  post.title,
                 subTitle: {
                     text: post.user.title,
-                    url: '/users/' + post.user.slug
+                    url: '/korystuvachi/' + post.user.slug
                 },
                 text: post.description, 
                 image: post.image,
-                url: '/posts/' + post.slug,
+                url: '/publikatsiyi/' + post.slug,
                 button: {
                     text: post.category.title,
-                    url: '/categories/' + post.category.slug
+                    url: '/katehoriyi/' + post.category.slug
                 }
             }); %>
         </div>
@@ -58,7 +58,7 @@
 </div>
 <div class="cloud text-center my-5 mx-auto">
     <% tags.forEach(tag => { %>
-        <a href="/tags/<%= tag.slug %>" class="size-<%= 10 - (tag.posts * 2) %> text-nowrap d-inline-block">
+        <a href="/mitky/<%= tag.slug %>" class="size-<%= 10 - (tag.posts * 2) %> text-nowrap d-inline-block">
             <%= tag.title %>
         </a>
     <% }) %>

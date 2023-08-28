@@ -14,21 +14,21 @@ import config from './config.js';
 const router = express.Router();
 
 router.get('/', home);
-router.get('/posts', post.index);
-router.get('/posts/:slug', post.view);
-router.get('/categories', category.index);
-router.get('/categories/:slug', category.posts);
-router.get('/tags', tag.index);
-router.get('/tags/:slug', tag.posts);
-router.get('/pages', page.index);
-router.get('/pages/:slug', page.view);
-router.get('/users', user.index);
-router.get('/users/:slug', user.posts);
-router.get('/search', search);
-router.get('/sitemap', authenticate, sitemap);
+router.get('/publikatsiyi', post.index);
+router.get('/publikatsiyi/:slug', post.view);
+router.get('/katehoriyi', category.index);
+router.get('/katehoriyi/:slug', category.posts);
+router.get('/mitky', tag.index);
+router.get('/mitky/:slug', tag.posts);
+router.get('/storinky', page.index);
+router.get('/storinky/:slug', page.view);
+router.get('/korystuvachi', user.index);
+router.get('/korystuvachi/:slug', user.posts);
+router.get('/poshuk', search);
+router.get('/mapa-sayta', authenticate, sitemap);
 
-router.get('/cache', authenticate, cache.index);
-router.delete('/cache', authenticate, cache.clear);
+router.get('/kesh', authenticate, cache.index);
+router.delete('/kesh', authenticate, cache.clear);
 
 router.get('/:slug', async (request, response, next) => {
     response.status(404);
