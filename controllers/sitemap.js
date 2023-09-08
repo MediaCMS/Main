@@ -56,7 +56,7 @@ export default async function (request, response) {
 
     while (await pages.hasNext()) {
         const page = await pages.next();
-        sitemap.add('/never/' + page.slug, 'never', 0.1);
+        sitemap.add('/storinky/' + page.slug, 'never', 0.1);
     }
 
     sitemap.add('/poshuk', 'never', 0.1);
