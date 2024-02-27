@@ -13,8 +13,7 @@
         <% posts.slice(0, 3).forEach((post, index)=> { %>
             <div class="carousel-item text-center align-middle h-100 <%= (index === 0) ? 'active' : '' %>"
                 onclick="window.location='/<%= post.uri %>'">
-                <img src="<%= images.blank %>" data-src="<%= post.image %>"
-                    alt="<%= post.title %>"
+                <img src="<%= images.host %>/<%= post.image %>?width=320" alt="<%= post.title %>"
                     class="vw-100 vh-100 object-fit-cover position-absolute top-0 start-0 z-n1" />
                 <div
                     class="carousel-caption text-center align-middle pt-2 d-inline-block position-static">

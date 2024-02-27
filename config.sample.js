@@ -27,7 +27,7 @@ export default {
         app_id: '',
         admins: ''
     },
-    copyright: '2023',
+    copyright: '2024',
     limit: 100,
     log: '/log'
 }

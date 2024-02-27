@@ -2,8 +2,7 @@
     <% if (typeof image !== 'undefined') {%>
         <div class="card-img-top">
             <a href="<%= url %>"">
-                <img src="<%= images.blank %>" data-src="<%= image %>"
-                    alt="<%= title %>" />
+                <img src="<%= images.host %>/<%= image %>?width=320" alt="<%= title %>" />
             </a>
         </div>
     <% } %>

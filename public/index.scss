@@ -7,7 +7,7 @@ html { min-height: 100%; font-size: calc(16px + 0.5vw) !important;
       &:hover { color: #6A7796; text-decoration: underline; }
       &:active { color: #6A7796; text-decoration: none; }
     }
-    img { max-width: 100%; margin: 0 auto; display: block; }
+    img { max-width: 100%; width: 100%; margin: 0 auto; display: block; }
     h1, h2, article p, #cloud { font-weight: 500; font-family: 'Lora', serif; }
     
     //header {}

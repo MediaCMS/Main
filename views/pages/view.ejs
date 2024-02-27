@@ -1,7 +1,7 @@
 <article class="container mt-5">
     <% if (typeof image !== 'undefined') { %>
         <div>
-            <img src="<%= images.blank %>" data-src="<%= image %>" />
+            <img src="<%= images.host %>/<%= image %>?width=320" />
         </div>
     <% } %>
     <p><%= description %></p>

@@ -11,6 +11,13 @@ import sitemap from './controllers/sitemap.js';
 import cache from './controllers/cache.js';
 import config from './config.js';
 
+const authenticate = (request, response, next) => {
+    if (!request?.header('x-api-key')
+        || (request.header('x-api-key') !== config.key) )
+        return response.sendStatus(403); 
+    next()
+}
+
 const router = express.Router();
 
 router.get('/', home);
@@ -44,12 +51,5 @@ router.use(async (request, response, next) => {
     }
     next();
 });
-
-function authenticate(request, response, next) {
-    if (!request?.header('x-api-key')
-        || (request.header('x-api-key') !== config.key) )
-        return response.sendStatus(403); 
-    next()
-}
 
 export { router as default };

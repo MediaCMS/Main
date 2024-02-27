@@ -70,6 +70,5 @@ process.on('SIGINT', async () => {
     await client.close();
     server.close();
     console.log(`HTTP server closed`);
-    await client.close()
     process.exit(0);
 })
