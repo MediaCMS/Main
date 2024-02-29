@@ -1,11 +1,8 @@
 
 // adapt image
 function adaptImage(uri, width, height = null) {
-    console.log(uri, width, height)
     const match = uri.match(/(.*)\?width=/)
-    console.log(match)
     if (match) uri = match[1]
-    console.log(uri)
     return uri + `?width=${width}&height=${height}`
 }
 
@@ -18,6 +15,15 @@ slideshow && slideshow.querySelectorAll('img').forEach(image => {
     return image
 })
 
+// lazyload article main background image adaptive
+const main = document.querySelector('article div.main[data-image]')
+if (main) {
+    main.style.backgroundImage = `url('${
+        adaptImage(
+            main.dataset.image, main.offsetWidth, main.offsetHeight
+        )
+    }')`
+}
 
 // lazyload article images adaptive
 const imagesObserver = new IntersectionObserver((entries, self) => {
