@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import db, { client } from './db.js';
 import log from './log.js';
 import menu from './menu.js';
@@ -10,12 +11,14 @@ const server = app.listen(config.port, config.ip, () => {
     console.log(`HTTP server started [${app.get('env')}]`);
     console.log(`Listening at ${config.ip}:${config.port}`);
 });
-
+console.log(config.cors)
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
+app.use(cors(config.cors));
 app.set('views', 'views');
 app.set('view engine', 'ejs');
+
 if (app.get('env') === 'production') {
     app.set('trust proxy', 1);
 }
@@ -55,7 +58,7 @@ app.use(router);
 app.use(async (error, request, response, next) => {
     console.error(error);
     if (response.headersSent) return next(error);
-    response.status(500).end('Помилка ;-(');
+    response.status(500).end('Error ;-(');
     await log(error);
 })
 

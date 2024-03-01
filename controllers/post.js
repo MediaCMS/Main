@@ -41,13 +41,16 @@ export default {
 
     view: async (request, response, next) => {
         let post;
+        const match = {
+            slug: request.params.slug
+        }
+        if (!request.query?.preview) {
+            match.status = true
+        }
         if (!cache.has(request.path)) {
             post = await db.collection('posts')
                 .aggregate([
-                    { $match: {
-                        slug: request.params.slug,
-                        status: true
-                    } },
+                    { $match: match },
                     { $lookup: {
                         from: 'categories',
                         localField: 'category',
@@ -73,10 +76,12 @@ export default {
                 response.status(404);
                 return next();
             }
+            /*
             post.body = post.body.replace(
-                /<img\s+src="https:\/\/фото\.медіа\.укр\/сховище([^"]+)"/g,
-                `<img src="${config.image.blank}" data-src="$1"`
+                /<img\s+src="https:\/\/image\.mediacms\.org\/([^"]+)"/g,
+                `<img src="${config.images.blank}" data-src="$1"`
             );
+            */
             cache.set(request.path, post);
         } else {
             post = cache.get(request.path);

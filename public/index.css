@@ -1,33 +1,29 @@
 html { min-height: 100%; font-size: calc(16px + 0.5vw) !important;
   body {
-    //h1 { margin-top: 5rem; }
-    //h1, h2, h3, h4, h5, h6 {}
-    a {
+    & a {
       color: #231F20; text-decoration: none;
       &:hover { color: #6A7796; text-decoration: underline; }
       &:active { color: #6A7796; text-decoration: none; }
     }
-    img { max-width: 100%; width: 100%; margin: 0 auto; display: block; }
-    h1, h2, article p, #cloud { font-weight: 500; font-family: 'Lora', serif; }
-    
-    //header {}
-
+    & img { max-width: 100%; width: 100%; margin: 0 auto; display: block; }
+    & h1, & h2, & article p, #cloud { font-weight: 500; font-family: 'Lora', serif; }
+ 
     /*
     .share { top: 12px; right: calc(1px + 0.5vw); z-index: 100;
       .fb-like { display: block;
-        span { width: auto !important; display: block;
-          iframe { width: 220px !important; position: static !important; }
+        & span { width: auto !important; display: block;
+          & iframe { width: 220px !important; position: static !important; }
         }
       }
     }
     */
-    main { min-height: 60vh;
+    & main { min-height: 60vh;
       &#home {
         .carousel {
           .carousel-inner {
             .carousel-item {
               min-height: 70vh;  line-height: 100vh; overflow: hidden; position: relative;
-              img { object-fit: cover; z-index: -1; }
+              & img { object-fit: cover; z-index: -1; }
               .carousel-caption {
                 max-width: 70%; line-height: 100%; font-family: 'Open Sans', sans-serif; 
                 h2 { font-size: calc(25px + 5vw); line-height: 100%; }
@@ -37,7 +33,7 @@ html { min-height: 100%; font-size: calc(16px + 0.5vw) !important;
         }
         .cloud {
           max-width: 960px; line-height: 500%; margin: 15vh auto;
-          a { line-height: 150%;
+          & a { line-height: 150%;
             &.size-1 { font-size: 3.0rem; margin: 12px 25px; }
             &.size-2 { font-size: 2.8rem; margin: 9px 20px; }
             &.size-3 { font-size: 2.6rem; margin: 9px 20px; }
@@ -53,13 +49,13 @@ html { min-height: 100%; font-size: calc(16px + 0.5vw) !important;
       }
       /*
       &#post-list {
-        ul { max-width: 640px;
-          li { line-height: 180%;
-            a.title {
+        & ul { max-width: 640px;
+          & li { line-height: 180%;
+            & a.title {
               &.text { font-weight: bold; }
               &:before { content: "•"; margin-right: 10px; }
             }
-            a.badge { visibility: hidden; }
+            & a.badge { visibility: hidden; }
             &:hover a.badge {
               color: #666; font-weight: 300; visibility: visible; &:hover { color: #000; }
             }
@@ -73,6 +69,11 @@ html { min-height: 100%; font-size: calc(16px + 0.5vw) !important;
         }
       }
       */
+      &#posts-view {
+        & p.tags { max-width: 768px; font-size: 0.8em; margin: 2em auto;
+          & a { font-style: italic; text-transform: lowercase; }
+        }
+      }
       /*
       &#search {
         .container { max-width: 960px;
@@ -90,7 +91,7 @@ html { min-height: 100%; font-size: calc(16px + 0.5vw) !important;
         .post {
           width: 318px; height: 200px; margin: 1px; 
           background-position: center; background-size: cover;
-          a { font: 700 36px 'Lora', serif; text-shadow: 1px 1px 1px black; 
+          & a { font: 700 36px 'Lora', serif; text-shadow: 1px 1px 1px black; 
             span { line-height: 200px; }
           }
         }
@@ -101,7 +102,7 @@ html { min-height: 100%; font-size: calc(16px + 0.5vw) !important;
       .card { position: relative; margin: 0 auto;
         .card-img-top {
           width: 100%; padding-top: 66.66%; overflow: hidden; position: relative;
-          img {
+          & img {
             min-width: 100%; min-height: 100%; max-width: 100%; margin: auto;
             position: absolute; top:-100%; left:-100%; right: -100%; bottom:-100%;
           }
@@ -110,12 +111,12 @@ html { min-height: 100%; font-size: calc(16px + 0.5vw) !important;
       .media { position: relative;
         .media-image {
           padding-top: 20%; overflow: hidden; position: relative;
-          img {
+          & img {
             min-width: 100%; min-height: 100%; margin: auto;
             position: absolute; top:-100%; left:-100%; right: -100%; bottom:-100%;
           }
         }
-        a { width: 100%; height: 100%;position: absolute; top: 0; bottom: 0; z-index: 100; }
+        & a { width: 100%; height: 100%;position: absolute; top: 0; bottom: 0; z-index: 100; }
       }
     }
   }

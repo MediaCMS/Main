@@ -32,9 +32,13 @@ router.get('/storinky/:slug', page.view);
 router.get('/korystuvachi', user.index);
 router.get('/korystuvachi/:slug', user.posts);
 router.get('/poshuk', search);
-router.get('/mapa-sayta', authenticate, sitemap);
 
+router.get('/mapa-sayta', authenticate, sitemap);
 router.get('/kesh', authenticate, cache.index);
+router.delete(
+    '/kesh/:categorySlug/:documentSlug',
+    authenticate, cache.delete
+);
 router.delete('/kesh', authenticate, cache.clear);
 
 router.get('/:slug', async (request, response, next) => {

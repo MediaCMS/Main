@@ -35,7 +35,7 @@ article {
       }
     }
     & figcaption {
-      color: darkgrey; max-width: 768px; font: italic 0.8em serif;
+      color: #666; max-width: 768px; font: italic 0.8em serif;
       text-align: center;  margin: 10px auto 10px;
     }
   }
@@ -50,7 +50,15 @@ article {
     & li { line-height: 150%; padding: 0 5px; margin: 0.6em; }
   }
   & table { width: fit-content; border-collapse: collapse; margin: 1em auto 2em;
-    & tr { & td { border: solid 1px grey; padding: 0.4em 0.8em; }}
+    & tr { 
+      & td, & th { border: solid 1px grey; padding: 0.4em 0.8em;
+        &.left { text-align: left; }
+        &.center { text-align: center; }
+        &.right { text-align: right; }
+        &.justify { text-align: justify; }
+      }
+      & th { font-weight: bold; }
+    }
   }
   & blockquote { max-width: 928px; padding: 0 5px; margin: 2em auto;
     & p {

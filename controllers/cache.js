@@ -11,12 +11,15 @@ export default {
         })
         response.json(data);
     },
+    delete: (request, response) => {
+        const path = '/' + request.params.categorySlug
+        + '/' + request.params.documentSlug
+        console.log(path, cache.has(path))
+        cache.delete(path)
+        response.end();
+    },
     clear: (request, response) => {
-        if (request.query?.path) {
-            cache.delete(request.query.path)
-        } else {
-            cache.clear();
-        }
+        cache.clear();
         response.end();
     },
 }
