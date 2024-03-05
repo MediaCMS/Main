@@ -20,7 +20,7 @@
                     <div class="image" data-size="<%= block?.size %>">
                         <% if (Array.isArray(block?.url)) {
                             var carouselID = 'carousel' + block.id %>
-                            <div id="<%= carouselID %>" class="carousel slide" data-interval="0">
+                            <div id="<%= carouselID %>" class="carousel slide" data-bs-interval="0">
                                 <div class="carousel-indicators">
                                     <% block.url.forEach((url, index) => {%>
                                         <button type="button" class="<%= index === 0 ? 'active' : '' %>"
