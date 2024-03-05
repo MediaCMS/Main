@@ -76,9 +76,9 @@
                 <% menu.forEach(item => { %>
                     <li class="nav-item">
                         <a href="<%= item.url %>" title="<%= item.description %>" data-path="<%= path %>" data-url="<%= item.url %>"
-                            class="nav-link small p-2 <%= (
+                            class="nav-link<%= (
                                 ((item.url.length > 1) && path.includes(item.url))
-                                || (path === item.url)) ? 'disabled' : '' %>">
+                                || (path === item.url)) ? ' active' : '' %> small p-2">
                             <%= item.title %>
                         </a>
                     </li>
