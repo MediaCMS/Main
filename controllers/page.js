@@ -19,11 +19,14 @@ export default {
     },
 
     view: async (request, response, next) => {
+        const match = {
+            slug: request.params.slug
+        }
+        if (!request.query?.preview) {
+            match.status = true
+        }
         const page = await db.collection('pages')
-            .find({
-                slug: request.params.slug, 
-                status: true
-            }).next();
+            .find(match).next();
         if (!page) {
             response.status(404);
             return next();
