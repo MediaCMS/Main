@@ -1,22 +1,4 @@
-<% if (typeof blocks !== 'undefined') { %>
-    <%- include('../article') %>
-<% } else { %>
-    <article class="container">
-        <h5 style="margin-top: -1rem;">
-            <a href="/korystuvachi/<%= user.slug %>">
-                <i><%= user.title %></i>
-            </a>, 
-            <a href="/katehoriyi/<%= category.slug %>">
-                <strong><%= category.title %></strong>
-            </a>
-        </h5>
-        <div class="mt-5">
-            <img src="<%= images.host %>/<%= image %>?width=320" />
-        </div>
-        <p><%= description %></p>
-        <%- body %>
-    </article>
-<% } %>
+<%- include('../article') %>
 <p class="tags">
     <strong>Мітки: </strong>
     <%- tags.map(tag => 
