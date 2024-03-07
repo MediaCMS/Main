@@ -11,6 +11,13 @@ article {
       & div.user { font-style: italic; font-size: 0.25em; margin: 0.5em auto; }
       & div.date { font-size: 0.15em; margin: 1.0em auto; }
     }
+    & div.copyright { width: 100%; color: white; font-size: 0.25em;
+      position: absolute; bottom: 0;
+      & div { width: fit-content; position: absolute; padding: 5px 3px;
+        &.source { text-align: left; left: 1%; bottom: 1%; z-index: 2; }
+        &.author { text-align: right; right: 1%; bottom: 1%; z-index: 3; }
+      }
+    }
   }
   & h2 {
     max-width: 960px; font: 700 2em "Lora", serif; text-align: center; 
@@ -31,11 +38,11 @@ article {
           & img { width: 100%; margin: 0; }
         }
       }
-      & span.source {
-        width: 50%; text-align: left; position: absolute; left: 1%; bottom: 1%; z-index: 2;
-      }
-      & span.author {
-        width: 50%; text-align: right; position: absolute; right: 1%; bottom: 1%;z-index: 3;
+      & div.copyright {
+        & div { width: fit-content; position: absolute; padding: 5px 3px;
+          &.source { text-align: left; left: 1%; bottom: 1%; z-index: 2; }
+          &.author { text-align: right; right: 1%; bottom: 1%; z-index: 3; }
+        }
       }
     }
     & figcaption {

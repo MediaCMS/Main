@@ -66,11 +66,15 @@
                             <% } else {%>
                                 <img src="<%= images.host %>/<%= block.url %>?width=320" alt="<%= block?.title %>" />
                             <% } %>
-                            <% if (block?.source) { %>
-                                <span class="source" title="<%= block?.source %>"><%= block.source %></span>
-                            <% } %>
-                            <% if (block?.author) { %>
-                                <span class="author" title="<%= block?.author %>"><%= block.author %></span>
+                            <% if (block?.source || block?.author) { %>
+                                <div class="copyright">
+                                    <% if (block?.source) { %>
+                                        <div class="source" title="<%= block?.source %>"><%= block.source %></div>
+                                    <% } %>
+                                    <% if (block?.author) { %>
+                                        <div class="author" title="<%= block?.author %>"><%= block.author %></div>
+                                    <% } %>
+                                </div>
                             <% } %>
                         </div>
                         <% if (block?.title) %><figcaption><%= block?.title %></figcaption>
