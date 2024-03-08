@@ -1,6 +1,6 @@
 <article>
-    <% if (typeof image !== 'undefined') { %>
-        <div class="main" data-image="<%= images.host %>/<%= image %>">
+    <% if (image?.url) { %>
+        <div class="main" data-image="<%= images.host %>/<%= image.url %>">
             <div class="text">
                 <% if (typeof category !== 'undefined') {%>
                     <div class="category"><%= category.title %></div>
@@ -17,6 +17,14 @@
                     </div>
                 <% } %>
             </div>
+            <div class="image">
+                <% if (image?.source) {%>
+                    <div class="source"></div>
+                <% } %>
+                <% if (image?.author) {%>
+                    <div class="author"></div>
+                <% } %>
+                </div>
         </div>
     <% } %>
     <% if (message) {%>
@@ -81,14 +89,13 @@
                     </figure>
                 <% } break; %>
                 <% case 'video': %>
-                    <div class="video" data-size="<%= block?.size %>"
+                    <iframe src="https://www.youtube.com/embed/<%= block?.url %>"
+                        allow="accelerometer; autoplay; clipboard-write;
+                        encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen="true" class="video"
+                        data-size="<%= block?.size %>"
                         <% if (block?.ratio) { %> data-ratio="<%= block.ratio %>"<% } %>>
-                        <iframe src="https://www.youtube.com/embed/<%= block?.url %>"
-                            allow="accelerometer; autoplay; clipboard-write;
-                            encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen="true">
-                        </iframe>
-                    </div>
+                    </iframe>
                 <% break; %>
                 <% case 'list': %>
                     <ul data-size="<%= block?.size %>"><%- block.text %></ul>
