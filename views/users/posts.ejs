@@ -2,7 +2,7 @@
     cards: posts.map(post => ({
         title:  post.title,
         text: post.description, 
-        image: post.image,
+        image: post.image.url,
         url: '/publikatsiyi/' + post.slug,
         button: {
             text: post.category.title,
