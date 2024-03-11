@@ -97,6 +97,13 @@
                         <% if (block?.ratio) { %> data-ratio="<%= block.ratio %>"<% } %>>
                     </iframe>
                 <% break; %>
+                <% case 'map': %>
+                    <iframe src="https://www.google.com/maps/embed?pb=<%= block?.url %>"
+                        allowfullscreen="true" loading="lazy" class="map"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        data-size="<%= block?.size %>">
+                    </iframe>
+                <% break; %>
                 <% case 'list': %>
                     <ul data-size="<%= block?.size %>"><%- block.text %></ul>
                 <% break; %>

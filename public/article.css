@@ -51,11 +51,13 @@ article {
       text-align: center;  margin: 10px auto 10px;
     }
   }
-  & iframe.video { margin: 2em auto; max-width: 100% !important; display: block;
+  & iframe { margin: 2em auto; max-width: 100% !important; display: block;
     &[data-size="small"] { width: 640px; height: 360px; }
     &[data-size="medium"] { width: 800px; height: 450px; }
     &[data-size="large"] { width: 960px; height: 540px; }
     &[data-size="full"] { width: 100%; height: calc(100vw / 1.77); }
+    /*.video {}*/
+    /*.map {}*/
   }
   & ul { width: fit-content; max-width: 768px; margin: 1em auto 2em;
     & li { line-height: 150%; padding: 0 5px; margin: 0.6em; }
