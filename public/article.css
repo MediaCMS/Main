@@ -58,6 +58,7 @@ article {
     &[data-size="full"] { width: 100%; height: calc(100vw / 1.77); }
     /*.video {}*/
     /*.map {}*/
+    &.twitter { width: 550px; height: 360px; }
   }
   & ul { width: fit-content; max-width: 768px; margin: 1em auto 2em;
     & li { line-height: 150%; padding: 0 5px; margin: 0.6em; }
