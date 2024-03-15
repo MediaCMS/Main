@@ -97,15 +97,25 @@
                         <% if (block?.ratio) { %> data-ratio="<%= block.ratio %>"<% } %>>
                     </iframe>
                 <% break; %>
+                <% case 'facebook': %>
+                    <% const facebookSource = 'https://www.facebook.com/plugins/post.php'
+                        + '?href=' + block?.url
+                        + '&show_text=' + (block?.showText ? 'true' : 'false')
+                        + '&width=' + block?.width.toString() %>
+                    <iframe src="<%= facebookSource %>" className="facebook"
+                        width="<%= block.width %>" height="<%= block.height %>" allowfullscreen="true"
+                        allow="autoplay;clipboard-write;encrypted-media;picture-in-picture;web-share">
+                    </iframe>
+                <% break; %>
                 <% case 'twitter': %>
-                    <% const query = '?dnt=false&embedId=twitter-widget-0&frame=false'
-                    + '&hideCard=false&hideThread=false&id=0123456789'
-                    + '&lang=en&origin=https%3A%2F%2Fpublish.twitter.com%2F%23'
-                    + '&sessionId=b25822f74af35addadf583c4f8205ac3bae9cece'
-                    + '&theme=light&widgetsVersion=2615f7e52b7e0%3A1702314776716' %>
-                    <iframe src="https://platform.twitter.com/embed/Tweet.html<%= query.replace('0123456789', block.url) %>"
-                        allowtransparency="true" allowfullscreen="true"
-                        class="twitter" data-size="<%= block?.size %>">
+                    <% const twitterSource = 'https://platform.twitter.com/embed/Tweet.html'
+                        + '?dnt=false&embedId=twitter-widget-0&frame=false'
+                        + '&hideCard=false&hideThread=false&id=' + block.url
+                        + '&lang=en&origin=https%3A%2F%2Fpublish.twitter.com%2F%23'
+                        + '&sessionId=b25822f74af35addadf583c4f8205ac3bae9cece'
+                        + '&theme=light&widgetsVersion=2615f7e52b7e0%3A1702314776716' %>
+                    <iframe src="<%= twitterSource %>" class="twitter" data-size="<%= block?.size %>"
+                        allowtransparency="true" allowfullscreen="true">
                     </iframe>
                 <% break; %>
                 <% case 'list': %>

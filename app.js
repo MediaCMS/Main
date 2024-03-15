@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use(cors(config.cors));
-app.set('views', 'views');
+app.set('views', config.root + '/views');
 app.set('view engine', 'ejs');
 
 if (app.get('env') === 'production') {
