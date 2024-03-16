@@ -108,15 +108,16 @@
                     </iframe>
                 <% break; %>
                 <% case 'twitter': %>
-                    <% const twitterSource = 'https://platform.twitter.com/embed/Tweet.html'
-                        + '?dnt=false&embedId=twitter-widget-0&frame=false'
-                        + '&hideCard=false&hideThread=false&id=' + block.url
-                        + '&lang=en&origin=https%3A%2F%2Fpublish.twitter.com%2F%23'
-                        + '&sessionId=b25822f74af35addadf583c4f8205ac3bae9cece'
-                        + '&theme=light&widgetsVersion=2615f7e52b7e0%3A1702314776716' %>
-                    <iframe src="<%= twitterSource %>" class="twitter" data-size="<%= block?.size %>"
-                        allowtransparency="true" allowfullscreen="true">
-                    </iframe>
+                    <blockquote class="twitter-tweet<%= block?.text ? '' : ' empty' %>">
+                        <p lang="en" dir="ltr"><%- block.text %></p>
+                        <footer>
+                            <span class="name">
+                                &mdash; <%= block?.author?.name %> 
+                                <cite>(@<%= block?.author?.login %>)</cite>&nbsp;
+                            </span>
+                            <a href="<%= block?.url %>" class="date"><%= block?.date %></a>
+                        </footer>
+                    </blockquote>
                 <% break; %>
                 <% case 'list': %>
                     <ul data-size="<%= block?.size %>"><%- block.text %></ul>
@@ -125,7 +126,8 @@
                     <%- block.text %>
                 <% break; %>
                 <% case 'quote': %>
-                    <blockquote cite="<%= block?.link ?? '' %>" data-size="<%= block?.size %>">
+                    <blockquote cite="<%= block?.link ?? '' %>"
+                        data-size="<%= block?.size %>">
                         <p><%= block?.text %></p>
                         <% if (block?.name) { %>
                             <footer>— <%= block.name %>
