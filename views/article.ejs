@@ -89,20 +89,14 @@
                     </figure>
                 <% } break; %>
                 <% case 'video': %>
-                    <iframe src="https://www.youtube.com/embed/<%= block?.url %>"
+                    <iframe src="<%= block?.url %>" class="video" allowfullscreen="true"
                         allow="accelerometer; autoplay; clipboard-write;
                         encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen="true" class="video"
-                        data-size="<%= block?.size %>"
-                        <% if (block?.ratio) { %> data-ratio="<%= block.ratio %>"<% } %>>
+                        data-size="<%= block?.size %>" data-ratio="<%= block.ratio %>">
                     </iframe>
                 <% break; %>
                 <% case 'facebook': %>
-                    <% const facebookSource = 'https://www.facebook.com/plugins/post.php'
-                        + '?href=' + block?.url
-                        + '&show_text=' + (block?.showText ? 'true' : 'false')
-                        + '&width=' + block?.width.toString() %>
-                    <iframe src="<%= facebookSource %>" className="facebook"
+                    <iframe src="<%= block?.url %>" className="facebook"
                         width="<%= block.width %>" height="<%= block.height %>" allowfullscreen="true"
                         allow="autoplay;clipboard-write;encrypted-media;picture-in-picture;web-share">
                     </iframe>
@@ -118,6 +112,12 @@
                             <a href="<%= block?.url %>" class="date"><%= block?.date %></a>
                         </footer>
                     </blockquote>
+                <% break; %>
+                <% case 'map': %>
+                    <iframe src="<%= block?.url %>" data-size="<%= block?.size %>"
+                        allowfullscreen="true" loading="lazy" class="map"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
                 <% break; %>
                 <% case 'list': %>
                     <ul data-size="<%= block?.size %>"><%- block.text %></ul>
@@ -142,13 +142,6 @@
                 <% break; %>
                 <% case 'raw': %>
                     <pre><%- block.text %></pre>
-                <% break; %>
-                <% case 'map': %>
-                    <iframe src="https://www.google.com/maps/embed?pb=<%= block?.url %>"
-                        allowfullscreen="true" loading="lazy" class="map"
-                        referrerpolicy="no-referrer-when-downgrade"
-                        data-size="<%= block?.size %>">
-                    </iframe>
                 <% break; %>
                 <% case 'code': %>
                     <pre>
