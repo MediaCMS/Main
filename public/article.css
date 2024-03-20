@@ -5,11 +5,11 @@ article {
     background-attachment: fixed; position: relative; display: flex;
     & div.text { color: white; max-width: 80%; font-size: calc(25px + 5vw);
       text-align: center; text-shadow: 1px 1px black;
-      & div.category { font: bold 0.2em sans-serif; letter-spacing: 0.3em;
+      & div.category { font: bold 0.3em sans-serif; letter-spacing: 0.3em;
         margin: 1.0em auto; }
       & h1 { font-size: 1em; font-weight: 600;  margin: 0 auto; }
-      & div.user { font-style: italic; font-size: 0.25em; margin: 0.5em auto; }
-      & div.date { font-size: 0.15em; margin: 1.0em auto; }
+      & div.user { font-style: italic; font-size: 0.35em; margin: 0.5em auto; }
+      & div.date { font-size: 0.25em; margin: 1.0em auto; }
     }
     & div.image { width: 100%; color: white; font-size: 0.8em;
       display: flex; justify-content: space-between; align-items: flex-end;
