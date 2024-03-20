@@ -63,8 +63,7 @@
             <!--<div class="fb-share-button" data-href="<%= url %>" data-layout="button" data-size="large"></div>-->
         </div>
         <main id="<%= view.replace('/', '-') %>">
-            <% if ((typeof blocks === 'undefined')
-                && (typeof image === 'undefined')) { %>
+            <% if (typeof blocks === 'undefined') { %>
                 <% if (title !== name) {%>
                     <h1 class="container" style="margin: 4rem auto 2rem;">
                         <u><%= title %></u>
