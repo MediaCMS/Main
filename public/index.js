@@ -41,12 +41,25 @@ const imagesObserver = new IntersectionObserver((entries, self) => {
 })
 document.querySelectorAll('article img')
 .forEach(image => imagesObserver.observe(image));
-
+/*
+// offcanvas manual widths
+var offcanvasElementList = [].slice.call(document.querySelectorAll('.offcanvas'))
+console.log('offcanvasElementList', offcanvasElementList)
+var offcanvasList = offcanvasElementList.map(function (offcanvasEl) {
+    console.log('offcanvas manual widths')
+    return new bootstrap.Offcanvas(offcanvasEl)
+});
+*/
+const menuElement = document.getElementById('menu')
+console.log(menuElement)
+const menuOffcanvas = new bootstrap.Offcanvas(menuElement)
+console.log(menuOffcanvas)
 
 // Swipe
 // https://www.kirupa.com/html5/detecting_touch_swipe_gestures.htm
+console.log();
 (() => {
-    const container = document.querySelector('body')
+    let container = document.querySelector('body')
     container.addEventListener('touchstart', startTouch, false)
     container.addEventListener('touchmove', moveTouch, false)
     let initialX = null;
@@ -69,31 +82,25 @@ document.querySelectorAll('article img')
         if (Math.abs(diffX) > Math.abs(diffY)) {
           // sliding horizontally
           if (diffX > 0) {
-            // swiped left
-            console.log("swiped left");
-            alert("swiped left")
+            console.log('swiped left')
+            if (menuOffcanvas._isShown) menuOffcanvas.hide()
           } else {
-            // swiped right
-            console.log("swiped right");
-            alert("swiped right")
+            console.log('swiped right');
+            if (!menuOffcanvas.__isShown) menuOffcanvas.show()
+            let container = document.querySelector('body')
           }  
         } else {
-          // sliding vertically
           if (diffY > 0) {
-            // swiped up
-            console.log("swiped up");
-            alert("swiped up")
+            //console.log("swiped up");
           } else {
-            // swiped down
-            console.log("swiped down");
-            alert("swiped down")
+            //console.log("swiped down");
           }  
         }
     
         initialX = null;
         initialY = null;
     
-        e.preventDefault();
+        //e.preventDefault();
     };
 })()
 
