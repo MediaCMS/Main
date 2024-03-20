@@ -1,156 +1,39 @@
-<article>
-    <% if (image?.url) { %>
-        <div class="main" data-image="<%= images.host %>/<%= image.url %>">
-            <div class="text">
-                <% if (typeof category !== 'undefined') {%>
-                    <div class="category"><%= category.title %></div>
-                <% } %>
-                <h1><%= title %></h1>
-                <% if (typeof user !== 'undefined') {%>
-                    <div class="user"><%= user.title %></div>
-                <% } %>
-                <% if (typeof date !== 'undefined') {%>
-                    <div class="date">
-                        <%= date.getDate() %>
-                        /<%= (date.getMonth() + 1).toString().padStart(2, '0') %>
-                        /<%= date.getFullYear() %>
-                    </div>
-                <% } %>
-            </div>
-            <div class="image">
-                <% if (image?.source) {%>
-                    <div class="source"></div>
-                <% } %>
-                <% if (image?.author) {%>
-                    <div class="author"></div>
-                <% } %>
-                </div>
-        </div>
-    <% } %>
-    <% if (message) {%>
-        <div class="box alert alert-danger"><%= message %></div>
-    <% } %>
-    <% if (typeof blocks !== 'undefined') {%>
-        <% blocks.forEach(block => { %>
-            <% switch (block.type) {
-                case 'header': %>
-                    <h2><%- block.text %></h2>
-                <% break; %>
-                <% case 'text': %>
-                    <p><%- block.text %></p>
-                <% break; %>
-                <% case 'image': { %>
-                    <figure title="<%= block?.title %>">
-                        <div class="image" data-size="<%= block?.size %>">
-                            <% if (Array.isArray(block?.url)) {
-                                var carouselID = 'carousel' + block.id %>
-                                <div id="<%= carouselID %>" class="carousel slide" data-bs-interval="0">
-                                    <div class="carousel-indicators">
-                                        <% block.url.forEach((url, index) => {%>
-                                            <button type="button" class="<%= index === 0 ? 'active' : '' %>"
-                                                data-bs-target="#<%= carouselID %>" data-bs-slide-to="<%= index %>"
-                                                aria-current="true" aria-label="Slide <%= index + 1 %>">
-                                            </button>
-                                        <% }) %>
-                                    </div>
-                                    <div class="carousel-inner">
-                                        <% block.url.forEach((url, index) => {%>
-                                            <div class="carousel-item<%= index === 0 ? ' active' : '' %>">
-                                                <img src="<%= images.host %>/<%= url %>?width=320" class="d-block w-100" alt="<%= block?.title %>">
-                                            </div>
-                                        <% }) %>
-                                    </div>
-                                    <button type="button" class="carousel-control-prev"
-                                        data-bs-target="#<%= carouselID %>" data-bs-slide="prev">
-                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Попередній</span>
-                                    </button>
-                                    <button type="button" class="carousel-control-next"
-                                        data-bs-target="#<%= carouselID %>" data-bs-slide="next">
-                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Наступний</span>
-                                    </button>
-                                </div>
-                            <% } else {%>
-                                <img src="<%= images.host %>/<%= block.url %>?width=320" alt="<%= block?.title %>" />
-                            <% } %>
-                            <% if (block?.source || block?.author) { %>
-                                <div class="copyright">
-                                    <% if (block?.source) { %>
-                                        <div class="source" title="<%= block?.source %>"><%= block.source %></div>
-                                    <% } %>
-                                    <% if (block?.author) { %>
-                                        <div class="author" title="<%= block?.author %>"><%= block.author %></div>
-                                    <% } %>
-                                </div>
-                            <% } %>
+<div id="article">
+    <article>
+        <% if (image?.url) { %>
+            <div class="main" data-image="<%= images.host %>/<%= image.url %>">
+                <div class="text">
+                    <% if (typeof category !== 'undefined') {%>
+                        <div class="category"><%= category.title %></div>
+                    <% } %>
+                    <h1><%= title %></h1>
+                    <% if (typeof user !== 'undefined') {%>
+                        <div class="user"><%= user.title %></div>
+                    <% } %>
+                    <% if (typeof date !== 'undefined') {%>
+                        <div class="date">
+                            <%= date.getDate() %>
+                            /<%= (date.getMonth() + 1).toString().padStart(2, '0') %>
+                            /<%= date.getFullYear() %>
                         </div>
-                        <% if (block?.title) %><figcaption><%= block?.title %></figcaption>
-                    </figure>
-                <% } break; %>
-                <% case 'video': %>
-                    <iframe src="<%= block?.url %>" class="video" allowfullscreen="true"
-                        allow="accelerometer; autoplay; clipboard-write;
-                        encrypted-media; gyroscope; picture-in-picture"
-                        data-size="<%= block?.size %>" data-ratio="<%= block.ratio %>">
-                    </iframe>
-                <% break; %>
-                <% case 'facebook': %>
-                    <iframe src="<%= block?.url %>" className="facebook"
-                        width="<%= block.width %>" height="<%= block.height %>" allowfullscreen="true"
-                        allow="autoplay;clipboard-write;encrypted-media;picture-in-picture;web-share">
-                    </iframe>
-                <% break; %>
-                <% case 'twitter': %>
-                    <blockquote class="twitter-tweet<%= block?.text ? '' : ' empty' %>">
-                        <p lang="en" dir="ltr"><%- block.text %></p>
-                        <footer>
-                            <span class="name">
-                                &mdash; <%= block?.author?.name %> 
-                                <cite>(@<%= block?.author?.login %>)</cite>&nbsp;
-                            </span>
-                            <a href="<%= block?.url %>" class="date"><%= block?.date %></a>
-                        </footer>
-                    </blockquote>
-                <% break; %>
-                <% case 'map': %>
-                    <iframe src="<%= block?.url %>" data-size="<%= block?.size %>"
-                        allowfullscreen="true" loading="lazy" class="map"
-                        referrerpolicy="no-referrer-when-downgrade">
-                    </iframe>
-                <% break; %>
-                <% case 'list': %>
-                    <ul data-size="<%= block?.size %>"><%- block.text %></ul>
-                <% break; %>
-                <% case 'table': %>
-                    <%- block.text %>
-                <% break; %>
-                <% case 'quote': %>
-                    <blockquote cite="<%= block?.link ?? '' %>"
-                        data-size="<%= block?.size %>">
-                        <p><%= block?.text %></p>
-                        <% if (block?.name) { %>
-                            <footer>— <%= block.name %>
-                                <% if (block?.work) %>, <cite><%= block?.work %></cite>
-                            </footer>
-                        <% } %>
-                    </blockquote>
-                    <%- block.quote %>
-                <% break; %>
-                <% case 'address': %>
-                    <address><%- block.text %></address>
-                <% break; %>
-                <% case 'raw': %>
-                    <pre><%- block.text %></pre>
-                <% break; %>
-                <% case 'code': %>
-                    <pre>
-                        <code
-                            <% if (block?.language) { %> class="language-<%= block.language %><% } %>"
-                            ><%- block.text %></code>
-                    </pre>
-                <% break; %>
-            <% } %>
-        <% }); %>
-    <% } %>
-</article>
+                    <% } %>
+                </div>
+                <div class="image">
+                    <% if (image?.source) {%>
+                        <div class="source"></div>
+                    <% } %>
+                    <% if (image?.author) {%>
+                        <div class="author"></div>
+                    <% } %>
+                    </div>
+            </div>
+        <% } %>
+        <% if (message) {%>
+            <div class="box alert alert-danger"><%= message %></div>
+        <% } %>
+        <% if (typeof blocks !== 'undefined') {%>
+            <%- include('article/blocks') %>
+        <% } %>
+    </article>
+    <%- include('article/content') %>
+</div>

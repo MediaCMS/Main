@@ -1,0 +1,86 @@
+<nav class="">
+    <div class="header">
+        <a class="logo" href="/">
+            <img src="/logo.png" alt={name} width="100" />
+        </a>
+        <a class="button" data-bs-toggle="offcanvas" title="Меню сайта"
+            href="#menu" role="button" aria-controls="menu">
+        </a>
+    </div>
+    <div id="menu" class="offcanvas offcanvas-start menu"
+        aria-labelledby="menuLabel" tabindex="-1">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="contentMenuLabel">Меню сайта</h5>
+            <button type="button" class="btn-close text-reset"
+            data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="list-group">
+                <% categories.forEach(category => { %>
+                    <a href="/katehoriyi/<%= category.slug %>"
+                        class="list-group-item<%=
+                            (path === ('/katehoriyi/' + category.slug)) ? ' active' : '' %>
+                        ">
+                        <%= category.title %>
+                    </a>
+                <% })%>
+                <span class="list-group-item">&nbsp;</span>
+                <% menu.forEach(item => { %>
+                    <a href="<%= item.url %>" title="<%= item.description %>" 
+                        class="list-group-item<%= (
+                            ((item.url.length > 1) && path.includes(item.url))
+                            || (path === item.url)) ? ' active' : '' %>">
+                        <%= item.title %>
+                    </a>
+                <% }) %>
+            </div>
+        </div>
+        <div class="offcanvas-footer">
+            <form action="/poshuk" method="GET" class="d-flex" id="search">
+                <input type="search" name="запит" placeholder="Пошук ..."
+                    class="form-control me-2" />
+            </form>
+        </div>
+    </div>
+    <!--
+    <div class="container-fluid">
+        <a href="/" class="navbar-brand">
+            <img src="/logo.png" alt={name} width="100" />
+        </a>
+        <button class="navbar-toggler" type="button"
+            data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon" />
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <% categories.slice(0, 6).forEach(category => { %>
+                    <li class="nav-item">
+                        <a href="/katehoriyi/<%= category.slug %>"
+                            class="nav-link <%= (path === '/katehoriyi/' + category.slug) ? ' active' : '' %>">
+                            <%= category.title %>
+                        </a>
+                    </li>
+                <% }) %>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown"
+                        data-bs-toggle="dropdown" aria-expanded="false" role="button">
+                         ...
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <% categories.slice(6).forEach(category => { %>
+                            <li class="nav-item">
+                                <a href="/katehoriyi/<%= category.slug %>"
+                                    class="nav-link<%= (path==='/katehoriyi/' + category.slug) ? ' active' : '' %>">
+                                    <%= category.title %>
+                                </a>
+                            </li>
+                        <% }) %>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    -->
+</nav>

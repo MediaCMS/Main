@@ -1,0 +1,26 @@
+<% const content = blocks.filter(block => block.type === 'header') %>
+<% if (content.length) { %>
+    <div class="content">
+        <a class="button" data-bs-toggle="offcanvas"
+            href="#content" role="button" aria-controls="content">
+            <img src="/content.png" alt="Зміст" title="Зміст статті" />
+        </a>
+        <div id="content" class="offcanvas offcanvas-end menu"
+            aria-labelledby="contentLabel" tabindex="-1">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="contentLabel">Зміст статті</h5>
+                <button type="button" class="btn-close text-reset"
+                    data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <div class="list-group">
+                    <% content.forEach(block => { %>
+                        <a class="list-group-item" href="#block<%= block.id %>">
+                            <%= block.text %>
+                        </a>
+                    <% })%>
+                </div>
+            </div>
+        </div>
+    </div>
+<% } %>

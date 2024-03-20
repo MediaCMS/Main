@@ -17,12 +17,37 @@ html { min-height: 100%; font-size: calc(16px + 0.5vw) !important;
       }
     }
     */
+    & nav {
+      & div.header { display: flex;
+        position: fixed; top: 0.8em; left: 0.8em; z-index: 1035;
+        & a.logo { 
+          img { width: 7em; }
+        }
+        & a.button { width: 37px; height: 37px;
+          border: solid 2px #000; border-radius: 5px;
+          background-image: url(/menu.svg); background-size: 70px 70px;
+          background-position: -18px -18px; background-color: #fff;
+          margin-left: 10px; opacity: 0.3;
+        }
+      }
+      & div.menu {
+        & div.offcanvas-body { padding: 0 !important;
+          & div.list-group {
+            & a.list-group-item { text-transform: uppercase;
+              &:hover {
+                color: #000; text-decoration: none !important; background-color: #eee;
+              }
+            }
+          }
+        }
+      }
+    }
     & main { min-height: 60vh;
       &#home {
         .carousel {
           .carousel-inner {
             .carousel-item {
-              min-height: 70vh;  line-height: 100vh; overflow: hidden; position: relative;
+              min-height: 70vh; line-height: 100vh; overflow: hidden; position: relative;
               & img { object-fit: cover; z-index: -1; }
               .carousel-caption {
                 max-width: 70%; line-height: 100%; font-family: 'Open Sans', sans-serif; 
@@ -97,6 +122,23 @@ html { min-height: 100%; font-size: calc(16px + 0.5vw) !important;
         }
       }
       */
+      & #article {
+        & div.content {
+          & a.button { 
+            position: fixed; top: 0.1em; right: 0.1em; z-index: 1035;
+            & img { width: 3em; }
+          }
+          & div.menu {
+            & div.offcanvas-body { padding: 0 !important;
+              & div.list-group {
+                & a.list-group-item { text-transform: uppercase;
+                  &:hover { color: #000; text-decoration: none !important; background-color: #eee; }
+                }
+              }
+            }
+          }
+        }
+      }
       .box { max-width: 768px; font-weight: 300; margin: 50px auto; }
       .screen { min-width: 100vw; height: 50vh; text-align: center; vertical-align: middle; display: table-cell; }
       .card { position: relative; margin: 0 auto;

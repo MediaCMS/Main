@@ -1,4 +1,4 @@
-<div id="slideshow" class="carousel slide carousel-fade my-4"
+<div id="slideshow" class="carousel slide carousel-fade"
     data-bs-ride="carousel" data-interval="5000">
     <div class="carousel-indicators">
         <% for(let i = 0; i < 3; i ++) { %>
@@ -35,7 +35,7 @@
         <span class="visually-hidden">Наступний</span>
     </button>
 </div>
-<div class="row m-0">
+<div class="row mx-0 mt-5">
     <% posts.slice(3).forEach(post => { %>
         <div class="col">
             <%- include('card', {
