@@ -41,67 +41,61 @@ const imagesObserver = new IntersectionObserver((entries, self) => {
 })
 document.querySelectorAll('article img')
 .forEach(image => imagesObserver.observe(image));
-/*
-// offcanvas manual widths
-var offcanvasElementList = [].slice.call(document.querySelectorAll('.offcanvas'))
-console.log('offcanvasElementList', offcanvasElementList)
-var offcanvasList = offcanvasElementList.map(function (offcanvasEl) {
-    console.log('offcanvas manual widths')
-    return new bootstrap.Offcanvas(offcanvasEl)
-});
-*/
-const menuElement = document.getElementById('menu')
-console.log(menuElement)
-const menuOffcanvas = new bootstrap.Offcanvas(menuElement)
-console.log(menuOffcanvas)
 
-// Swipe
+// Swipe menu and content
 // https://www.kirupa.com/html5/detecting_touch_swipe_gestures.htm
-console.log();
 (() => {
-    let container = document.querySelector('body')
-    container.addEventListener('touchstart', startTouch, false)
-    container.addEventListener('touchmove', moveTouch, false)
-    let initialX = null;
-    let initialY = null;
-    function startTouch(e) {
-        initialX = e.touches[0].clientX;
-        initialY = e.touches[0].clientY;
+    const coordinates = {
+        initial: { x: null, y: null },
+        current: { x: null, y: null },
+        difference: { x: null, y: null }
     }
-
-    function moveTouch(e) {
-        if (initialX === null) return;
-        if (initialY === null) return;
-    
-        var currentX = e.touches[0].clientX;
-        var currentY = e.touches[0].clientY;
-    
-        var diffX = initialX - currentX;
-        var diffY = initialY - currentY;
-    
-        if (Math.abs(diffX) > Math.abs(diffY)) {
-          // sliding horizontally
-          if (diffX > 0) {
-            console.log('swiped left')
-            if (menuOffcanvas._isShown) menuOffcanvas.hide()
+    const menuElement = document.getElementById('menu')
+    const menuOffcanvas = new bootstrap.Offcanvas(menuElement)
+    const contentElement = document.getElementById('content')
+    const contentOffcanvas = contentElement
+        ? new bootstrap.Offcanvas(contentElement) : null
+    const container = document.querySelector('body')
+    container.addEventListener('touchstart', event => {
+        coordinates.initial.x = event.touches[0].clientX
+        coordinates.initial.y = event.touches[0].clientY
+    }, false)
+    container.addEventListener('touchmove', event => {
+        if (coordinates.initial.x === null) return
+        if (coordinates.initial.y === null) return
+        coordinates.current.x = event.touches[0].clientX
+        coordinates.current.y = event.touches[0].clientY
+        coordinates.difference.x = coordinates.initial.x - coordinates.current.x
+        coordinates.difference.y = coordinates.initial.y - coordinates.current.y
+        if (Math.abs(coordinates.difference.x) > Math.abs(coordinates.difference.y)) {
+          if (coordinates.difference.x > 0) {
+            if (menuOffcanvas._isShown) {
+                menuOffcanvas.hide()
+            } else {
+                if (contentOffcanvas && !contentOffcanvas._isShown) {
+                    contentOffcanvas.show()
+                }
+            }
           } else {
-            console.log('swiped right');
-            if (!menuOffcanvas.__isShown) menuOffcanvas.show()
-            let container = document.querySelector('body')
+            if (contentOffcanvas && contentOffcanvas._isShown) {
+                contentOffcanvas.hide()
+            } else {
+                if (!menuOffcanvas._isShown) {
+                    menuOffcanvas.show()
+                }
+            }
           }  
         } else {
-          if (diffY > 0) {
-            //console.log("swiped up");
+          if (coordinates.difference.y > 0) {
+            //console.log('swiped up')
           } else {
-            //console.log("swiped down");
+            //console.log('swiped down')
           }  
         }
-    
-        initialX = null;
-        initialY = null;
-    
-        //e.preventDefault();
-    };
+        coordinates.initial.x = null
+        coordinates.current.y = null
+        //event.preventDefault()
+    }, false)
 })()
 
 window.onerror = function(errorMsg, url, lineNumber) {

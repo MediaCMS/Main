@@ -33,7 +33,9 @@ html { min-height: 100%; font-size: calc(16px + 0.5vw) !important;
       & div.menu {
         & div.offcanvas-body { padding: 0 !important;
           & div.list-group {
-            & a.list-group-item { text-transform: uppercase;
+            & a.list-group-item {
+              color: #666; font-size: 1.5em; font-weight: bold; letter-spacing: 0.1em;
+              text-transform: uppercase; border: 0; padding: 0 0 0 2em;
               &:hover {
                 color: #000; text-decoration: none !important; background-color: #eee;
               }
@@ -125,13 +127,15 @@ html { min-height: 100%; font-size: calc(16px + 0.5vw) !important;
       & #article {
         & div.content {
           & a.button { 
-            position: fixed; top: 0.1em; right: 0.1em; z-index: 1035;
+            position: fixed; top: 0.1em; right: 0.1em; z-index: 1025;
             & img { width: 3em; }
           }
           & div.menu {
             & div.offcanvas-body { padding: 0 !important;
               & div.list-group {
-                & a.list-group-item { text-transform: uppercase;
+                & a.list-group-item {
+                  color: #666; font-size: 1.3em; font-weight: normal; letter-spacing: 0;
+                  text-transform: uppercase; padding: 0.1em 0.1em 0.1em 2em;
                   &:hover { color: #000; text-decoration: none !important; background-color: #eee; }
                 }
               }
