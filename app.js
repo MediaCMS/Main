@@ -11,7 +11,7 @@ const server = app.listen(config.port, config.ip, () => {
     console.log(`HTTP server started [${app.get('env')}]`);
     console.log(`Listening at ${config.ip}:${config.port}`);
 });
-console.log(config.cors)
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));

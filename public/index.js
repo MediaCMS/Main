@@ -51,9 +51,11 @@ document.querySelectorAll('article img')
         difference: { x: null, y: null }
     }
     const menuElement = document.getElementById('menu')
+    // eslint-disable-next-line no-undef
     const menuOffcanvas = new bootstrap.Offcanvas(menuElement)
     const contentElement = document.getElementById('content')
     const contentOffcanvas = contentElement
+        // eslint-disable-next-line no-undef
         ? new bootstrap.Offcanvas(contentElement) : null
     const container = document.querySelector('body')
     container.addEventListener('touchstart', event => {

@@ -1,4 +1,3 @@
-import config from '../config.js';
 import db, { skip, limit } from '../db.js';
 import cache from '../cache.js';
 
