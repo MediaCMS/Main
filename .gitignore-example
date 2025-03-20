@@ -1,6 +1,8 @@
 .git
 node_modules
 public/sitemap.xml
+public/robots.txt
+public/rss.xml
 .gitignore
 log
 config.js
