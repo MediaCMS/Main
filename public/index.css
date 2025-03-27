@@ -5,7 +5,7 @@ html { min-height: 100%; font-size: calc(16px + 0.5vw) !important;
       &:hover { color: #6A7796; text-decoration: underline; }
       &:active { color: #6A7796; text-decoration: none; }
     }
-    & img { max-width: 100%; width: 100%; margin: 0 auto; display: block; }
+    & img { max-width: 100%; margin: 0 auto; display: block; }
     & h1, & h2, & article p, #cloud { font-weight: 500; font-family: 'Lora', serif; }
  
     /*
@@ -151,6 +151,25 @@ html { min-height: 100%; font-size: calc(16px + 0.5vw) !important;
           & img {
             min-width: 100%; min-height: 100%; max-width: 100%; margin: auto;
             position: absolute; top:-100%; left:-100%; right: -100%; bottom:-100%;
+          }
+        }
+      }
+      & div.content {
+        & a.button { 
+          position: fixed; top: .1em; right: .1em; z-index: 1025;
+          & img { width: 3em; }
+        }
+        & div.menu {
+          & div.offcanvas-body { padding: 0 !important;
+            & div.list-group {
+              & a.list-group-item {
+                color: #666; font-size: 1.3em; font-weight: normal; letter-spacing: 0;
+                text-transform: uppercase; padding: .1em .1em .1em 2em;
+                &:hover {
+                  color: #000; text-decoration: none !important; background-color: #eee;
+                }
+              }
+            }
           }
         }
       }

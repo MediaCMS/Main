@@ -87,7 +87,11 @@
             </iframe>
         <% break; %>
         <% case 'list': %>
-            <ul data-size="<%= block?.size %>"><%- block.text %></ul>
+            <% if (block?.order) { %>
+                <ol data-size="<%= block?.size %>"><%- block.text %></ol>
+            <% } else { %>
+                <ul data-size="<%= block?.size %>"><%- block.text %></ul>
+            <% } %>
         <% break; %>
         <% case 'table': %>
             <%- block.text %>
@@ -97,8 +101,10 @@
                 data-size="<%= block?.size %>">
                 <p><%= block?.text %></p>
                 <% if (block?.name) { %>
-                    <footer>— <%= block.name %>
-                        <% if (block?.work) %>, <cite><%= block?.work %></cite>
+                    <footer>
+                        — <%= block.name %><% if (block?.work) {
+                            %>, <cite><%= block?.work %></cite><%
+                        } %>
                     </footer>
                 <% } %>
             </blockquote>
@@ -113,7 +119,9 @@
         <% case 'code': %>
             <pre>
                 <code
-                    <% if (block?.language) { %> class="language-<%= block.language %><% } %>"
+                    <% if (block?.language) {
+                        %> class="language-<%= block.language %><%
+                    } %>"
                     ><%- block.text %></code>
             </pre>
         <% break; %>

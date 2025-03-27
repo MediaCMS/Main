@@ -1,39 +1,60 @@
-<div id="article">
-    <article>
-        <% if (image?.url) { %>
-            <div class="main" data-image="<%= images.host %>/<%= image.url %>">
-                <div class="text">
-                    <% if (typeof category !== 'undefined') {%>
-                        <div class="category"><%= category.title %></div>
-                    <% } %>
-                    <h1><%= title %></h1>
-                    <% if (typeof user !== 'undefined') {%>
-                        <div class="user"><%= user.title %></div>
-                    <% } %>
-                    <% if (typeof date !== 'undefined') {%>
-                        <div class="date">
-                            <%= date.getDate() %>
-                            /<%= (date.getMonth() + 1).toString().padStart(2, '0') %>
-                            /<%= date.getFullYear() %>
+<div class="article">
+    <article id="<%= _id %>">
+        <% if ((typeof image !== 'undefined') && image?.url) { %>
+            <% const background = images.host + '/' + image.url %>
+            <div class="main" data-image="<%= background %>"
+                style="background-image: url('<%= background %>');">
+                <div class="layout">
+                    <div class="head">
+                        <% if (typeof category !== 'undefined') {%>
+                            <div class="category">
+                                <a href="/katehoriyi/<%= category.slug %>">
+                                    <%= category.title %>
+                                </a>
+                            </div>
+                        <% } %>
+                    </div>
+                    <div class="body">
+                        <h1><%= title %></h1>
+                        <% if (typeof user !== 'undefined') {%>
+                            <div class="user"><%= user.title %></div>
+                        <% } %>
+                    </div>
+                    <div class="foot">
+                        <div>
+                            <div class="date fw-light">
+                                <% if (typeof date !== 'undefined') {%>
+                                    <%= 
+                                        date.toLocaleDateString('uk-UA', {
+                                            year: 'numeric', month: 'long', day: 'numeric'
+                                        })
+                                    %>
+                                <% } %>
+                            </div>
                         </div>
+                    </div>
+                </div>
+                <div class="bottom">
+                    <% if (image?.source) {%>
+                        <div class="source"><%= image.source %></div>
+                    <% } %>
+                    <% if (image?.description) {%>
+                        <div class="description"><%= image.description %></div>
                     <% } %>
                 </div>
-                <div class="image">
-                    <% if (image?.source) {%>
-                        <div class="source"></div>
-                    <% } %>
-                    <% if (image?.author) {%>
-                        <div class="author"></div>
-                    <% } %>
-                    </div>
             </div>
         <% } %>
         <% if (message) {%>
             <div class="box alert alert-danger"><%= message %></div>
         <% } %>
+        <% if (typeof description !== 'undefined') {%>
+            <p class="intro"><%- description %></p>
+        <% } %>
         <% if (typeof blocks !== 'undefined') {%>
-            <%- include('view/blocks') %>
+            <%- include('./blocks', { ...blocks }) %>
         <% } %>
     </article>
-    <%- include('view/content') %>
+    <% if (typeof blocks !== 'undefined') {%>
+        <%- include('./content') %>
+    <% } %>
 </div>
