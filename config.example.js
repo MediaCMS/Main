@@ -6,10 +6,11 @@ export default {
     port: 8888,
     root: '/var/www/media/main',
     db: 'mongodb://media:**********@127.0.0.1:27017/media',
-    key: '', // private key
+    key: '*** Private Access Key ***',
     cors: {
         origin: 'http://panel.mediacms.local',
-        optionsSuccessStatus: 200
+        optionsSuccessStatus: 200,
+        credentials: true
     },
     image: {
         host: 'https://image.example.com',

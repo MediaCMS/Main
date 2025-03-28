@@ -1,4 +1,5 @@
 import express from 'express';
+import jwt from 'jsonwebtoken';
 
 import home from './controllers/home.js';
 import post from './controllers/post.js';
@@ -11,11 +12,19 @@ import sitemap from './controllers/sitemap.js';
 import cache from './controllers/cache.js';
 import config from './config.js';
 
-const authenticate = (request, response, next) => {
-    if (!request?.header('x-api-key')
-        || (request.header('x-api-key') !== config.key) )
-        return response.sendStatus(403); 
-    next()
+const verification = (request, response, next) => {
+    if (request.cookies?.token) {
+        try {
+            response.locals.user = jwt.verify(
+                request.cookies.token, config.key
+            );
+        } catch (error) {
+            return response.status(403).end(error);
+        }
+    } else {
+        return response.sendStatus(401);
+    }
+    next();
 }
 
 const router = express.Router();
@@ -33,13 +42,13 @@ router.get('/korystuvachi', user.index);
 router.get('/korystuvachi/:slug', user.posts);
 router.get('/poshuk', search);
 
-router.get('/mapa-sayta', authenticate, sitemap);
-router.get('/kesh', authenticate, cache.index);
+router.get('/mapa-sayta', verification, sitemap);
+router.get('/kesh', verification, cache.index);
 router.delete(
     '/kesh/:categorySlug/:documentSlug',
-    authenticate, cache.delete
+    verification, cache.delete
 );
-router.delete('/kesh', authenticate, cache.clear);
+router.delete('/kesh', verification, cache.clear);
 
 router.get('/:slug', async (request, response, next) => {
     response.status(404);

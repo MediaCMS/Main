@@ -1,4 +1,5 @@
 import express from 'express';
+import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import db, { client } from './db.js';
 import log from './log.js';
@@ -12,6 +13,7 @@ const server = app.listen(config.port, config.ip, () => {
     console.log(`Listening at ${config.ip}:${config.port}`);
 });
 
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
