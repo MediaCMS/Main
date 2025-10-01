@@ -10,7 +10,6 @@ export default {
         };
         data.users = await db.collection('users')
             .aggregate([
-                { $match: { status: true } },
                 { $lookup: {
                     from: 'roles',
                     localField: 'role',
@@ -25,6 +24,7 @@ export default {
                     foreignField: 'user',
                     as: 'posts'
                 } },
+                { $match: { 'posts.status': true }},
                 { $project: {
                     title: true, description: true, image: true, slug: true,
                     posts: { $size: '$posts' }
