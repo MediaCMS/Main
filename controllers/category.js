@@ -42,7 +42,7 @@ export default {
                         { $unwind: '$user' },
                         { $project: {
                             _id: false, title: true, description: true,
-                            image: true, slug: true, status: true,
+                            image: true, slug: true, date: true, status: true,
                             user: { title: true, slug: true }
                         } }
                     ],

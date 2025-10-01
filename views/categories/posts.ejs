@@ -1,12 +1,13 @@
 <%- include('../cards', {
     cards: posts.map(post => ({
         title:  post.title,
+        date: post.date.getHours() + ':' + post.date.getMinutes().toString().padStart(2, '0'),
         subTitle: {
             text: post.user.title,
             url: '/korystuvachi/' + post.user.slug
         },
         text: post.description, 
         image: post.image.url,
-        url: '/publikatsiyi/' + post.slug,
+        url: '/publikatsiyi/' + post.slug
     }))
 }); %>

@@ -38,7 +38,7 @@ async function getPosts() {
             } },
             { $unwind: '$user' },
             { $project: {
-                time: true, title: true, description: true, 
+                date: true, title: true, description: true, 
                 image: true, tags: true, slug: true, status: true,
                 category: { title: true, slug: true },
                 user: { title: true, slug: true }
