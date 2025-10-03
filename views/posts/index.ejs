@@ -6,11 +6,12 @@
             url: '/korystuvachi/' + post.user.slug
         },
         text: post.description, 
-        image: post.image.url,
+        image: post?.image?.url,
         url: '/publikatsiyi/' + post.slug,
-        button: {
-            text: post.category.title,
+        category: {
+            title: post.category.title,
             url: '/katehoriyi/' + post.category.slug
-        }
+        },
+        date: post.date.getHours() + ':' + post.date.getMinutes().toString().padStart(2, '0')
     }))
 }); %>

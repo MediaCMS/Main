@@ -66,7 +66,7 @@ export default {
                         { $unwind: '$category' },
                         { $project: {
                             _id: false, title: true, description: true,
-                            image: true, slug: true, status: true,
+                            image: true, slug: true, status: true, date: true,
                             category: { title: true, slug: true }
                         } }
                     ],

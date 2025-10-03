@@ -31,7 +31,7 @@ export default {
                 { $project: {
                     time: true, title: true, description: true, 
                     image: true, tags: true, slug: true, status: true,
-                    category: { title: true, slug: true },
+                    category: { title: true, slug: true }, date: true,
                     user: { title: true, slug: true }
                 }}
             ]).toArray();

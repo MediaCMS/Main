@@ -50,6 +50,13 @@ export default {
                         { $skip: skip(request.query?.page) },
                         { $limit: limit },
                         { $lookup: {
+                            from: 'categories', 
+                            localField: 'category', 
+                            foreignField: '_id', 
+                            as: 'category'
+                        } },
+                        { $unwind: '$category' },
+                        { $lookup: {
                             from: 'users', 
                             localField: 'user', 
                             foreignField: '_id', 
@@ -58,7 +65,8 @@ export default {
                         { $unwind: '$user' },
                         { $project: {
                             _id: false, title: true, description: true,
-                            image: true, slug: true, status: true,
+                            image: true, slug: true, date: true, status: true,
+                            category: { title: true, slug: true },
                             user: { title: true, slug: true }
                         } }
                     ],

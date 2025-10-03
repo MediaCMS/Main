@@ -35,7 +35,7 @@
         <span class="visually-hidden">Наступний</span>
     </button>
 </div>
-<div class="row mx-0 mt-5">
+<div class="container row mx-auto mt-5">
     <% posts.slice(3).forEach(post => { %>
         <div class="col">
             <%- include('card', {
@@ -45,7 +45,7 @@
                     url: '/korystuvachi/' + post.user.slug
                 },
                 text: post.description, 
-                image: post.image.url,
+                image: post?.image?.url,
                 url: '/publikatsiyi/' + post.slug,
                 category: {
                     title: post.category.title,
