@@ -20,7 +20,7 @@ export default async (request, response) => {
 async function getPosts() {
     return await db.collection('posts')
         .aggregate([
-            { $match: { status: true } },
+            { $match: { image: { $exists: true }, status: true } },
             { $sort: { date: -1 } },
             { $limit: 100 },
             { $lookup: {

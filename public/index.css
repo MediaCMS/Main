@@ -56,7 +56,9 @@ html { min-height: 100%; font-size: calc(16px + 0.25vw) !important;
               & img { object-fit: cover; z-index: -1; }
               .carousel-caption {
                 max-width: 70%; line-height: 100%; font-family: 'Open Sans', sans-serif; 
-                h2 { font-size: calc(25px + 5vw); line-height: 100%; }
+                h2 { 
+                  font-size: 4em; text-shadow: 1px 1px 1px #000; line-height: 125%;
+                }
               }
             }
           }

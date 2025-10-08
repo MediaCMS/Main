@@ -24,7 +24,10 @@ article { margin: 0 auto;
         }
       }
       & div.body { flex-grow: 0;
-        & h1 { color: #fff; font: 600 3.0em/130% sans-serif; margin: 0 auto; }
+        & h1 {
+          color: #fff; font: 600 3.0em/130% "Lora", serif;
+          text-shadow: 1px 1px 1px #000; margin: 0 auto;
+        }
         & div.user { font-style: italic; font-size: 1em; margin: 0.5em auto; }
       }
       & div.foot { display: flex; justify-content: center; align-items: center; flex-grow: 1;
