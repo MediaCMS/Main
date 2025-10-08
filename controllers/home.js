@@ -21,7 +21,7 @@ async function getPosts() {
     return await db.collection('posts')
         .aggregate([
             { $match: { status: true } },
-            { $sort: { time: -1 } },
+            { $sort: { date: -1 } },
             { $limit: 100 },
             { $lookup: {
                 from: 'categories', 
