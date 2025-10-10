@@ -11,7 +11,7 @@ export default {
         data.posts = await db.collection('posts')
             .aggregate([
                 { $match: { status: true } },
-                { $sort: { time: 1 } },
+                { $sort: { date: -1 } },
                 { $skip: skip(request.query?.page) },
                 { $limit: limit },
                 { $lookup: {

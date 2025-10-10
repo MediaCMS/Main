@@ -30,7 +30,7 @@ export default {
                             },
                             status: true
                         } },
-                        { $sort: { time: 1 } },
+                        { $sort: { date: -1 } },
                         { $skip: skip(request.query?.page) },
                         { $limit: limit },
                         { $lookup: {
