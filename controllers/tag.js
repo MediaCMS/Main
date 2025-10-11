@@ -9,23 +9,21 @@ export default {
             keywords: "мітки"
         };
         data.tags = await db.collection('tags')
-            .aggregate([
-                { $match: { status: true } },
-                { $lookup: {
-                    from: 'posts',
-                    localField: '_id',
-                    foreignField: 'tags',
-                    as: 'posts'
-                } },
-                { $project: {
-                    title: true, description: true, image: true, slug: true,
-                    posts: { $size: '$posts' }
-                } },
-                { $match: { posts: { $gt: 0 } } },
-                { $sort: { title: 1 } },
-                { $skip: skip(request.query?.page) },
-                { $limit: limit }
-            ]).toArray();
+        .aggregate([
+            { $match: { status: true } },
+            { $lookup: {
+                from: 'posts', localField: '_id', 
+                foreignField: 'tags', as: 'posts'
+            } },
+            { $project: {
+                title: true, slug: true, 
+                posts: { $size: '$posts' },
+                status: true
+            } },
+            { $match: { posts: { $gt: 1 } } },
+            { $limit: 100 },
+            { $sort: { title: 1 } }
+        ]).toArray();
         response.render('tags/index', data);
     },
 

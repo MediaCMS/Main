@@ -22,15 +22,17 @@ html { min-height: 100%; font-size: calc(16px + 0.25vw) !important;
         position: fixed; top: 0.8em; left: 0.8em; z-index: 1035;
         & a.logo { 
           background-color: #ff0000; overflow: hidden; 
-          border: solid 1px #ff8888; border-radius: 5px;
-          padding: 0 .25em;
+          border: solid 1px #ff8888; border-radius: 0;
+          padding: 0 .25em; opacity: 0.75;
           img { width: 2.5em; }
+          &:hover { opacity: 1.0; box-shadow: 1px 1px 3px #000; }
         }
         & a.button { width: 37px; height: 37px;
-          border: solid 2px #000; border-radius: 5px;
+          border: solid 2px #000; border-radius: 0;
           background-image: url(/menu.svg); background-size: 70px 70px;
           background-position: -18px -18px; background-color: #fff;
-          margin-left: 1vw; opacity: 0.3;
+          margin-left: 1vw; opacity: 0.25;
+          &:hover { opacity: 0.5; box-shadow: 1px 1px 3px #000; }
         }
       }
       & div.menu {
@@ -61,21 +63,6 @@ html { min-height: 100%; font-size: calc(16px + 0.25vw) !important;
                 }
               }
             }
-          }
-        }
-        .cloud {
-          max-width: 960px; line-height: 500%; margin: 15vh auto;
-          & a { line-height: 150%;
-            &.size-1 { font-size: 3.0rem; margin: 12px 25px; }
-            &.size-2 { font-size: 2.8rem; margin: 9px 20px; }
-            &.size-3 { font-size: 2.6rem; margin: 9px 20px; }
-            &.size-4 { font-size: 2.4rem; margin: 6px 20px; }
-            &.size-5 { font-size: 2.2rem; margin: 6px 15px; }
-            &.size-6 { font-size: 2.0rem; margin: 6px 15px; }
-            &.size-7 { font-size: 1.8rem; margin: 3px 15px; }
-            &.size-8 { font-size: 1.6rem; margin: 3px 10px; }
-            &.size-9 { font-size: 1.4rem; margin: 3px 10px; }
-            &.size-10 { font-size: 1.2rem; margin: 3px 10px; }
           }
         }
       }
@@ -146,6 +133,20 @@ html { min-height: 100%; font-size: calc(16px + 0.25vw) !important;
               }
             }
           }
+        }
+      }
+      .cloud {
+        max-width: 960px; line-height: 500%; margin: 15vh auto;
+        & a { line-height: 150%;
+          &.size-1 { font-size: 3.0em; margin: 12px 25px; }
+          &.size-2 { font-size: 2.8em; margin: 9px 20px; }
+          &.size-3 { font-size: 2.6em; margin: 9px 20px; }
+          &.size-4 { font-size: 2.4em; margin: 6px 20px; }
+          &.size-5 { font-size: 2.2em; margin: 6px 15px; }
+          &.size-6 { font-size: 2.0em; margin: 6px 15px; }
+          &.size-7 { font-size: 1.8em; margin: 3px 15px; }
+          &.size-8 { font-size: 1.6em; margin: 3px 10px; }
+          &.size-9 { font-size: 1.4em; margin: 3px 10px; }
         }
       }
       .box { max-width: 768px; font-weight: 300; margin: 50px auto; }

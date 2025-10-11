@@ -1,8 +1,7 @@
-<%- include('../cards', {
-    cards: tags.map(tag => ({
-        title: tag.title,
-        text: tag.description, 
-        image: tag.image,
-        url: '/mitky/' + tag.slug
-    }))
-}); %>
+<div class="cloud text-center my-5 mx-auto">
+    <% tags.forEach(tag => { %>
+        <a href="/mitky/<%= tag.slug %>" class="size-<%= 10 - (tag.posts) %> text-nowrap d-inline-block">
+            <%= tag.title %>
+        </a>
+    <% }) %>
+</div>

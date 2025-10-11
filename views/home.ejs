@@ -56,10 +56,3 @@
         </div>
     <% }) %>
 </div>
-<div class="cloud text-center my-5 mx-auto">
-    <% tags.forEach(tag => { %>
-        <a href="/mitky/<%= tag.slug %>" class="size-<%= 10 - (tag.posts * 2) %> text-nowrap d-inline-block">
-            <%= tag.title %>
-        </a>
-    <% }) %>
-</div>

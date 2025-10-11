@@ -1,68 +1,14 @@
-import db from '../db.js';
+import home from '../service/post/home.js';
 import cache from '../cache.js';
 
 export default async (request, response) => {
-    let data = {};
-    if (!cache.has(request.path)) {
-        data = {
-            description: 'Новини',
-            keywords: 'новини, статті, медіа'
-        };
-        data.posts = await getPosts();
-        data.tags = await getTags();
-        cache.set('/', data);
-    } else {
-        data = cache.get('/');
-    }
-    response.render('home', data);
-}
-
-async function getPosts() {
-    return await db.collection('posts')
-        .aggregate([
-            { $match: { image: { $exists: true }, status: true } },
-            { $sort: { date: -1 } },
-            { $limit: 100 },
-            { $lookup: {
-                from: 'categories', 
-                localField: 'category', 
-                foreignField: '_id', 
-                as: 'category'
-            } },
-            { $unwind: '$category' },
-            { $lookup: {
-                from: 'users', 
-                localField: 'user', 
-                foreignField: '_id', 
-                as: 'user'
-            } },
-            { $unwind: '$user' },
-            { $project: {
-                date: true, title: true, description: true, 
-                image: true, tags: true, slug: true, status: true,
-                category: { title: true, slug: true },
-                user: { title: true, slug: true }
-            }}
-        ]).toArray();
-}
-
-async function getTags() {
-    return await db.collection('tags')
-        .aggregate([
-            { $match: { status: true } },
-            { $lookup: {
-                from: 'posts', 
-                localField: '_id', 
-                foreignField: 'tags', 
-                as: 'posts'
-            } },
-            { $project: {
-                title: true, slug: true, 
-                posts: { $size: '$posts' },
-                status: true
-            } },
-            { $match: { posts: { $gt: -1 } } },
-            { $limit: 100 },
-            { $sort: { title: 1 } }
-        ]).toArray();;
+    const data = cache.has(request.path)
+        ? cache.get('/') : await home();
+    response.render('home', {
+        title: 'Новини Львова і Львівщини',
+        description: 'Варіанти - онлайн газета новин Львова. Інший погляд на львівські новини та новини львівщини. Завжди свіжі новини про Львів, про львів\'ян і не тільки. Тут новини у Львові оновлюються постійно.',
+        keywords: 'новини львів, львівські новини, новини львівщини, новини про Львів, новини у Львові, Варіанти',
+        important: data.important,
+        categories: data.categories
+    });
 }
