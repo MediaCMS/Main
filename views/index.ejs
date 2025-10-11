@@ -63,8 +63,8 @@
         <main id="<%= view.replace('/', '-') %>">
             <% if (typeof blocks === 'undefined') { %>
                 <% if (title !== name) {%>
-                    <h1 class="container" style="margin: 4rem auto 2rem;">
-                        <u><%= title %></u>
+                    <h1 class="container label">
+                        <span><%= title %></span>
                     </h1>
                 <% } %>
                 <% if (message) {%>

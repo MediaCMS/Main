@@ -7,7 +7,6 @@ html { min-height: 100%; font-size: calc(16px + 0.25vw) !important;
     }
     & img { max-width: 100%; margin: 0 auto; display: block; }
     & h1, & h2, & article p, #cloud { font-weight: 500; font-family: 'Lora', serif; }
- 
     /*
     .share { top: 12px; right: calc(1px + 0.5vw); z-index: 100;
       .fb-like { display: block;
@@ -50,6 +49,7 @@ html { min-height: 100%; font-size: calc(16px + 0.25vw) !important;
       }
     }
     & main { min-height: 60vh;
+      & > h1 { font-size: 1.5em; margin: 3em auto 1em !important; }
       &#home {
         .carousel {
           .carousel-inner {
@@ -66,11 +66,7 @@ html { min-height: 100%; font-size: calc(16px + 0.25vw) !important;
           }
         }
         #posts { margin: 3em auto 6em;
-          & h3 { 
-            font-size: 2em; font-weight: 300; text-align: left; margin: .75em .17em;
-            padding: 0 calc(var(--bs-gutter-x) * .5);
-            & a { color: #fff; background-color: #f00; padding: .3em .5em; }
-          }
+          & h3 { font-size: 1.5em; margin-bottom: 2em; }
           & .card { 
             & .card-body { height: 12em; }
           }
@@ -144,6 +140,14 @@ html { min-height: 100%; font-size: calc(16px + 0.25vw) !important;
               }
             }
           }
+        }
+      }
+      .label { 
+        text-align: left; margin: 0 auto;
+        & a, & span { 
+          color: #fff; font: 300 1em/1 'Open Sans', 'Ubuntu', sans-serif; 
+          text-transform: uppercase; background-color: #f00;
+          border-left: solid 5px #b90c1d;padding: .25em .5em;
         }
       }
       .cloud {
