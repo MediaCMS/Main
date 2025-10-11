@@ -1,7 +1,7 @@
 <div id="slideshow" class="carousel slide carousel-fade"
     data-bs-ride="carousel" data-interval="5000">
     <div class="carousel-indicators">
-        <% for(let i = 0; i < 3; i ++) { %>
+        <% for(let i = 0; i < posts.length; i ++) { %>
             <button type="button" class="<%= !i ? 'active' : '' %>"
                 aria-current="<%= !i ? 'true' : '' %>"
                 aria-label="Slide 1" data-bs-target="#slideshow"
@@ -10,10 +10,11 @@
         <% } %>
     </div>
     <div class="carousel-inner">
-        <% posts.slice(0, 3).forEach((post, index)=> { %>
+        <% posts.forEach((category, index) => { %>
+            <% const post = category.posts[0]; %>
             <div class="carousel-item text-center align-middle h-100 <%= (index === 0) ? 'active' : '' %>"
-                onclick="window.location='/<%= post.uri %>'">
-                <img src="<%= images.host %>/<%= post.image.url %>?width=320" alt="<%= post.title %>"
+                onclick="window.location='/<%= post.slug %>'">
+                <img src="<%= images.host %>/<%= post.image?.url %>" alt="<%= post.title %>"
                     class="vw-100 vh-100 object-fit-cover position-absolute top-0 start-0 z-n1" />
                 <div
                     class="carousel-caption text-center align-middle pt-2 d-inline-block position-static">
@@ -35,24 +36,36 @@
         <span class="visually-hidden">Наступний</span>
     </button>
 </div>
-<div class="container row mx-auto mt-5">
-    <% posts.slice(3).forEach(post => { %>
-        <div class="col">
-            <%- include('card', {
-                title:  post.title,
-                subTitle: {
-                    text: post.user.title,
-                    url: '/korystuvachi/' + post.user.slug
-                },
-                text: post.description, 
-                image: post?.image?.url,
-                url: '/publikatsiyi/' + post.slug,
-                category: {
-                    title: post.category.title,
-                    url: '/katehoriyi/' + post.category.slug
-                },
-                date: post.date.getHours() + ':' + post.date.getMinutes().toString().padStart(2, '0')
-            }); %>
-        </div>
+
+<div id="posts" class="container row mx-auto mt-5">
+    <% posts.forEach(category => { %>
+        <h2 class="text-center">
+            <a href="/katehoriyi/<%= category.slug %>" class="text-dark text-decoration-none">
+                <%= category.title %>
+            </a>
+        </h2>
+        <% category.posts.slice(1).forEach(post => { %>
+            <div class="col">
+                <%- include('card', {
+                    title:  post.title,
+                    /*
+                    subTitle: {
+                        text: post.user.title,
+                        url: '/korystuvachi/' + post.user.slug
+                    },
+                    */
+                    //text: post.description, 
+                    image: post?.image?.url,
+                    url: '/publikatsiyi/' + post.slug,
+                    /*
+                    category: {
+                        title: post.category.title,
+                        url: '/katehoriyi/' + post.category.slug
+                    },
+                    */
+                    date: post.date.getHours() + ':' + post.date.getMinutes().toString().padStart(2, '0')
+                }); %>
+            </div>
+        <% }) %>
     <% }) %>
 </div>

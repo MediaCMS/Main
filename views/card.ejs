@@ -25,7 +25,9 @@
                 <% } %>
             </h6>
         <% } %>
-        <p class="card-text"><%- text %></p>
+        <% if (typeof text !== 'undefined') { %>
+            <p class="card-text"><%- text %></p>
+        <% } %>
         <% if (typeof button !=='undefined' ) { %>
             <a href="<%= button.url %>" class="btn btn-primary">
                 <%= button.text %>

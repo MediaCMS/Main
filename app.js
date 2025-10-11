@@ -25,7 +25,7 @@ if (app.get('env') === 'production') {
     app.set('trust proxy', 1);
 }
 
-app.use(async function (request, response, next) {
+app.use(async (request, response, next) => {
     request.url = decodeURI(request.url);
     response.locals.name = config.name;
     response.locals.host = config.host;
