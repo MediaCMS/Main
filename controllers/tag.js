@@ -16,9 +16,8 @@ export default {
                 foreignField: 'tags', as: 'posts'
             } },
             { $project: {
-                title: true, slug: true, 
+                title: true, slug: true, status: true, 
                 posts: { $size: '$posts' },
-                status: true
             } },
             { $match: { posts: { $gt: 1 } } },
             { $limit: 100 },
@@ -48,17 +47,13 @@ export default {
                         { $skip: skip(request.query?.page) },
                         { $limit: limit },
                         { $lookup: {
-                            from: 'categories', 
-                            localField: 'category', 
-                            foreignField: '_id', 
-                            as: 'category'
+                            from: 'categories', localField: 'category', 
+                            foreignField: '_id', as: 'category'
                         } },
                         { $unwind: '$category' },
                         { $lookup: {
-                            from: 'users', 
-                            localField: 'user', 
-                            foreignField: '_id', 
-                            as: 'user'
+                            from: 'users', localField: 'user', 
+                            foreignField: '_id', as: 'user'
                         } },
                         { $unwind: '$user' },
                         { $project: {
@@ -79,6 +74,6 @@ export default {
             response.status(404);
             return next();
         }
-        response.render('categories/posts', data);
+        response.render('tags/posts', data);
      }
 }

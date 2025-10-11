@@ -51,23 +51,17 @@ export default {
                 .aggregate([
                     { $match: match },
                     { $lookup: {
-                        from: 'categories',
-                        localField: 'category',
-                        foreignField: '_id',
-                        as: 'category'
+                        from: 'categories', localField: 'category',
+                        foreignField: '_id', as: 'category'
                     } },
                     { $unwind: '$category' },
                     { $lookup: {
-                        from: 'tags',
-                        localField: 'tags',
-                        foreignField: '_id',
-                        as: 'tags'
+                        from: 'tags', localField: 'tags',
+                        foreignField: '_id', as: 'tags'
                     } },
                     { $lookup: {
-                        from: 'users', 
-                        localField: 'user',
-                        foreignField: '_id',
-                        as: 'user'
+                        from: 'users', localField: 'user',
+                        foreignField: '_id', as: 'user'
                     } },
                     { $unwind: '$user' }
                 ]).next();

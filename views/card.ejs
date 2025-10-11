@@ -1,4 +1,4 @@
-<div class="card" style="width: 18rem;">
+<div class="card">
     <% if (typeof image !== 'undefined') {%>
         <div class="card-img-top">
             <% if (typeof category !== 'undefined') { %>
@@ -14,7 +14,8 @@
     <% } %>
     <div class="card-body">
         <h5 class="card-title text-reset">
-            <a href="<%= url %>"><%= title %></a>
+            <a href="<%= url %>"
+                title="<%- (typeof text !== 'undefined') ? text : title %>"><%= title %></a>
         </h5>
         <% if (typeof subTitle !== 'undefined') { %>
             <h6 class="card-subtitle m-3 small text-muted">
@@ -25,9 +26,11 @@
                 <% } %>
             </h6>
         <% } %>
+        <% /* %>
         <% if (typeof text !== 'undefined') { %>
             <p class="card-text"><%- text %></p>
         <% } %>
+        <% */ %>
         <% if (typeof button !=='undefined' ) { %>
             <a href="<%= button.url %>" class="btn btn-primary">
                 <%= button.text %>

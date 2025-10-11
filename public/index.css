@@ -65,8 +65,12 @@ html { min-height: 100%; font-size: calc(16px + 0.25vw) !important;
             }
           }
         }
-        #posts { max-width: 960px; margin: 3em auto 6em;
-          & h2 { font-size: 2.5em; margin-bottom: 0.5em; }
+        #posts { margin: 3em auto 6em;
+          & h3 { 
+            font-size: 2em; font-weight: 300; text-align: left; margin: .75em .17em;
+            padding: 0 calc(var(--bs-gutter-x) * .5);
+            & a { color: #fff; background-color: #f00; padding: .3em .5em; }
+          }
           & .card { 
             & .card-body { height: 12em; }
           }
@@ -156,16 +160,15 @@ html { min-height: 100%; font-size: calc(16px + 0.25vw) !important;
           &.size-9 { font-size: 1.4em; margin: 3px 10px; }
         }
       }
-      .box { max-width: 768px; font-weight: 300; margin: 50px auto; }
-      .screen { min-width: 100vw; height: 50vh; text-align: center; vertical-align: middle; display: table-cell; }
-      .card { border: none !important; position: relative; margin: 0 auto 1em;
+      .card {
+        width: 18em; border: none !important; position: relative; margin: 0 auto 1em;
         .card-img-top {
           width: 100%; padding-top: 66.66%; overflow: hidden; position: relative;
           border: none; border-radius: 0; box-shadow: none;
           & a.category { 
             color: white; font-size: 0.8em; font-weight: 300; 
             background-color: rgba(255,0,0,.75); text-decoration: none !important;
-            padding: .25em .75em; position: absolute; top: .5em; left: 0; z-index: 1;
+            padding: .1em .75em; position: absolute; top: .75em; left: 0; z-index: 1;
           }
           & img {
             min-width: 100%; min-height: 100%; max-width: 100%; margin: auto;
@@ -179,7 +182,7 @@ html { min-height: 100%; font-size: calc(16px + 0.25vw) !important;
         }
         .card-body {
           overflow: hidden; padding: 1em 0; margin-bottom: 1em;
-          .card-title { line-height: 1.5; overflow: hidden; text-overflow: ellipsis; }
+          .card-title { line-height: 1.4; overflow: hidden; text-overflow: ellipsis; }
           .card-text { overflow: hidden; text-overflow: ellipsis; }
          }
       }

@@ -37,35 +37,26 @@
     </button>
 </div>
 
-<div id="posts" class="container row mx-auto mt-5">
+<div id="posts" class="container mx-auto">
     <% posts.forEach(category => { %>
-        <h2 class="text-center">
-            <a href="/katehoriyi/<%= category.slug %>" class="text-dark text-decoration-none">
+        <h3>
+            <a href="/katehoriyi/<%= category.slug %>">
                 <%= category.title %>
             </a>
-        </h2>
-        <% category.posts.slice(1).forEach(post => { %>
-            <div class="col">
-                <%- include('card', {
-                    title:  post.title,
-                    /*
-                    subTitle: {
-                        text: post.user.title,
-                        url: '/korystuvachi/' + post.user.slug
-                    },
-                    */
-                    //text: post.description, 
-                    image: post?.image?.url,
-                    url: '/publikatsiyi/' + post.slug,
-                    /*
-                    category: {
-                        title: post.category.title,
-                        url: '/katehoriyi/' + post.category.slug
-                    },
-                    */
-                    date: post.date.getHours() + ':' + post.date.getMinutes().toString().padStart(2, '0')
-                }); %>
-            </div>
-        <% }) %>
+        </h3>
+        <div class="row">
+            <% category.posts.slice(1).forEach(post => { %>
+                <div class="col">
+                    <%- include('card', {
+                        title:  post.title,
+                        text: post.description, 
+                        image: post?.image?.url,
+                        url: '/publikatsiyi/' + post.slug,
+                        date: post.date.getHours() + ':' 
+                        + post.date.getMinutes().toString().padStart(2, '0')
+                    }); %>
+                </div>
+            <% }) %>
+        </div>
     <% }) %>
 </div>

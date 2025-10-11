@@ -1,10 +1,12 @@
 <%- include('../cards', {
     cards: posts.map(post => ({
-        title:  post.title,
+        title: post.title,
+        /*
         subTitle: {
             text: post.user.title,
             url: '/korystuvachi/' + post.user.slug
         },
+        */
         text: post.description, 
         image: post?.image?.url,
         url: '/publikatsiyi/' + post.slug,
