@@ -49,7 +49,11 @@ html { min-height: 100%; font-size: calc(16px + 0.25vw) !important;
       }
     }
     & main { min-height: 60vh;
-      & > h1 { font-size: 1.5em; margin: 3em auto 1em !important; }
+      & > h1 { 
+        /*font-size: 1.5em; margin: 3em auto 1em !important;*/
+        color: #333;font: 300 3.5em 'Lora', sans-serif; margin: 1em auto 1em !important;
+        text-decoration: underline;
+      }
       &#home {
         .carousel {
           .carousel-inner {
@@ -147,7 +151,7 @@ html { min-height: 100%; font-size: calc(16px + 0.25vw) !important;
         & a, & span { 
           color: #fff; font: 300 1em/1 'Open Sans', 'Ubuntu', sans-serif; 
           text-transform: uppercase; background-color: #f00;
-          border-left: solid 5px #800;padding: .25em .5em;
+          border-left: solid 3px #800;padding: .25em .5em;
         }
       }
       .cloud {
