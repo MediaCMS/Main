@@ -1,6 +1,6 @@
-<div class="cloud text-center my-5 mx-auto">
+<div class="container cloud text-center my-5 mx-auto">
     <% tags.forEach(tag => { %>
-        <a href="/mitky/<%= tag.slug %>" class="size-<%= 10 - (tag.posts) %> text-nowrap d-inline-block">
+        <a href="/mitky/<%= tag.slug %>" class="size-<%= 10 - Math.round(tag.posts / 2) %> text-nowrap d-inline-block" data-posts="<%= tag.posts %>">
             <%= tag.title %>
         </a>
     <% }) %>

@@ -8,20 +8,29 @@ export default {
             description: "Список міток публікацій",
             keywords: "мітки"
         };
-        data.tags = await db.collection('tags')
-        .aggregate([
-            { $match: { status: true } },
-            { $lookup: {
-                from: 'posts', localField: '_id', 
-                foreignField: 'tags', as: 'posts'
-            } },
-            { $project: {
-                title: true, slug: true, status: true, 
-                posts: { $size: '$posts' },
-            } },
-            { $match: { posts: { $gt: 1 } } },
-            { $limit: 100 },
-            { $sort: { title: 1 } }
+        data.tags = await db.collection('tags').aggregate([
+        { $match: { status: true } },
+        { $lookup: {
+            from: 'posts',
+            let: { tagId: '$_id' },
+            pipeline: [
+                { $match: {
+                    $expr: {
+                    $and: [
+                        { $eq: ['$status', true] },
+                        { $in: ['$$tagId', '$tags'] }
+                    ]
+                    }
+                }},
+                { $project: { _id: 1 } } // беремо мінімум полів
+            ],
+            as: 'posts'
+        }},
+        { $addFields: { postCount: { $size: '$posts' } } },
+        { $match: { postCount: { $gt: 1 } } },
+        { $project: { title: 1, slug: 1, status: 1, posts: '$postCount' } },
+        { $sort: { title: 1 } },
+        { $limit: 100 }
         ]).toArray();
         response.render('tags/index', data);
     },

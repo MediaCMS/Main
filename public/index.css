@@ -155,7 +155,7 @@ html { min-height: 100%; font-size: calc(16px + 0.25vw) !important;
         }
       }
       .cloud {
-        max-width: 960px; line-height: 500%; margin: 15vh auto;
+        line-height: 500%; margin: 15vh auto;
         & a { line-height: 150%;
           &.size-1 { font-size: 3.0em; margin: 12px 25px; }
           &.size-2 { font-size: 2.8em; margin: 9px 20px; }
