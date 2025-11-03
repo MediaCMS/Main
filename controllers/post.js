@@ -51,6 +51,11 @@ export default {
                 .aggregate([
                     { $match: match },
                     { $lookup: {
+                        from: 'types', localField: 'type',
+                        foreignField: '_id', as: 'type'
+                    } },
+                    { $unwind: '$type' },
+                    { $lookup: {
                         from: 'categories', localField: 'category',
                         foreignField: '_id', as: 'category'
                     } },
@@ -69,12 +74,9 @@ export default {
                 response.status(404);
                 return next();
             }
-            /*
-            post.body = post.body.replace(
-                /<img\s+src="https:\/\/image\.mediacms\.org\/([^"]+)"/g,
-                `<img src="${config.images.blank}" data-src="$1"`
-            );
-            */
+            if (!post.type?.author) {
+                delete post.user;
+            }
             cache.set(request.path, post);
         } else {
             post = cache.get(request.path);
