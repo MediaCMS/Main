@@ -29,9 +29,9 @@ app.use(async (request, response, next) => {
     request.url = decodeURI(request.url);
     response.locals.name = config.name;
     response.locals.host = config.host;
-    response.locals.idn = config.idn;
     response.locals.path = decodeURI(request.originalUrl).split("?").shift();
-    response.locals.url = response.locals.host + response.locals.uri;
+    response.locals.url = config.protocol + '://' 
+        + config.host + response.locals.path;
     response.locals.menu = menu;
     response.locals.images = config.image;
     response.locals.title = config.name;
